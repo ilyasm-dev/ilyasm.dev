@@ -52,13 +52,13 @@ export default function Home() {
       <section className="hero wrap">
         <p className="eyebrow">Software engineer in the Netherlands</p>
         <h1>
-          I built a game with 70 million visits,
+          I build games, platforms and tools,
           <br />
-          <span className="grad">and work on the compiler that runs it.</span>
+          <span className="grad">and make them fast.</span>
         </h1>
         <p className="lede">
-          I also built Rolantir, an analytics platform that tracks 443,000 Roblox games, and fixed a slowdown that halved
-          llama.cpp&apos;s speed on RTX 50 GPUs. Products on top, and the code they run on underneath.
+          I co-owned Dig It, a Roblox game with 70 million visits. I co-founded Rolantir, an analytics platform that tracks
+          443,000 Roblox games. Most recently I fixed a slowdown that halved llama.cpp&apos;s speed on RTX 50 GPUs.
         </p>
         <div className="cta-row">
           <a className="button" href="mailto:hello@ilyasm.dev">

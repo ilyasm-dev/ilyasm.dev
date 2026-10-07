@@ -52,14 +52,13 @@ export default function Home() {
       <section className="hero wrap">
         <p className="eyebrow">Software engineer in the Netherlands</p>
         <h1>
-          I build software,
+          I built a game with 70 million visits,
           <br />
-          <span className="grad">and go as deep as it takes.</span>
+          <span className="grad">and work on the compiler that runs it.</span>
         </h1>
         <p className="lede">
-          I have shipped a game with 70 million visits and an analytics platform for 443,000 games. I also work in the
-          layers underneath, from databases to compilers and GPU code, where I find out why things are slow or broken and
-          fix them.
+          I also built Rolantir, an analytics platform that tracks 443,000 Roblox games, and fixed a slowdown that halved
+          llama.cpp&apos;s speed on RTX 50 GPUs. Products on top, and the code they run on underneath.
         </p>
         <div className="cta-row">
           <a className="button" href="mailto:hello@ilyasm.dev">

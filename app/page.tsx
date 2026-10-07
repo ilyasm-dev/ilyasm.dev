@@ -6,19 +6,24 @@ import { allPosts } from "@/lib/posts";
 
 const AREAS = [
   {
-    title: "GPU and AI inference performance",
-    line: "I find out why AI models run slower than the hardware allows, and fix it.",
-    proof: "llama.cpp fix: up to 2.1x faster long-context generation on RTX 50 GPUs (in review).",
+    title: "Building and running products",
+    line: "I build products end to end and keep them running: backend, data, web front end and live operations.",
+    proof: "Rolantir tracks 443,000 Roblox games in production. Dig It, a game I co-owned, reached 70 million visits.",
   },
   {
-    title: "Compilers and runtimes",
-    line: "I work on the layer that decides how fast everyone else's code runs.",
-    proof: "Contributions to the Luau compiler, its native code generator for x64 and ARM64, and its runtime.",
+    title: "Making slow software fast",
+    line: "I find out why something is slow, at whatever layer it is, and fix it with numbers before and after.",
+    proof: "llama.cpp: up to 2.1x faster long-context generation on RTX 50 GPUs (in review). Rolantir charts: from 400 to 900 ms down to 3 to 8 ms.",
   },
   {
-    title: "Backend performance",
-    line: "I make slow services and databases fast, without losing data on the way.",
-    proof: "Rolantir: dashboard charts from 400 to 900 ms down to 3 to 8 ms after a live database move.",
+    title: "Making software run where it wasn't meant to",
+    line: "Compilers, runtimes and ports that bring existing software to new platforms, and prove it still behaves.",
+    proof: "Ulana runs C, Rust and Go programs as plain Luau (release in progress). Contributions to the Luau compiler.",
+  },
+  {
+    title: "Games and real-time systems",
+    line: "Multiplayer games, live operations and the scripting language underneath them.",
+    proof: "Dig It peaked at 27,400 players online at once. Fixes in Luau, the language behind Roblox.",
   },
 ];
 
@@ -47,13 +52,14 @@ export default function Home() {
       <section className="hero wrap">
         <p className="eyebrow">Software engineer in the Netherlands</p>
         <h1>
-          I make software faster,
+          I build software,
           <br />
-          <span className="grad">from compilers to GPU kernels.</span>
+          <span className="grad">and go as deep as it takes.</span>
         </h1>
         <p className="lede">
-          I work mostly in Luau, Rust, C++ and CUDA. My main interests are compilers and runtimes, and making code fast,
-          from CPU hot paths to GPU kernels.
+          I have shipped a game with 70 million visits and an analytics platform for 443,000 games. I also work in the
+          layers underneath, from databases to compilers and GPU code, where I find out why things are slow or broken and
+          fix them.
         </p>
         <div className="cta-row">
           <a className="button" href="mailto:hello@ilyasm.dev">

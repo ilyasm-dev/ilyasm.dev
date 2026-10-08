@@ -41,7 +41,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <nav>
               <Link href="/#work">Work</Link>
-              <Link href="/writing/">Writing</Link>
               <a href="mailto:hello@ilyasm.dev">Contact</a>
               <ThemeToggle />
             </nav>

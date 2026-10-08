@@ -1,8 +1,6 @@
-import Link from "next/link";
 import DecodeChart from "@/components/DecodeChart";
 import LatencyBars from "@/components/LatencyBars";
 import Reveal from "@/components/Reveal";
-import { allPosts } from "@/lib/posts";
 
 const AREAS = [
   {
@@ -46,7 +44,6 @@ const IN_PROGRESS = [
 ];
 
 export default function Home() {
-  const posts = allPosts();
   return (
     <main>
       <section className="hero wrap">
@@ -118,7 +115,6 @@ export default function Home() {
             </p>
             <DecodeChart />
             <p className="card-more">
-              <Link href="/writing/blackwell-q4_0-cuda-12-8/">How I found it</Link>
               <a href="https://github.com/ggml-org/llama.cpp/pull/30077">Pull request #30077</a>
             </p>
           </article>
@@ -190,25 +186,6 @@ export default function Home() {
                 </div>
                 <p className="card-text">{p.text}</p>
               </article>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="wrap section">
-        <Reveal>
-          <h2 className="section-title">Writing</h2>
-        </Reveal>
-        <div className="post-list">
-          {posts.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 80}>
-              <Link className="post-link" href={`/writing/${p.slug}/`}>
-                <span className="post-title">
-                  {p.title}
-                  {p.draft && <span className="tag tag-draft">draft</span>}
-                </span>
-                <span className="post-summary">{p.summary}</span>
-              </Link>
             </Reveal>
           ))}
         </div>

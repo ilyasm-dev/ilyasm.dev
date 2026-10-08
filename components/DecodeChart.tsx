@@ -87,10 +87,10 @@ export default function DecodeChart() {
           <div className="tooltip" style={{ left: `${tipLeft}%` }} role="status">
             <strong>{DEPTHS[hover]} tokens of context</strong>
             <span>
-              <i className="sw sw-master" /> before: {tip.m.toFixed(1)} tok/s
+              <i className="sw sw-master" /> {tip.m.toFixed(1)} tok/s before
             </span>
             <span>
-              <i className="sw sw-fix" /> after: {tip.f.toFixed(1)} tok/s
+              <i className="sw sw-fix" /> {tip.f.toFixed(1)} tok/s after
             </span>
             <span className="tip-gain">{(tip.f / tip.m).toFixed(2)}x</span>
           </div>
@@ -103,7 +103,7 @@ export default function DecodeChart() {
         <span>
           <i className="sw sw-fix" /> after the fix
         </span>
-        {kind === "q8_0" && <span className="legend-note">The lines overlap: the fix leaves q8_0 unchanged.</span>}
+        {kind === "q8_0" && <span className="legend-note">The lines overlap because the fix leaves q8_0 unchanged.</span>}
       </div>
     </figure>
   );

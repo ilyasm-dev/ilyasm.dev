@@ -5,12 +5,12 @@ const AREAS = [
   {
     title: "AI models that run slower than the hardware allows",
     line: "I profile inference engines such as llama.cpp and vLLM down to the GPU kernels, and fix the bottleneck.",
-    proof: "llama.cpp: up to 2.1x faster long-context generation on RTX 50 GPUs (in review).",
+    proof: "Up to 2.1x faster long-context generation in llama.cpp on RTX 50 GPUs (in review).",
   },
   {
     title: "Backends and databases that don't keep up",
     line: "Slow queries, data that keeps growing, and migrations that cannot lose anything on the way.",
-    proof: "Rolantir: dashboard queries from 400 to 900 ms down to 3 to 8 ms, full history kept.",
+    proof: "Rolantir's dashboard queries went from 400 to 900 ms down to 3 to 8 ms, with the full history kept.",
   },
   {
     title: "Software that has to run somewhere new",
@@ -19,7 +19,7 @@ const AREAS = [
   },
   {
     title: "Whole systems, built and kept running",
-    line: "When the problem is bigger than one fix, I build end to end: backend, data, web front end and operations.",
+    line: "When the problem is bigger than one fix, I build the backend, data, web front end and operations end to end.",
     proof: "Rolantir tracks 443,000 games in production. Dig It, a game I co-owned, peaked at 27,400 players at once.",
   },
 ];
@@ -97,7 +97,7 @@ export default function Home() {
         <article className="card card-feature">
           <div className="card-head">
             <a className="card-title" href="https://github.com/ggml-org/llama.cpp/pull/30077">
-              llama.cpp: up to twice as fast long-context generation on RTX 50 GPUs
+              Up to twice as fast long-context generation in llama.cpp on RTX 50 GPUs
             </a>
             <span className="tag">in review</span>
           </div>
@@ -120,8 +120,8 @@ export default function Home() {
               <span className="tag">co-founded</span>
             </div>
             <p className="card-text">
-              Analytics for the Roblox platform: tracks player counts for about 443,000 games. Built the data service
-              and moved the live database to TimescaleDB.
+              Analytics for the Roblox platform that tracks player counts for about 443,000 games. I built the data
+              service and moved the live database to TimescaleDB.
             </p>
             <LatencyBars />
           </article>

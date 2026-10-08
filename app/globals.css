@@ -157,7 +157,6 @@ nav a:hover {
   font-weight: 600;
   font-size: 0.95rem;
   margin: 0 0 14px;
-  animation: rise 0.6s ease both;
 }
 
 .hero h1 {
@@ -165,7 +164,6 @@ nav a:hover {
   line-height: 1.08;
   letter-spacing: -0.03em;
   margin: 0;
-  animation: rise 0.7s ease 0.05s both;
 }
 
 .grad {
@@ -180,7 +178,6 @@ nav a:hover {
   font-size: 1.15rem;
   max-width: 640px;
   margin: 22px 0 0;
-  animation: rise 0.7s ease 0.12s both;
 }
 
 .proof-strip {
@@ -190,7 +187,6 @@ nav a:hover {
   padding-top: 26px;
   border-top: 1px solid var(--line);
   max-width: 860px;
-  animation: rise 0.7s ease 0.15s both;
 }
 
 .proof-strip div {
@@ -224,7 +220,6 @@ nav a:hover {
   align-items: center;
   gap: 14px 18px;
   margin-top: 30px;
-  animation: rise 0.7s ease 0.18s both;
 }
 
 .cta-note {
@@ -247,17 +242,6 @@ nav a:hover {
   box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 /* Sections */
 .section {
   padding-top: 56px;
@@ -271,32 +255,6 @@ nav a:hover {
   color: var(--faint);
   font-weight: 600;
   margin: 0 0 18px;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .reveal.is-visible {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .eyebrow,
-  .hero h1,
-  .lede,
-  .cta-row {
-    animation: none;
-  }
 }
 
 /* What I do */

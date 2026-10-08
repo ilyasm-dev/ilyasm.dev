@@ -1,6 +1,5 @@
 import DecodeChart from "@/components/DecodeChart";
 import LatencyBars from "@/components/LatencyBars";
-import Reveal from "@/components/Reveal";
 
 const AREAS = [
   {
@@ -80,125 +79,105 @@ export default function Home() {
       </section>
 
       <section className="wrap section">
-        <Reveal>
-          <h2 className="section-title">Problems I solve</h2>
-        </Reveal>
+        <h2 className="section-title">Problems I solve</h2>
         <div className="areas">
-          {AREAS.map((a, i) => (
-            <Reveal key={a.title} delay={i * 80}>
-              <article className="area">
-                <h3>{a.title}</h3>
-                <p>{a.line}</p>
-                <p className="proof">{a.proof}</p>
-              </article>
-            </Reveal>
+          {AREAS.map((a) => (
+            <article className="area" key={a.title}>
+              <h3>{a.title}</h3>
+              <p>{a.line}</p>
+              <p className="proof">{a.proof}</p>
+            </article>
           ))}
         </div>
       </section>
 
       <section className="wrap section" id="work">
-        <Reveal>
-          <h2 className="section-title">Selected work</h2>
-        </Reveal>
+        <h2 className="section-title">Selected work</h2>
 
-        <Reveal>
-          <article className="card card-feature">
-            <div className="card-head">
-              <a className="card-title" href="https://github.com/ggml-org/llama.cpp/pull/30077">
-                llama.cpp: up to twice as fast long-context generation on RTX 50 GPUs
-              </a>
-              <span className="tag">in review</span>
-            </div>
-            <p className="card-text">
-              Found why attention ran at half speed with a compressed (q4_0) cache on Blackwell GPUs in llama.cpp&apos;s
-              default CUDA builds, and fixed it in a few lines. Hover the chart to compare.
-            </p>
-            <DecodeChart />
-            <p className="card-more">
-              <a href="https://github.com/ggml-org/llama.cpp/pull/30077">Pull request #30077</a>
-            </p>
-          </article>
-        </Reveal>
+        <article className="card card-feature">
+          <div className="card-head">
+            <a className="card-title" href="https://github.com/ggml-org/llama.cpp/pull/30077">
+              llama.cpp: up to twice as fast long-context generation on RTX 50 GPUs
+            </a>
+            <span className="tag">in review</span>
+          </div>
+          <p className="card-text">
+            Found why attention ran at half speed with a compressed (q4_0) cache on Blackwell GPUs in llama.cpp&apos;s
+            default CUDA builds, and fixed it in a few lines. Hover the chart to compare.
+          </p>
+          <DecodeChart />
+          <p className="card-more">
+            <a href="https://github.com/ggml-org/llama.cpp/pull/30077">Pull request #30077</a>
+          </p>
+        </article>
 
         <div className="card-grid">
-          <Reveal>
-            <article className="card">
-              <div className="card-head">
-                <a className="card-title" href="https://rolantir.dev">
-                  Rolantir
-                </a>
-                <span className="tag">co-founded</span>
+          <article className="card">
+            <div className="card-head">
+              <a className="card-title" href="https://rolantir.dev">
+                Rolantir
+              </a>
+              <span className="tag">co-founded</span>
+            </div>
+            <p className="card-text">
+              Analytics for the Roblox platform: tracks player counts for about 443,000 games. Built the data service
+              and moved the live database to TimescaleDB.
+            </p>
+            <LatencyBars />
+          </article>
+          <article className="card">
+            <div className="card-head">
+              <a className="card-title" href="https://github.com/green-real">
+                Luau compiler and runtime
+              </a>
+              <span className="tag">open source</span>
+            </div>
+            <p className="card-text">
+              Contributions to the Luau compiler, its native code generator for x64 and ARM64, and its runtime, under
+              the handle green-real.
+            </p>
+          </article>
+          <article className="card">
+            <div className="card-head">
+              <span className="card-title">Dig It</span>
+              <span className="tag">co-owned, sold</span>
+            </div>
+            <p className="card-text">A Roblox game with about 70 million visits and a peak of 27,400 players online at the same time.</p>
+            <div className="stats">
+              <div>
+                <strong>70M</strong>
+                <span>visits</span>
               </div>
-              <p className="card-text">
-                Analytics for the Roblox platform: tracks player counts for about 443,000 games. Built the data service
-                and moved the live database to TimescaleDB.
-              </p>
-              <LatencyBars />
-            </article>
-          </Reveal>
-          <Reveal delay={80}>
-            <article className="card">
-              <div className="card-head">
-                <a className="card-title" href="https://github.com/green-real">
-                  Luau compiler and runtime
-                </a>
-                <span className="tag">open source</span>
+              <div>
+                <strong>27,400</strong>
+                <span>players at once, peak</span>
               </div>
-              <p className="card-text">
-                Contributions to the Luau compiler, its native code generator for x64 and ARM64, and its runtime, under
-                the handle green-real.
-              </p>
-            </article>
-          </Reveal>
-          <Reveal delay={160}>
-            <article className="card">
-              <div className="card-head">
-                <span className="card-title">Dig It</span>
-                <span className="tag">co-owned, sold</span>
-              </div>
-              <p className="card-text">A Roblox game with about 70 million visits and a peak of 27,400 players online at the same time.</p>
-              <div className="stats">
-                <div>
-                  <strong>70M</strong>
-                  <span>visits</span>
-                </div>
-                <div>
-                  <strong>27,400</strong>
-                  <span>players at once, peak</span>
-                </div>
-              </div>
-            </article>
-          </Reveal>
+            </div>
+          </article>
         </div>
       </section>
 
       <section className="wrap section">
-        <Reveal>
-          <h2 className="section-title">In progress</h2>
-        </Reveal>
+        <h2 className="section-title">In progress</h2>
         <div className="progress-list">
-          {IN_PROGRESS.map((p, i) => (
-            <Reveal key={p.name} delay={i * 80}>
-              <article className="progress">
-                <div className="card-head">
-                  <span className="card-title">{p.name}</span>
-                  <span className="tag tag-soft">{p.tag}</span>
-                </div>
-                <p className="card-text">{p.text}</p>
-              </article>
-            </Reveal>
+          {IN_PROGRESS.map((p) => (
+            <article className="progress" key={p.name}>
+              <div className="card-head">
+                <span className="card-title">{p.name}</span>
+                <span className="tag tag-soft">{p.tag}</span>
+              </div>
+              <p className="card-text">{p.text}</p>
+            </article>
           ))}
         </div>
       </section>
 
       <section className="wrap section contact">
-        <Reveal>
-          <h2>Something slower than it should be?</h2>
-          <p>I&apos;m open to internships and contract work.</p>
-          <a className="button" href="mailto:hello@ilyasm.dev">
-            hello@ilyasm.dev
-          </a>
-        </Reveal>
+        <h2>Something slower than it should be?</h2>
+        <p>I&apos;m open to internships and contract work.</p>
+        <a className="button" href="mailto:hello@ilyasm.dev">
+          hello@ilyasm.dev
+        </a>
       </section>
     </main>
   );

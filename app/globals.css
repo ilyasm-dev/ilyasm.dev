@@ -362,6 +362,11 @@ a.card-title {
   font-size: 0.95rem;
 }
 
+.card-links {
+  gap: 6px 16px;
+  font-size: 0.9rem;
+}
+
 .tag {
   display: inline-block;
   font-size: 0.78rem;

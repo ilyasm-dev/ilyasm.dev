@@ -24,6 +24,35 @@ const AREAS = [
   },
 ];
 
+// Sources in the hub, contributions/README.md and assets/cv.md.
+const OPEN_SOURCE = [
+  {
+    name: "vLLM",
+    href: "https://github.com/vllm-project/vllm/pull/60464",
+    tag: "3 fixes in review",
+    text: "An open-source engine that serves AI models. On an H100 GPU, I made it pick the right matrix kernel for each batch size, for 17 to 52% more serving throughput. Two more fixes stop compressed (block-FP8) models from crashing at startup with older CUDA compilers, and remove a wasted copy in every layer.",
+    links: [
+      { label: "Kernel choice #60464", href: "https://github.com/vllm-project/vllm/pull/60464" },
+      { label: "Startup crash #60438", href: "https://github.com/vllm-project/vllm/pull/60438" },
+      { label: "Layer copy #60481", href: "https://github.com/vllm-project/vllm/pull/60481" },
+    ],
+  },
+  {
+    name: "Wasmtime",
+    href: "https://github.com/bytecodealliance/wasmtime/pull/14617",
+    tag: "in review",
+    text: "A runtime for WebAssembly programs. I added bounds checks on the host side to the code that converts strings between components. That code had three security advisories in 2026.",
+    links: [{ label: "Pull request #14617", href: "https://github.com/bytecodealliance/wasmtime/pull/14617" }],
+  },
+  {
+    name: "tt-metal",
+    href: "https://github.com/tenstorrent/tt-metal/issues/59930",
+    tag: "fix ready",
+    text: "The software stack for Tenstorrent's AI chips. A sweep of 54 math operations on the chip simulator found logit up to 8,767 ULP (steps of float32 precision) off near 0.5. My fix brings that to 3 ULP.",
+    links: [{ label: "Issue #59930", href: "https://github.com/tenstorrent/tt-metal/issues/59930" }],
+  },
+];
+
 const IN_PROGRESS = [
   {
     name: "Ulana",
@@ -154,6 +183,30 @@ export default function Home() {
               </div>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section className="wrap section">
+        <h2 className="section-title">Recent open source</h2>
+        <div className="card-grid">
+          {OPEN_SOURCE.map((o) => (
+            <article className="card" key={o.name}>
+              <div className="card-head">
+                <a className="card-title" href={o.href}>
+                  {o.name}
+                </a>
+                <span className="tag">{o.tag}</span>
+              </div>
+              <p className="card-text">{o.text}</p>
+              <p className="card-more card-links">
+                {o.links.map((l) => (
+                  <a key={l.href} href={l.href}>
+                    {l.label}
+                  </a>
+                ))}
+              </p>
+            </article>
+          ))}
         </div>
       </section>
 

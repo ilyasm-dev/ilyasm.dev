@@ -87,6 +87,14 @@
       default CUDA builds, and fixed it in a few lines.</p>
     </li>
     <li>
+      <a class="title" href="https://github.com/vllm-project/vllm/pull/60464">vLLM: faster and more reliable FP8 serving on Hopper GPUs</a>
+      <span class="tag">in review</span>
+      <p class="desc">Found vLLM picking a slower FP8 matrix-multiply kernel for common batch sizes on H100s. Choosing by
+      size gives 17 to 52% more serving throughput. Two related fixes stop a startup crash when nvcc is older than 12.9
+      (<a href="https://github.com/vllm-project/vllm/pull/60438">#60438</a>) and remove a copy per layer
+      (<a href="https://github.com/vllm-project/vllm/pull/60481">#60481</a>).</p>
+    </li>
+    <li>
       <a class="title" href="https://github.com/green-real">Luau compiler and runtime</a>
       <span class="tag">open source</span>
       <p class="desc">Contributions to the Luau compiler, its native code generator for x64 and ARM64, and its runtime,
@@ -100,7 +108,7 @@
     </li>
     <li>
       <span class="title">Dig It</span>
-      <span class="tag">co-owned, sold</span>
+      <span class="tag">co-founded, sold</span>
       <p class="desc">A Roblox game with about 70 million visits and a peak of 27,400 players online at the same time.</p>
     </li>
   </ul>
@@ -130,6 +138,7 @@
 
   <footer>
     <a href="https://github.com/ilyas-mallah">GitHub</a>
+    <a href="https://www.linkedin.com/in/ilyas-mallah">LinkedIn</a>
     <a href="https://github.com/green-real">Earlier work (green-real)</a>
     <a href="mailto:hello@ilyasm.dev">Email</a>
   </footer>

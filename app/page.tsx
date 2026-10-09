@@ -187,7 +187,7 @@ export default function Home() {
       </section>
 
       <section className="wrap section">
-        <h2 className="section-title">Recent open source</h2>
+        <h2 className="section-title">Recent open source work</h2>
         <div className="card-grid">
           {OPEN_SOURCE.map((o) => (
             <article className="card" key={o.name}>

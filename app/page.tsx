@@ -1,5 +1,13 @@
 import DecodeChart from "@/components/DecodeChart";
 import LatencyBars from "@/components/LatencyBars";
+import CopyButton from "@/components/CopyButton";
+import SocialIcon, { type IconName } from "@/components/SocialIcons";
+
+const SOCIALS: { name: string; href: string; aria: string; icon: IconName }[] = [
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/ilyas-mallah", aria: "LinkedIn profile", icon: "linkedin" },
+  { name: "GitHub", href: "https://github.com/ilyas-mallah", aria: "GitHub profile", icon: "github" },
+  { name: "X", href: "https://x.com/ilyasmdev", aria: "X profile", icon: "x" },
+];
 
 const AREAS = [
   {
@@ -100,8 +108,8 @@ export default function Home() {
           </div>
         </div>
         <div className="cta-row">
-          <a className="button" href="mailto:hello@ilyasm.dev">
-            hello@ilyasm.dev
+          <a className="button" href="#contact">
+            Contact
           </a>
           <span className="cta-note">Open to contract work and internships.</span>
         </div>
@@ -225,12 +233,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="wrap section contact">
+      <section className="wrap section contact" id="contact">
         <h2>Something slower than it should be?</h2>
         <p>I&apos;m open to internships and contract work.</p>
-        <a className="button" href="mailto:hello@ilyasm.dev">
-          hello@ilyasm.dev
-        </a>
+        <div className="contact-email">
+          <span className="email">hello@ilyasm.dev</span>
+          <CopyButton value="hello@ilyasm.dev" label="email address" />
+        </div>
+        <ul className="socials">
+          {SOCIALS.map((s) => (
+            <li key={s.name}>
+              <a className="social" href={s.href} aria-label={s.aria}>
+                <SocialIcon name={s.icon} />
+                <span className="social-label">{s.name}</span>
+              </a>
+            </li>
+          ))}
+          <li>
+            <span className="social social-discord" role="group" aria-label="Discord username ilyasmallah">
+              <SocialIcon name="discord" />
+              <span className="social-label">Discord</span>
+              <span className="social-handle">ilyasmallah</span>
+              <CopyButton value="ilyasmallah" label="Discord username" />
+            </span>
+          </li>
+        </ul>
       </section>
     </main>
   );

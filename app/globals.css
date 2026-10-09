@@ -60,6 +60,26 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Keeps anchor targets clear of the sticky header. */
+[id] {
+  scroll-margin-top: 72px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -711,6 +731,96 @@ a.card-title {
 .contact p {
   color: var(--muted);
   margin: 0 0 20px;
+}
+
+.contact-email {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.email {
+  font-size: clamp(1.15rem, 4vw, 1.4rem);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  user-select: all;
+}
+
+.copy-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg-elev);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.copy-button:hover,
+.copy-button:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.socials {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 26px 0 0;
+  padding: 0;
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-elev);
+  color: var(--fg);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+a.social:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.social-discord {
+  padding-right: 6px;
+}
+
+.social-handle {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+@media (max-width: 520px) {
+  .social-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .social {
+    padding: 6px 11px;
+  }
 }
 
 /* Pages and articles */

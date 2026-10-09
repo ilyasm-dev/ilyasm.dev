@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <nav>
               <Link href="/#work">Work</Link>
-              <a href="mailto:hello@ilyasm.dev">Contact</a>
+              <Link href="/#contact">Contact</Link>
               <ThemeToggle />
             </nav>
           </div>
@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span className="footer-links">
               <a href="https://github.com/ilyas-mallah">GitHub</a>
               <a href="https://github.com/green-real">Earlier work (green-real)</a>
-              <a href="mailto:hello@ilyasm.dev">Email</a>
+              <Link href="/#contact">Email</Link>
             </span>
           </div>
         </footer>

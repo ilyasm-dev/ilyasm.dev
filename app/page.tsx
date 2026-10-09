@@ -7,6 +7,7 @@ const SOCIALS: { name: string; href: string; aria: string; icon: IconName }[] = 
   { name: "LinkedIn", href: "https://www.linkedin.com/in/ilyas-mallah", aria: "LinkedIn profile", icon: "linkedin" },
   { name: "GitHub", href: "https://github.com/ilyas-mallah", aria: "GitHub profile", icon: "github" },
   { name: "X", href: "https://x.com/ilyasmdev", aria: "X profile", icon: "x" },
+  { name: "Discord", href: "https://discord.com/users/1557401037042618432", aria: "Discord profile", icon: "discord" },
 ];
 
 const AREAS = [
@@ -249,14 +250,6 @@ export default function Home() {
               </a>
             </li>
           ))}
-          <li>
-            <span className="social social-discord" role="group" aria-label="Discord username ilyasmallah">
-              <SocialIcon name="discord" />
-              <span className="social-label">Discord</span>
-              <span className="social-handle">ilyasmallah</span>
-              <CopyButton value="ilyasmallah" label="Discord username" />
-            </span>
-          </li>
         </ul>
       </section>
     </main>

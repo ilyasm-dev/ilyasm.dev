@@ -800,15 +800,6 @@ a.social:hover {
   color: var(--accent);
 }
 
-.social-discord {
-  padding-right: 6px;
-}
-
-.social-handle {
-  color: var(--muted);
-  font-weight: 500;
-}
-
 @media (max-width: 520px) {
   .social-label {
     position: absolute;

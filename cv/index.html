@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ilyas Mallah</title>
+<link rel="canonical" href="https://ilyasm.dev/">
+<meta name="description" content="Ilyas Mallah, software engineer. Compilers, runtimes and fast code in Luau, Rust, C++ and CUDA.">
+<meta property="og:title" content="Ilyas Mallah">
+<meta property="og:description" content="Software engineer. Compilers, runtimes and fast code in Luau, Rust, C++ and CUDA.">
+<meta property="og:url" content="https://ilyasm.dev/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='42' font-family='system-ui,sans-serif' font-size='28' font-weight='700' text-anchor='middle' fill='white'%3EIM%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --fg: #1c1c1c;
+    --muted: #5f5f5f;
+    --line: #e4e4e0;
+    --accent: #2563eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111214;
+      --fg: #e8e8e6;
+      --muted: #a0a09c;
+      --line: #2a2b2f;
+      --accent: #7aa2ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 680px; margin: 0 auto; padding: 72px 20px 56px; }
+  h1 { font-size: 2.2rem; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+  .role { color: var(--muted); font-size: 1.1rem; margin: 6px 0 24px; }
+  p { margin: 0 0 16px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .cta { margin-top: 24px; }
+  .cta a.button {
+    display: inline-block;
+    padding: 9px 16px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+  }
+  .cta a.button:hover { text-decoration: none; opacity: 0.9; }
+  h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 56px 0 12px;
+    font-weight: 600;
+  }
+  ul.work { list-style: none; padding: 0; margin: 0; }
+  ul.work li { padding: 16px 0; border-top: 1px solid var(--line); }
+  ul.work li:last-child { border-bottom: 1px solid var(--line); }
+  .title { font-weight: 600; }
+  .tag { color: var(--muted); font-size: 0.9rem; margin-left: 6px; }
+  .desc { color: var(--muted); margin: 4px 0 0; }
+  footer { margin-top: 56px; color: var(--muted); font-size: 0.95rem; }
+  footer a { margin-right: 18px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Ilyas Mallah</h1>
+  <p class="role">Software engineer in the Netherlands</p>
+
+  <p>I work mostly in Luau, Rust, C++ and CUDA. My main interests are compilers and runtimes, and making code fast,
+  from CPU hot paths to GPU kernels.</p>
+
+  <p class="cta"><a class="button" href="mailto:hello@ilyasm.dev">hello@ilyasm.dev</a>
+  &nbsp; Open to internships and contract work.</p>
+
+  <h2>Selected work</h2>
+  <ul class="work">
+    <li>
+      <a class="title" href="https://github.com/ggml-org/llama.cpp/pull/30077">llama.cpp: up to twice as fast long-context generation on RTX 50 GPUs</a>
+      <span class="tag">in review</span>
+      <p class="desc">Found why attention ran at half speed with a compressed (q4_0) cache on Blackwell GPUs in llama.cpp's
+      default CUDA builds, and fixed it in a few lines.</p>
+    </li>
+    <li>
+      <a class="title" href="https://github.com/vllm-project/vllm/pull/60464">vLLM: faster and more reliable FP8 serving on Hopper GPUs</a>
+      <span class="tag">in review</span>
+      <p class="desc">Found vLLM picking a slower FP8 matrix-multiply kernel for common batch sizes on H100s. Choosing by
+      size gives 17 to 52% more serving throughput. Two related fixes stop a startup crash when nvcc is older than 12.9
+      (<a href="https://github.com/vllm-project/vllm/pull/60438">#60438</a>) and remove a copy per layer
+      (<a href="https://github.com/vllm-project/vllm/pull/60481">#60481</a>).</p>
+    </li>
+    <li>
+      <a class="title" href="https://github.com/green-real">Luau compiler and runtime</a>
+      <span class="tag">open source</span>
+      <p class="desc">Contributions to the Luau compiler, its native code generator for x64 and ARM64, and its runtime,
+      under the handle green-real.</p>
+    </li>
+    <li>
+      <a class="title" href="https://rolantir.dev">Rolantir</a>
+      <span class="tag">co-founded</span>
+      <p class="desc">Analytics for the Roblox platform: tracks player counts for about 443,000 games. Built the data
+      service and moved the live database to TimescaleDB, taking dashboard charts from 400 to 900 ms down to 3 to 8 ms.</p>
+    </li>
+    <li>
+      <span class="title">Dig It</span>
+      <span class="tag">co-founded, sold</span>
+      <p class="desc">A Roblox game with about 70 million visits and a peak of 27,400 players online at the same time.</p>
+    </li>
+  </ul>
+
+  <h2>In progress</h2>
+  <ul class="work">
+    <li>
+      <span class="title">Ulana</span>
+      <span class="tag">release in progress</span>
+      <p class="desc">A compiler that turns WebAssembly into Luau, so programs written in C, Rust or Go, such as SQLite,
+      QuickJS and zstd, run as plain Luau.</p>
+    </li>
+    <li>
+      <span class="title">Ganglion</span>
+      <span class="tag">in development</span>
+      <p class="desc">A Rust and CUDA engine that runs whole brain wiring maps as live simulations. It matches a validated
+      scientific reference bit for bit, runs a 165,000-neuron nervous system faster than real time on one consumer GPU,
+      and drives a physics model of the body.</p>
+    </li>
+    <li>
+      <span class="title">infdoc</span>
+      <span class="tag">in development</span>
+      <p class="desc">A command-line check that finds silent slowdowns in self-hosted LLM serving. Every rule comes from a
+      measured case.</p>
+    </li>
+  </ul>
+
+  <footer>
+    <a href="https://github.com/ilyas-mallah">GitHub</a>
+    <a href="https://www.linkedin.com/in/ilyas-mallah">LinkedIn</a>
+    <a href="https://github.com/green-real">Earlier work (green-real)</a>
+    <a href="mailto:hello@ilyasm.dev">Email</a>
+  </footer>
+</main>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "622e4ebceeab46088e7e2b5203ec64ff"}'></script>
+</body>
+</html>

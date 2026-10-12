@@ -1,0 +1,88 @@
+<!doctype html>
+<!-- Source of public/og.png. Serve the repo root over http so the icon loads, open this page in Playwright headless
+     at viewport 1200x630, scale 1, and screenshot it. public/icon.svg is the favicon and the source of favicon.ico:
+     screenshot it at 48x48 with a transparent background and save it as ICO. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>og.png source</title>
+<style>
+  html, body { margin: 0; }
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    position: relative;
+    isolation: isolate;
+    background: #f7f8fa;
+    color: #16171a;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* The hero's dot grid. */
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(color-mix(in srgb, #565b66 22%, transparent) 1.2px, transparent 1.8px);
+    background-size: 26px 26px;
+    mask-image: radial-gradient(ellipse 70% 80% at 60% 40%, #000 25%, transparent 80%);
+  }
+  body::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 10px;
+    background: linear-gradient(in oklch 90deg, #1f5ce0, #0d9b8d);
+  }
+  .card {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 64px 80px 66px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .brand img { width: 84px; height: 84px; display: block; }
+  h1 {
+    margin: 0;
+    font-size: 76px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+  .grad {
+    background: linear-gradient(in oklch 90deg, #1f5ce0, #0d9b8d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 38px;
+    color: #565b66;
+  }
+  .foot strong { color: #1f5ce0; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand"><img src="../../public/icon.svg" alt="">Ilyas Mallah</div>
+    <h1>I find out why software is slow,<br><span class="grad">and make it fast.</span></h1>
+    <div class="foot"><strong>ilyasm.dev</strong><span>Open to contract work.</span></div>
+  </div>
+</body>
+</html>

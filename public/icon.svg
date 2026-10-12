@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- The header's IM mark: the oklch blend of the light accent and accent-2-fill, IBM Plex Mono SemiBold outlines. -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1f5ce0"/>
+      <stop offset=".25" stop-color="#006bca"/>
+      <stop offset=".5" stop-color="#0074b1"/>
+      <stop offset=".75" stop-color="#007898"/>
+      <stop offset="1" stop-color="#0c7882"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#g)"/>
+  <g fill="#fff" transform="translate(9.095 45) scale(.03724 -.03724)">
+    <path d="M78 0V98H235V600H78V698H522V600H365V98H522V0Z"/>
+    <path transform="translate(600 0)" d="M438 323 444 525H435L300 166L165 525H156L162 323V0H48V698H204L301 441H308L406 698H552V0H438Z"/>
+  </g>
+</svg>

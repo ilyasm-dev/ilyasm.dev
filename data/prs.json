@@ -1,0 +1,232 @@
+[
+  {
+    "repo": "llvm/llvm-project",
+    "number": 230606,
+    "title": "[libc++] Assert that valarray operands and assignment sources have matching sizes",
+    "url": "https://github.com/llvm/llvm-project/pull/230606",
+    "state": "open",
+    "createdAt": "2026-10-09",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
+    "number": 230605,
+    "title": "[libc++] Assert that the resize_and_overwrite operation returns a size in [0, n]",
+    "url": "https://github.com/llvm/llvm-project/pull/230605",
+    "state": "open",
+    "createdAt": "2026-10-09",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
+    "number": 230491,
+    "title": "[clang][-Wunsafe-buffer-usage] Warn on initializing annotated fields",
+    "url": "https://github.com/llvm/llvm-project/pull/230491",
+    "state": "open",
+    "createdAt": "2026-10-09",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
+    "number": 230490,
+    "title": "[libc++] Assert that the position passed to insert and emplace is in [begin(), end()]",
+    "url": "https://github.com/llvm/llvm-project/pull/230490",
+    "state": "open",
+    "createdAt": "2026-10-09",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "facebook/zstd",
+    "number": 4834,
+    "title": "decompress: return the skippable header size from ZSTD_frameHeaderSize()",
+    "url": "https://github.com/facebook/zstd/pull/4834",
+    "state": "open",
+    "createdAt": "2026-10-09",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "facebook/zstd",
+    "number": 4833,
+    "title": "programs: fix `zstd -l` infinite loop on a large skippable frame",
+    "url": "https://github.com/facebook/zstd/pull/4833",
+    "state": "open",
+    "createdAt": "2026-10-09",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "facebook/zstd",
+    "number": 4832,
+    "title": "decompress: make `ZSTD_decompressBound()` a true upper bound",
+    "url": "https://github.com/facebook/zstd/pull/4832",
+    "state": "open",
+    "createdAt": "2026-10-09",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "WebAssembly/wabt",
+    "number": 2874,
+    "title": "wasm2c: refuse memory sizes that do not fit in size_t",
+    "url": "https://github.com/WebAssembly/wabt/pull/2874",
+    "state": "open",
+    "createdAt": "2026-10-09",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "bytecodealliance/wasmtime",
+    "number": 14617,
+    "title": "Bounds-check string transcoder buffers before calling the host",
+    "url": "https://github.com/bytecodealliance/wasmtime/pull/14617",
+    "state": "open",
+    "createdAt": "2026-10-08",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "vllm-project/vllm",
+    "number": 60481,
+    "title": "[Compile] Defunctionalize rms_norm_per_block_quant",
+    "url": "https://github.com/vllm-project/vllm/pull/60481",
+    "state": "open",
+    "createdAt": "2026-10-07",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "vllm-project/vllm",
+    "number": 60464,
+    "title": "[Perf] Pick the SM90 block-FP8 CUTLASS kernel by M size, not M % 4",
+    "url": "https://github.com/vllm-project/vllm/pull/60464",
+    "state": "open",
+    "createdAt": "2026-10-07",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "vllm-project/vllm",
+    "number": 60438,
+    "title": "[Bugfix] Fall back from DeepGEMM when nvcc is older than 12.9",
+    "url": "https://github.com/vllm-project/vllm/pull/60438",
+    "state": "open",
+    "createdAt": "2026-10-07",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "ggml-org/llama.cpp",
+    "number": 30077,
+    "title": "CUDA: fix slow q4_0/q5_0 V dequantization on Blackwell with CUDA 12.8",
+    "url": "https://github.com/ggml-org/llama.cpp/pull/30077",
+    "state": "open",
+    "createdAt": "2026-10-07",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 2987,
+    "title": "Fix x64 regalloc converting a stack spill on reload",
+    "url": "https://github.com/luau-lang/luau/pull/2987",
+    "state": "merged",
+    "createdAt": "2026-09-24",
+    "mergedAt": "2026-09-25",
+    "author": "green-real"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 2699,
+    "title": "Fix optional tagged userdata types not being remapped at load time",
+    "url": "https://github.com/luau-lang/luau/pull/2699",
+    "state": "merged",
+    "createdAt": "2026-08-23",
+    "mergedAt": "2026-09-22",
+    "author": "green-real"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 2683,
+    "title": "Add array iteration fast-path to A64 `FORGLOOP` lowering",
+    "url": "https://github.com/luau-lang/luau/pull/2683",
+    "state": "merged",
+    "createdAt": "2026-08-20",
+    "mergedAt": "2026-09-22",
+    "author": "green-real"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 2700,
+    "title": "Resolve table field types through chained type aliases",
+    "url": "https://github.com/luau-lang/luau/pull/2700",
+    "state": "open",
+    "createdAt": "2026-08-23",
+    "mergedAt": null,
+    "author": "green-real"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 2648,
+    "title": "Check argument types of calls through a __call metamethod",
+    "url": "https://github.com/luau-lang/luau/pull/2648",
+    "state": "merged",
+    "createdAt": "2026-08-13",
+    "mergedAt": "2026-08-21",
+    "author": "green-real"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 2618,
+    "title": "Expose the integer type to user-defined type functions",
+    "url": "https://github.com/luau-lang/luau/pull/2618",
+    "state": "merged",
+    "createdAt": "2026-08-04",
+    "mergedAt": "2026-08-20",
+    "author": "green-real"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 2615,
+    "title": "Fix negated integer literals reporting a type error",
+    "url": "https://github.com/luau-lang/luau/pull/2615",
+    "state": "merged",
+    "createdAt": "2026-08-03",
+    "mergedAt": "2026-08-12",
+    "author": "green-real"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 2571,
+    "title": "Add integer equality fast-path for `JUMPIFEQ` codegen translation",
+    "url": "https://github.com/luau-lang/luau/pull/2571",
+    "state": "merged",
+    "createdAt": "2026-07-19",
+    "mergedAt": "2026-08-06",
+    "author": "green-real"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 2573,
+    "title": "Support 4-wide vector type definitions via Frontend setting",
+    "url": "https://github.com/luau-lang/luau/pull/2573",
+    "state": "open",
+    "createdAt": "2026-07-19",
+    "mergedAt": null,
+    "author": "green-real"
+  },
+  {
+    "repo": "luau-lang/lute",
+    "number": 301,
+    "title": "Fix functions returned from `luau.load` not being able to call `require`",
+    "url": "https://github.com/luau-lang/lute/pull/301",
+    "state": "merged",
+    "createdAt": "2025-05-29",
+    "mergedAt": "2025-06-03",
+    "author": "green-real"
+  }
+]

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { ReplyCopy } from "@/content/copy/types";
+import { fill, type Lang } from "@/lib/i18n";
 
 const TZ = "Europe/Amsterdam";
 const START = 9;
@@ -26,11 +28,14 @@ function gmtLabel(minutes: number): string {
   return `GMT${sign}${h}${mm ? `.${String(mm).padStart(2, "0")}` : ""}`;
 }
 
-// Amsterdam wall clock hour as a time in the visitor's zone, e.g. "3 am".
-function localTime(hour: number, amsOffset: number, at: Date): string {
-  const utc = Date.UTC(at.getUTCFullYear(), at.getUTCMonth(), at.getUTCDate(), hour, 0) - amsOffset * 60000;
+// Amsterdam wall clock hour as a time in the visitor's zone, "3 am" in English and "3.00" in Dutch.
+function localTime(hour: number, amsOffset: number, at: Date, lang: Lang): string {
+  const utc = new Date(Date.UTC(at.getUTCFullYear(), at.getUTCMonth(), at.getUTCDate(), hour, 0) - amsOffset * 60000);
+  if (lang === "nl") {
+    return new Intl.DateTimeFormat("nl-NL", { hour: "numeric", minute: "2-digit" }).format(utc).replace(":", ".").replace(/^0(\d)/, "$1");
+  }
   return new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" })
-    .format(new Date(utc))
+    .format(utc)
     .replace(":00", "")
     .replace(/^12\sAM$/, "midnight")
     .replace(/^12\sPM$/, "noon")
@@ -38,24 +43,19 @@ function localTime(hour: number, amsOffset: number, at: Date): string {
     .replace(/\s?PM$/, " pm");
 }
 
-function describe(at: Date) {
+function describe(at: Date, lang: Lang, copy: ReplyCopy) {
   const ams = offsetMinutes(TZ, at);
   const mine = offsetMinutes(undefined, at);
-  const yours = mine === ams ? null : `${localTime(START, ams, at)} to ${localTime(END, ams, at)} your time`;
-  return { gmt: gmtLabel(ams), yours };
+  const yours = mine === ams ? "" : fill(copy.yours, { start: localTime(START, ams, at, lang), end: localTime(END, ams, at, lang) });
+  return { zone: gmtLabel(ams), yours };
 }
 
-export default function ReplyHours() {
-  const [info, setInfo] = useState<{ gmt: string; yours: string | null }>({ gmt: "Amsterdam time", yours: null });
+export default function ReplyHours({ lang, copy }: { lang: Lang; copy: ReplyCopy }) {
+  const [info, setInfo] = useState({ zone: copy.zoneFallback, yours: "" });
 
   useEffect(() => {
-    setInfo(describe(new Date()));
-  }, []);
+    setInfo(describe(new Date(), lang, copy));
+  }, [lang, copy]);
 
-  return (
-    <>
-      I reply within hours, 9&nbsp;am to 9&nbsp;pm {info.gmt}
-      {info.yours ? ` (${info.yours})` : ""}.
-    </>
-  );
+  return <>{fill(copy.text, info)}</>;
 }

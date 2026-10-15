@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { marked } from "marked";
+import { externalLinksInHtml } from "@/components/ExternalLink";
 
 // The sample report is a Markdown copy of the hub's audit report, rendered at build time.
 const FILE = path.join(process.cwd(), "content", "sample-report.md");
@@ -12,7 +13,7 @@ export function getReport() {
   const title = lines[titleLine].slice(2).trim();
   const body = lines.filter((_, i) => i !== titleLine).join("\n").trim();
   const intro = body.split(/\n\s*\n/)[0].replace(/\s+/g, " ");
-  return { title, intro, html: stackTables(marked.parse(body, { async: false }) as string) };
+  return { title, intro, html: externalLinksInHtml(stackTables(marked.parse(body, { async: false }) as string)) };
 }
 
 const stripTags = (s: string) => s.replace(/<[^>]+>/g, "").replace(/"/g, "&quot;").trim();

@@ -3,7 +3,9 @@ import { pageMeta } from "@/lib/pageMeta";
 import Link from "next/link";
 import { DatabaseBackup, UserRound, Wrench } from "lucide-react";
 import { ChartQueryBars } from "@/components/BeforeAfterBars";
+import Ext from "@/components/ExternalLink";
 import { MigrationDiagram } from "@/components/Illustrations";
+import { COPY } from "@/content/copy";
 
 // Facts and numbers from the hub's projects/rolantir/README.md.
 export const metadata: Metadata = pageMeta("Rolantir case study", "How I moved Rolantir's live 13.9 GB SQLite database to PostgreSQL with TimescaleDB without losing history, and made its chart queries 50x faster.", "/work/rolantir/");
@@ -98,7 +100,7 @@ export default function RolantirCase() {
         <section className="case-part">
           <h2 className="case-h case-h-good">The result</h2>
           <div className="case-figure">
-            <ChartQueryBars />
+            <ChartQueryBars copy={COPY.en.bars} />
           </div>
           <p>
             I rewrote the derived-metric chart queries to fetch once and scan in memory. It gives bit-exact results against the
@@ -107,7 +109,7 @@ export default function RolantirCase() {
             3.7 GB instead of 35 GB.
           </p>
           <p className="case-proof">
-            The code is private. The product is live at <a href="https://rolantir.dev">rolantir.dev (beta)</a>.
+            The code is private. The product is live at <Ext href="https://rolantir.dev">rolantir.dev (beta)</Ext>.
           </p>
         </section>
 

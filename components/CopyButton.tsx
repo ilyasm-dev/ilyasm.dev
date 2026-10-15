@@ -14,7 +14,7 @@ function fallbackCopy(text: string) {
   area.remove();
 }
 
-export default function CopyButton({ value, label, text = "Copy" }: { value: string; label: string; text?: string }) {
+export default function CopyButton({ value, aria, text, copiedText }: { value: string; aria: string; text: string; copiedText: string }) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function CopyButton({ value, label, text = "Copy" }: { value: str
   }
 
   return (
-    <button type="button" className="copy-button" onClick={copy} aria-label={`Copy ${label}`}>
+    <button type="button" className="copy-button" onClick={copy} aria-label={aria}>
       <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
         {copied ? (
           <path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -44,9 +44,9 @@ export default function CopyButton({ value, label, text = "Copy" }: { value: str
           </>
         )}
       </svg>
-      <span aria-hidden="true">{copied ? "Copied" : text}</span>
+      <span aria-hidden="true">{copied ? copiedText : text}</span>
       <span className="sr-only" role="status">
-        {copied ? "Copied" : ""}
+        {copied ? copiedText : ""}
       </span>
     </button>
   );

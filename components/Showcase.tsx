@@ -2,55 +2,21 @@
 
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { ArrowUpRight, RotateCcw } from "lucide-react";
-import ChatRace, { CHAT_RACE_LABEL, CHAT_RACE_MS } from "@/components/ChatRace";
-import ServingGrid, { SERVING_LABEL, SERVING_MS, SERVING_SPEEDUP } from "@/components/ServingGrid";
-import ChartLoad, { CHART_LABEL, chartRunMs } from "@/components/ChartLoad";
+import ChatRace, { chatRaceLabel, chatRaceMs } from "@/components/ChatRace";
+import ServingGrid, { servingLabel, SERVING_MS, SERVING_SPEEDUP } from "@/components/ServingGrid";
+import ChartLoad, { chartLabel, chartRunMs } from "@/components/ChartLoad";
+import type { ShowcaseCopy } from "@/content/copy/types";
+import { fill, type Lang } from "@/lib/i18n";
 
-type Tab = {
-  id: "llama" | "vllm" | "rolantir";
-  figureShort: string;
-  topic: string;
-  figure: string;
-  meaning: string;
-  measured: string;
-  source: { label: string; href: string; external: boolean };
-  label: string;
-};
-
-const TABS: Tab[] = [
-  {
-    id: "llama",
-    figureShort: "Up to 2.1x faster",
-    topic: "AI replies",
-    figure: "Up to 2.1x faster AI replies",
-    meaning: "Long chats answer about twice as fast without new hardware.",
-    measured: "Measured on an RTX 5090 GPU",
-    source: { label: "llama.cpp PR #30077", href: "https://github.com/ggml-org/llama.cpp/pull/30077", external: true },
-    label: CHAT_RACE_LABEL,
-  },
-  {
-    id: "vllm",
-    figureShort: "Up to 52% more",
-    topic: "AI serving",
-    figure: "Up to 52% more AI tokens per second",
-    meaning: "Two GPUs now serve more than what three GPUs served before my fix.",
-    measured: `Measured on an H100 GPU (shown ${SERVING_SPEEDUP}x faster)`,
-    source: { label: "vLLM PR #60464", href: "https://github.com/vllm-project/vllm/pull/60464", external: true },
-    label: SERVING_LABEL,
-  },
-  {
-    id: "rolantir",
-    figureShort: "50x faster",
-    topic: "Chart queries",
-    figure: "50x faster chart queries",
-    meaning: "Chart queries that went from slow to instant.",
-    measured: "Measured on production",
-    source: { label: "Rolantir case", href: "/work/rolantir/", external: false },
-    label: CHART_LABEL,
-  },
+// The text of each tab is in the copy, in the same order.
+const TABS: { id: "llama" | "vllm" | "rolantir"; href: string; external: boolean }[] = [
+  { id: "llama", href: "https://github.com/ggml-org/llama.cpp/pull/30077", external: true },
+  { id: "vllm", href: "https://github.com/vllm-project/vllm/pull/60464", external: true },
+  { id: "rolantir", href: "/work/rolantir/", external: false },
 ];
 
-export default function Showcase() {
+// `raceTokens` is the English answer's token count, which times the chat race in every language.
+export default function Showcase({ copy, lang, raceTokens }: { copy: ShowcaseCopy; lang: Lang; raceTokens: number }) {
   const root = useRef<HTMLElement>(null);
   const frame = useRef(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -60,7 +26,7 @@ export default function Showcase() {
   const [reduced, setReduced] = useState(false);
   const [elapsed, setElapsed] = useState<number | null>(null);
 
-  const total = active === 0 ? CHAT_RACE_MS : active === 1 ? SERVING_MS : chartRunMs(slow);
+  const total = active === 0 ? chatRaceMs(raceTokens) : active === 1 ? SERVING_MS : chartRunMs(slow);
 
   const start = useCallback(() => {
     cancelAnimationFrame(frame.current);
@@ -123,11 +89,13 @@ export default function Showcase() {
   };
 
   const tab = TABS[active];
+  const text = copy.tabs[active];
+  const label = active === 0 ? chatRaceLabel(copy, raceTokens, lang) : active === 1 ? servingLabel(copy, lang) : chartLabel(copy);
 
   return (
-    <section className="showcase" ref={root} aria-label="Measured results">
+    <section className="showcase" ref={root} aria-label={copy.aria}>
       <div className="show-frame">
-        <div className="show-tabs" role="tablist" aria-label="Results" onKeyDown={onKey}>
+        <div className="show-tabs" role="tablist" aria-label={copy.tabsAria} onKeyDown={onKey}>
           {TABS.map((t, i) => (
             <button
               key={t.id}
@@ -143,27 +111,29 @@ export default function Showcase() {
               className="show-tab"
               onClick={() => select(i)}
             >
-              <strong>{t.figureShort}</strong>
+              <strong>{copy.tabs[i].figureShort}</strong>
               <span className="show-tab-sep" aria-hidden="true">
                 {" · "}
               </span>
-              <span>{t.topic}</span>
+              <span>{copy.tabs[i].topic}</span>
             </button>
           ))}
         </div>
         <div role="tabpanel" id={`show-panel-${tab.id}`} aria-labelledby={`show-tab-${tab.id}`} tabIndex={0} className="show-panel">
           <div className="show-source-row">
             <p className="show-source">
-              {tab.measured}
+              {fill(text.measured, { speedup: SERVING_SPEEDUP })}
               <span aria-hidden="true">{" · "}</span>
-              {tab.source.external ? (
-                <a href={tab.source.href} target="_blank" rel="noopener noreferrer">
-                  {tab.source.label}
+              {tab.external ? (
+                <a href={tab.href} target="_blank" rel="noopener noreferrer">
+                  {text.source}
                   <ArrowUpRight size={14} strokeWidth={2} aria-hidden="true" />
-                  <span className="sr-only"> (opens in a new tab)</span>
+                  <span className="sr-only">{copy.newTab}</span>
                 </a>
               ) : (
-                <a href={tab.source.href}>{tab.source.label}</a>
+                <a href={tab.href} hrefLang={lang === "en" ? undefined : "en"}>
+                  {text.source}
+                </a>
               )}
             </p>
             {reduced ? null : (
@@ -171,26 +141,26 @@ export default function Showcase() {
                 {active === 2 ? (
                   <button type="button" role="switch" aria-checked={slow} className="show-switch" onClick={() => setSlow((s) => !s)}>
                     <span className="show-switch-track" aria-hidden="true" />
-                    slow motion 10x
+                    {copy.slowMotion}
                   </button>
                 ) : null}
-                <button type="button" className="race-replay" onClick={start} aria-label="Replay">
+                <button type="button" className="race-replay" onClick={start} aria-label={copy.replayAria}>
                   <RotateCcw size={14} strokeWidth={2} aria-hidden="true" />
                   <span className="race-replay-text" aria-hidden="true">
-                    replay
+                    {copy.replay}
                   </span>
                 </button>
               </span>
             )}
           </div>
-          <div role="img" aria-label={tab.label}>
-            {active === 0 ? <ChatRace elapsed={elapsed} reduced={reduced} /> : null}
-            {active === 1 ? <ServingGrid elapsed={elapsed} reduced={reduced} /> : null}
-            {active === 2 ? <ChartLoad elapsed={elapsed} slow={slow} reduced={reduced} /> : null}
+          <div role="img" aria-label={label}>
+            {active === 0 ? <ChatRace copy={copy} lang={lang} count={raceTokens} elapsed={elapsed} reduced={reduced} /> : null}
+            {active === 1 ? <ServingGrid copy={copy} lang={lang} elapsed={elapsed} reduced={reduced} /> : null}
+            {active === 2 ? <ChartLoad copy={copy} elapsed={elapsed} slow={slow} reduced={reduced} /> : null}
           </div>
           <div className="show-card">
-            <strong className="show-figure">{tab.figure}</strong>
-            <p className="proof-meaning">{tab.meaning}</p>
+            <strong className="show-figure">{text.figure}</strong>
+            <p className="proof-meaning">{text.meaning}</p>
           </div>
         </div>
       </div>

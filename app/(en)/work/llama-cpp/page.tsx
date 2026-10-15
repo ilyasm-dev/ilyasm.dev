@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { pageMeta } from "@/lib/pageMeta";
 import Link from "next/link";
 import DecodeChart from "@/components/DecodeChart";
+import Ext from "@/components/ExternalLink";
 import { MemoryDetour } from "@/components/Illustrations";
 
 // Facts and numbers from the hub's contributions/llama.cpp/30077-v-dequant-blackwell/notes.md and pr.md.
@@ -87,7 +88,7 @@ export default function LlamaCase() {
             unchanged.
           </p>
           <p className="case-proof">
-            The fix is <a href="https://github.com/ggml-org/llama.cpp/pull/30077">pull request #30077</a>, open and in review.
+            The fix is <Ext href="https://github.com/ggml-org/llama.cpp/pull/30077">pull request #30077</Ext>, open and in review.
           </p>
         </section>
 

@@ -1,4 +1,4 @@
-import { BadgeCheck, CircleDashed, CircleDot, GitMerge, GitPullRequest, Package, type LucideIcon } from "lucide-react";
+import { BadgeCheck, CircleDashed, CircleDot, GitMerge, GitPullRequest, GitPullRequestClosed, Package, type LucideIcon } from "lucide-react";
 
 // A category icon in a tile, so a reader sees what kind of work a card is before reading it.
 export function Mark({ icon: Icon }: { icon: LucideIcon }) {
@@ -9,11 +9,12 @@ export function Mark({ icon: Icon }: { icon: LucideIcon }) {
   );
 }
 
-export type StatusKind = "review" | "merged" | "issue" | "done" | "dev" | "release";
+export type StatusKind = "review" | "merged" | "closed" | "issue" | "done" | "dev" | "release";
 
 const ICONS = {
   review: GitPullRequest,
   merged: GitMerge,
+  closed: GitPullRequestClosed,
   issue: CircleDot,
   done: BadgeCheck,
   dev: CircleDashed,

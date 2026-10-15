@@ -5,3 +5,5 @@ next-env.d.ts
 *.tsbuildinfo
 .playwright-mcp/
 driver.c
+content/drafts/
+public/draft-media/

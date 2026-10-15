@@ -1,7 +1,8 @@
 <!doctype html>
 <!-- Source of public/og.png. Serve the repo root over http so the icon loads, open this page in Playwright headless
-     at viewport 1200x630, scale 1, and screenshot it. public/icon.svg is the favicon and the source of favicon.ico:
-     screenshot it at 48x48 with a transparent background and save it as ICO. -->
+     at viewport 1200x630, scale 1, and screenshot it. Open it with ?lang=nl for public/og-nl.png, the Dutch pages'
+     preview. public/icon.svg is the favicon and the source of favicon.ico: screenshot it at 48x48 with a transparent
+     background and save it as ICO. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -84,5 +85,13 @@
     <h1>I find out why software is slow,<br><span class="grad">and make it fast.</span></h1>
     <div class="foot"><strong>ilyasm.dev</strong><span>Open to contract work.</span></div>
   </div>
+  <script>
+    if (new URLSearchParams(location.search).get("lang") === "nl") {
+      document.documentElement.lang = "nl";
+      document.querySelector("h1").style.fontSize = "70px";
+      document.querySelector("h1").innerHTML = 'Ik zoek uit waarom<br>software traag is,<br><span class="grad">en maak het snel.</span>';
+      document.querySelector(".foot span").textContent = "Beschikbaar voor opdrachten.";
+    }
+  </script>
 </body>
 </html>

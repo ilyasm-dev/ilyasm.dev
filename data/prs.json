@@ -1,5 +1,15 @@
 [
   {
+    "repo": "WebAssembly/wabt",
+    "number": 2874,
+    "title": "wasm2c: refuse memory sizes that do not fit in size_t",
+    "url": "https://github.com/WebAssembly/wabt/pull/2874",
+    "state": "merged",
+    "createdAt": "2026-10-09",
+    "mergedAt": "2026-10-13",
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "llvm/llvm-project",
     "number": 230606,
     "title": "[libc++] Assert that valarray operands and assignment sources have matching sizes",
@@ -64,16 +74,6 @@
     "number": 4832,
     "title": "decompress: make `ZSTD_decompressBound()` a true upper bound",
     "url": "https://github.com/facebook/zstd/pull/4832",
-    "state": "open",
-    "createdAt": "2026-10-09",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "WebAssembly/wabt",
-    "number": 2874,
-    "title": "wasm2c: refuse memory sizes that do not fit in size_t",
-    "url": "https://github.com/WebAssembly/wabt/pull/2874",
     "state": "open",
     "createdAt": "2026-10-09",
     "mergedAt": null,

@@ -1,3 +1,5 @@
+import type { ShowcaseCopy } from "@/content/copy/types";
+import { fill, num, type Lang } from "@/lib/i18n";
 import { SLOT_ENDS_PATCHED, SLOT_ENDS_STOCK } from "@/lib/serving";
 
 // Measured vLLM output throughput of the same runs, long prompts, 64 at once, one H100 NVL (PR #60464).
@@ -16,7 +18,16 @@ const BEFORE_S = lastEnd(SLOT_ENDS_STOCK);
 const AFTER_S = lastEnd(SLOT_ENDS_PATCHED);
 
 export const SERVING_MS = (BEFORE_S * 1000) / SERVING_SPEEDUP;
-export const SERVING_LABEL = `Two grids of ${TILES} bars, one per request served at once. Each bar fills ${PER_TILE} times, once per request at its measured time, then stays full. Before the fix the GPU produces ${BEFORE_TPS} tokens per second and finishes all ${REQUESTS} requests in ${BEFORE_S.toFixed(1)} seconds. After the fix it produces ${AFTER_TPS} and finishes in ${AFTER_S.toFixed(1)} seconds.`;
+export const servingLabel = (copy: ShowcaseCopy, lang: Lang) =>
+  fill(copy.servingLabel, {
+    tiles: TILES,
+    perTile: PER_TILE,
+    beforeTps: BEFORE_TPS,
+    requests: REQUESTS,
+    beforeS: num(BEFORE_S, lang, 1),
+    afterTps: AFTER_TPS,
+    afterS: num(AFTER_S, lang, 1),
+  });
 
 type Panel = { name: "before" | "after"; doneS: number; slots: number[][] };
 const PANELS: Panel[] = [
@@ -43,7 +54,9 @@ function Tile({ served }: { served: number }) {
   );
 }
 
-function ServingPanel({ panel, elapsed }: { panel: Panel; elapsed: number | null }) {
+type Props = { copy: ShowcaseCopy; lang: Lang; elapsed: number | null };
+
+function ServingPanel({ panel, elapsed, copy, lang }: Props & { panel: Panel }) {
   const t = Math.min(((elapsed ?? 0) * SERVING_SPEEDUP) / 1000, panel.doneS);
   const done = t >= panel.doneS;
   const served = panel.slots.map((ends) => (done ? PER_TILE : servedAt(ends, t)));
@@ -51,26 +64,26 @@ function ServingPanel({ panel, elapsed }: { panel: Panel; elapsed: number | null
   return (
     <div className={`race-col race-col-${panel.name}`}>
       <div className="race-chat serve-panel">
-        <span className="race-tag">{panel.name}</span>
+        <span className="race-tag">{copy[panel.name]}</span>
         <div className="tile-grid" aria-hidden="true">
           {served.map((s, i) => (
             <Tile key={i} served={s} />
           ))}
         </div>
         <span className={done ? "show-outcome race-done" : "show-outcome"} aria-hidden="true">
-          {done ? `done in ${panel.doneS.toFixed(1)} s` : `${t.toFixed(1)} s`}
+          {done ? fill(copy.doneIn, { s: num(panel.doneS, lang, 1) }) : fill(copy.seconds, { s: num(t, lang, 1) })}
         </span>
       </div>
     </div>
   );
 }
 
-export default function ServingGrid({ elapsed, reduced }: { elapsed: number | null; reduced: boolean }) {
+export default function ServingGrid({ elapsed, reduced, ...props }: Props & { reduced: boolean }) {
   const e = reduced ? SERVING_MS : elapsed;
   return (
     <div className="show-body">
       {PANELS.map((p) => (
-        <ServingPanel key={p.name} panel={p} elapsed={e} />
+        <ServingPanel key={p.name} panel={p} elapsed={e} {...props} />
       ))}
     </div>
   );

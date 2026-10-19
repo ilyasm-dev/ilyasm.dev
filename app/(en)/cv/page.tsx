@@ -114,18 +114,45 @@ export default function Cv() {
             </li>
             <li>
               <p>
-                <strong>LLVM</strong> (libc++, Clang). Four PRs in review: hardening assertions for <code>insert</code>/
+                <strong>LLVM</strong> (libc++, Clang). Eight PRs in review: hardening assertions for <code>insert</code>/
                 <code>emplace</code> positions (<Pr repo="llvm/llvm-project" n={230490} />
-                ), <code>resize_and_overwrite</code> bounds (<Pr repo="llvm/llvm-project" n={230605} />) and{" "}
-                <code>valarray</code> sizes (<Pr repo="llvm/llvm-project" n={230606} />
-                ), plus a Clang warning (<Pr repo="llvm/llvm-project" n={230491} />
+                ), <code>resize_and_overwrite</code> bounds (<Pr repo="llvm/llvm-project" n={230605} />
+                ), <code>valarray</code> sizes (<Pr repo="llvm/llvm-project" n={230606} />
+                ), <code>splice</code> preconditions (<Pr repo="llvm/llvm-project" n={232538} />) and <code>erase</code>/
+                <code>extract</code> of <code>end()</code> (<Pr repo="llvm/llvm-project" n={232661} />
+                ), plus three Clang warning changes (<Pr repo="llvm/llvm-project" n={230491} />,{" "}
+                <Pr repo="llvm/llvm-project" n={232898} />, <Pr repo="llvm/llvm-project" n={233604} />
                 ).
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>Wasmtime</strong> (WebAssembly runtime, Cranelift code generator). Added float to 8- and 16-bit integer
+                conversions to the x64 backend, which panicked on them, closing an issue open since 2022. Merged in October 2026 (
+                <Pr repo="bytecodealliance/wasmtime" n={14778} />
+                ). Credited reporter of security advisory{" "}
+                <Ext href="https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-mghf-wjfp-p5xm">GHSA-mghf-wjfp-p5xm</Ext>,
+                published in October 2026 and fixed in Wasmtime 36.0.19, 48.0.7 and 49.0.4.
               </p>
             </li>
             <li>
               <p>
                 <strong>wabt</strong> (WebAssembly tools). Fixed wasm2c on 32-bit hosts, where a 4 GiB memory size wrapped to 0 and
                 freed memory still in use. Merged in October 2026 (<Pr repo="WebAssembly/wabt" n={2874} />
+                ).
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>mruby</strong> (embedded Ruby). Fixed <code>pack</code> and <code>unpack</code> string lengths that wrapped
+                negative at 2 GiB and read outside the string. Merged in October 2026 (<Pr repo="mruby/mruby" n={7692} />
+                ).
+              </p>
+            </li>
+            <li>
+              <p>
+                <strong>wgpu</strong> (Rust graphics, naga shader translator). Fixed naga&apos;s fuzz build, broken on OSS-Fuzz
+                since March 2026. Merged in October 2026 (<Pr repo="gfx-rs/wgpu" n={10637} />
                 ).
               </p>
             </li>

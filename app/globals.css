@@ -462,10 +462,10 @@ nav .lang-switch + .theme-toggle {
   gap: 28px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 760px) {
   .areas {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 48px;
   }
 }
 
@@ -1428,6 +1428,117 @@ a.social:hover {
   }
 }
 
+/* Language offer: floats above the page, so showing or closing it moves nothing. The body gets room at its end,
+   so the footer can still scroll clear of it. */
+body {
+  padding-bottom: var(--offer-room, 0px);
+}
+
+.lang-offer {
+  position: fixed;
+  z-index: 15;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: min(620px, calc(100% - 32px));
+  display: flex;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 8px 8px 8px 18px;
+  background: var(--bg-elev);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  transform: translateX(-50%);
+  animation: offer-in 0.3s ease-out both;
+}
+
+@keyframes offer-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 16px);
+  }
+}
+
+.lang-offer p {
+  flex: 1;
+  margin: 0;
+  color: var(--fg);
+}
+
+.lang-offer-go {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  color: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.lang-offer-go:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+}
+
+.lang-offer-close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.lang-offer-close:hover {
+  color: var(--fg);
+  background: var(--accent-soft);
+}
+
+/* On a phone the bar keeps one row: the link says it all, and the sentence stays for screen readers only. */
+@media (max-width: 520px) {
+  .lang-offer {
+    gap: 8px;
+    padding: 8px;
+  }
+  .lang-offer p {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .lang-offer-go {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (pointer: coarse) {
+  .lang-offer-go {
+    min-height: 48px;
+  }
+  .lang-offer-close {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lang-offer {
+    animation: none;
+  }
+}
+
 @media (max-width: 520px) {
   nav {
     gap: 12px;
@@ -2111,6 +2222,41 @@ a.social:hover {
   line-height: 1.5;
 }
 
+/* The second offer at the same price: a ruled block under the price card, no card of its own. */
+.sweep {
+  margin-top: 40px;
+  max-width: 62rem;
+}
+
+.sweep-text {
+  max-width: 62ch;
+  margin: 0 0 14px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.sweep .phase-checks {
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.sweep-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 0;
+  color: var(--fg);
+  font-size: 0.93rem;
+  font-weight: 600;
+}
+
+.sweep-price svg {
+  flex: none;
+  color: var(--accent);
+}
+
 .safeguards {
   margin-top: 56px;
 }
@@ -2260,8 +2406,8 @@ nav a {
 
 @media (min-width: 760px) {
   .highlights {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 48px;
   }
 }
 
@@ -3278,6 +3424,13 @@ h3.card-title {
   font-size: 0.9rem;
 }
 
+/* In the hero the row closes the proof, so the names a CTO knows show before the first section. */
+.hero-contributed {
+  margin: 28px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
 .contributed ul {
   list-style: none;
   margin: 0;
@@ -3374,6 +3527,9 @@ a.email {
   }
   .prose .table-stack td:first-child {
     font-weight: 650;
+  }
+  .prose .table-stack td[data-empty] {
+    display: none;
   }
   .prose .table-stack td[data-label="#"] {
     display: block;

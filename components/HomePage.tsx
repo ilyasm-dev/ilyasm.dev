@@ -1,11 +1,13 @@
 import {
   Archive,
   ArrowDown,
+  Award,
   ArrowRight,
   Braces,
   Brain,
   Check,
   Code,
+  Cpu,
   Database,
   Eye,
   FileCode,
@@ -21,7 +23,6 @@ import {
   Server,
   ShieldCheck,
   Stethoscope,
-  Target,
   Timer,
   Users,
   Wrench,
@@ -32,7 +33,7 @@ import Link from "next/link";
 import { ChartQueryBars, DecodeBars } from "@/components/BeforeAfterBars";
 import CopyButton from "@/components/CopyButton";
 import Ext from "@/components/ExternalLink";
-import { BillClimb, DatabaseMove, GaugeHalf } from "@/components/Illustrations";
+import { BillClimb, DatabaseMove, GaugeHalf, ShieldInput } from "@/components/Illustrations";
 import { Mark, Status, type StatusKind } from "@/components/Marks";
 import ReplyHours from "@/components/ReplyHours";
 import Showcase from "@/components/Showcase";
@@ -40,6 +41,7 @@ import SocialIcon, { type IconName } from "@/components/SocialIcons";
 import { COPY } from "@/content/copy";
 import prsData from "@/data/prs.json";
 import { fill, type Lang } from "@/lib/i18n";
+import { allPosts, monthYear } from "@/lib/posts";
 import { tokenize } from "@/lib/race";
 
 // The home page in either language. All text comes from content/copy. Links, icons and figures from data stay here,
@@ -66,18 +68,23 @@ const CONTRIBUTED: { name: string; by?: string }[] = [
   { name: "vLLM" },
   { name: "llama.cpp" },
   { name: "Luau", by: "Roblox" },
+  { name: "Wasmtime", by: "Bytecode Alliance" },
   { name: "wabt", by: "WebAssembly" },
   { name: "zstd", by: "Meta" },
+  { name: "mruby" },
+  { name: "wgpu" },
   { name: "tt-metal", by: "Tenstorrent" },
 ];
 
-const AREA_ART = [GaugeHalf, DatabaseMove, BillClimb];
+const AREA_ART = [GaugeHalf, DatabaseMove, BillClimb, ShieldInput];
 
 // Highlights are from the hub's contributions/README.md. The full list is data/prs.json, written at build time by scripts/fetch-prs.mjs.
+// The advisory is shown at the level of its public page only: the credit and the fixed versions.
 const HIGHLIGHTS: { name: string; icon: LucideIcon; href: string; status: StatusKind }[] = [
   { name: "vLLM", icon: Server, href: "https://github.com/vllm-project/vllm/pull/60464", status: "review" },
+  { name: "Wasmtime", icon: Award, href: "https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-mghf-wjfp-p5xm", status: "done" },
+  { name: "Wasmtime", icon: Cpu, href: "https://github.com/bytecodealliance/wasmtime/pull/14778", status: "merged" },
   { name: "wabt", icon: ShieldCheck, href: "https://github.com/WebAssembly/wabt/pull/2874", status: "merged" },
-  { name: "tt-metal", icon: Target, href: "https://github.com/tenstorrent/tt-metal/issues/59930", status: "issue" },
 ];
 
 type Pr = { repo: string; number: number; title: string; url: string; state: "open" | "merged"; createdAt: string; mergedAt: string | null; author: string };
@@ -118,6 +125,9 @@ const IN_PROGRESS: { name: string; icon: LucideIcon; kind: StatusKind }[] = [
   { name: "Ganglion", icon: Brain, kind: "dev" },
   { name: "infdoc", icon: Stethoscope, kind: "dev" },
 ];
+
+// Published posts, newest first. They are English, so the Dutch page marks them as such.
+const POSTS = allPosts();
 
 // The chat race runs on the English answer's length in every language, so the measured seconds stay the same.
 const RACE_TOKENS = tokenize(COPY.en.showcase.chatAnswer).length;
@@ -165,12 +175,23 @@ export default function HomePage({ lang }: { lang: Lang }) {
         <p className="hero-credit">
           <GitMerge size={16} strokeWidth={2} aria-hidden="true" />
           <span>
-            {c.creditLuau}{" "}
+            {c.creditLuau} {c.creditWasmtime}{" "}
             <Ext href={LUAU_MERGED} note={lang}>
               {c.seeThem}
             </Ext>
           </span>
         </p>
+        <div className="contributed hero-contributed">
+          <span className="contributed-label">{c.contributedTo}</span>
+          <ul>
+            {CONTRIBUTED.map((p) => (
+              <li key={p.name}>
+                <strong>{p.name}</strong>
+                {p.by && <span>{p.by}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <section className="wrap section">
@@ -316,6 +337,39 @@ export default function HomePage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
+      {POSTS.length > 0 && (
+        <section className="wrap section" aria-labelledby="writing-title">
+          <h2 className="section-title" id="writing-title">
+            {c.writingTitle}
+          </h2>
+          <p className="start-lead">{c.writingLead}</p>
+          <ul className="post-list home-posts">
+            {POSTS.map((p) => (
+              <li key={p.slug}>
+                <Link className="post-link" href={`/writing/${p.slug}/`} hrefLang={enOnly}>
+                  <span className="post-title" lang={enOnly}>
+                    {p.title}
+                  </span>
+                  <span className="post-summary" lang={enOnly}>
+                    {p.summary}
+                  </span>
+                  <span className="post-meta">
+                    {p.date ? `${monthYear(p.date, lang)} · ` : ""}
+                    {fill(c.writingMeta, { n: p.minutes })}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="card-more">
+            <Link className="flow-link" href="/writing/" hrefLang={enOnly}>
+              {c.writingAll}
+              <ArrowRight size={15} strokeWidth={2} aria-hidden="true" />
+            </Link>
+          </p>
+        </section>
+      )}
+
       <section className="wrap section" id="start">
         <h2 className="section-title">{c.startTitle}</h2>
         <p className="start-lead">{c.startLead}</p>
@@ -405,6 +459,22 @@ export default function HomePage({ lang }: { lang: Lang }) {
           </article>
         </div>
         <p className="price-fine">{c.priceFine}</p>
+        <div className="sweep">
+          <h3 className="sub-title">{c.sweepTitle}</h3>
+          <p className="sweep-text">{c.sweepText}</p>
+          <ul className="phase-checks" aria-label={c.includedAria}>
+            {c.sweepIncluded.map((item) => (
+              <li key={item}>
+                <Check size={16} strokeWidth={2.25} aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="sweep-price">
+            <Timer size={15} strokeWidth={2} aria-hidden="true" />
+            {c.sweepPrice}
+          </p>
+        </div>
         <div className="safeguards">
           <h3 className="sub-title">{c.safeguardsTitle}</h3>
           <ul>
@@ -423,20 +493,9 @@ export default function HomePage({ lang }: { lang: Lang }) {
 
       <section className="wrap section">
         <h2 className="section-title">{c.ossTitle}</h2>
-        <div className="contributed">
-          <span className="contributed-label">{c.contributedTo}</span>
-          <ul>
-            {CONTRIBUTED.map((p) => (
-              <li key={p.name}>
-                <strong>{p.name}</strong>
-                {p.by && <span>{p.by}</span>}
-              </li>
-            ))}
-          </ul>
-        </div>
         <ul className="highlights">
           {HIGHLIGHTS.map((h, i) => (
-            <li className="oss" key={h.name}>
+            <li className="oss" key={h.href}>
               <div className="oss-head">
                 <Mark icon={h.icon} />
                 <div>

@@ -50,6 +50,8 @@ export type Copy = {
     nav: { start: string; work: string; contact: string };
     theme: string;
     switchTo: { label: string; name: string; lang: Lang };
+    // The bar on the other language's page that offers this language. Written in this language.
+    offer: { region: string; text: string; go: string; close: string };
     privacy: string;
     earlier: string;
     cv: string;
@@ -70,8 +72,9 @@ export type Copy = {
     creditEngines: ReactNode;
     creditLuau: ReactNode;
     seeThem: string;
+    creditWasmtime: ReactNode;
     problemsTitle: string;
-    areas: [Area, Area, Area];
+    areas: [Area, Area, Area, Area];
     startTitle: string;
     startLead: ReactNode;
     investigation: string;
@@ -94,6 +97,11 @@ export type Copy = {
     teamFixes: ReactNode;
     workTogether: string;
     priceFine: string;
+    // The hardening sweep: a second offer at the investigation's price, so it has no price card of its own.
+    sweepTitle: string;
+    sweepText: string;
+    sweepIncluded: [string, string, string];
+    sweepPrice: string;
     safeguardsTitle: string;
     safeguards: [string, string, string, string, string];
     workTitle: string;
@@ -102,9 +110,14 @@ export type Copy = {
     llama: { status: string; text: string; stats: [Stat, Stat]; pr: string };
     luau: { title: string; status: string; text: string; prs: [ReactNode, ReactNode, ReactNode, ReactNode]; all: string };
     digIt: { status: string; text: string; stats: [Stat, Stat]; game: string; history: string };
+    // Posts are English only. {n} is the reading time in minutes.
+    writingTitle: string;
+    writingLead: string;
+    writingMeta: string;
+    writingAll: string;
     ossTitle: string;
     contributedTo: string;
-    highlights: [Highlight, Highlight, Highlight];
+    highlights: [Highlight, Highlight, Highlight, Highlight];
     hardening: string;
     allPrs: string;
     prMix: string;

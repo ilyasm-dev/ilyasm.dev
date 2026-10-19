@@ -1,5 +1,95 @@
 [
   {
+    "repo": "llvm/llvm-project",
+    "number": 233604,
+    "title": "[clang][-Wunsafe-buffer-usage] Add per-family subgroups of -Wunsafe-buffer-usage-in-libc-call",
+    "url": "https://github.com/llvm/llvm-project/pull/233604",
+    "state": "open",
+    "createdAt": "2026-10-19",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "gfx-rs/wgpu",
+    "number": 10637,
+    "title": "naga: Fix build with only `arbitrary` feature (used for fuzzing)",
+    "url": "https://github.com/gfx-rs/wgpu/pull/10637",
+    "state": "merged",
+    "createdAt": "2026-10-15",
+    "mergedAt": "2026-10-17",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
+    "number": 232898,
+    "title": "[clang][-Wunsafe-buffer-usage] Keep format-attr-call warnings independent of libc-call",
+    "url": "https://github.com/llvm/llvm-project/pull/232898",
+    "state": "open",
+    "createdAt": "2026-10-16",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
+    "number": 232661,
+    "title": "[libc++] Assert that erase and extract are not passed end() in the associative containers",
+    "url": "https://github.com/llvm/llvm-project/pull/232661",
+    "state": "open",
+    "createdAt": "2026-10-16",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "ggml-org/llama.cpp",
+    "number": 30694,
+    "title": "llama : merge nearby KV ranges when reading state into host memory",
+    "url": "https://github.com/ggml-org/llama.cpp/pull/30694",
+    "state": "open",
+    "createdAt": "2026-10-16",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "bytecodealliance/wasmtime",
+    "number": 14788,
+    "title": "cranelift-jit: assert that relocations stay within their definition",
+    "url": "https://github.com/bytecodealliance/wasmtime/pull/14788",
+    "state": "open",
+    "createdAt": "2026-10-16",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "bytecodealliance/wasmtime",
+    "number": 14778,
+    "title": "x64: Lower fcvt_to_{u,s}int{,_sat} to i8 and i16",
+    "url": "https://github.com/bytecodealliance/wasmtime/pull/14778",
+    "state": "merged",
+    "createdAt": "2026-10-16",
+    "mergedAt": "2026-10-16",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "mruby/mruby",
+    "number": 7692,
+    "title": "mruby-pack: keep string lengths in mrb_int so they don't wrap at 2 GiB",
+    "url": "https://github.com/mruby/mruby/pull/7692",
+    "state": "merged",
+    "createdAt": "2026-10-15",
+    "mergedAt": "2026-10-16",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
+    "number": 232538,
+    "title": "[libc++] Assert the element and range preconditions of list::splice and forward_list::splice_after",
+    "url": "https://github.com/llvm/llvm-project/pull/232538",
+    "state": "open",
+    "createdAt": "2026-10-15",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "WebAssembly/wabt",
     "number": 2874,
     "title": "wasm2c: refuse memory sizes that do not fit in size_t",
@@ -76,16 +166,6 @@
     "url": "https://github.com/facebook/zstd/pull/4832",
     "state": "open",
     "createdAt": "2026-10-09",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "bytecodealliance/wasmtime",
-    "number": 14617,
-    "title": "Bounds-check string transcoder buffers before calling the host",
-    "url": "https://github.com/bytecodealliance/wasmtime/pull/14617",
-    "state": "open",
-    "createdAt": "2026-10-08",
     "mergedAt": null,
     "author": "ilyas-mallah"
   },

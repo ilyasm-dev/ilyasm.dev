@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { marked } from "marked";
 import { externalLinksInHtml } from "@/components/ExternalLink";
+import { stackTables } from "@/lib/report";
 
 // Published posts are content/writing/<slug>.md, with their images in public/writing/media/. Drafts are read from
 // content/drafts/ (ignored by git) only when PREVIEW_DRAFTS=1, so a draft can be checked locally and never ships.
@@ -43,7 +44,7 @@ function parse(file: string, draft: boolean): Post {
   const firstPara = body.split(/\n\s*\n/)[0].replace(/\s+/g, " ");
   const plain = (meta.summary ?? firstPara).replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/[`*]/g, "");
   const media = draft ? "/draft-media/" : "/writing/media/";
-  const html = (marked.parse(body, { async: false }) as string).replace(/src="(?:\.\.\/)*(?:[\w-]+\/)*media\//g, `src="${media}`);
+  const html = stackTables(marked.parse(body, { async: false }) as string).replace(/src="(?:\.\.\/)*(?:[\w-]+\/)*media\//g, `src="${media}`);
   return {
     slug,
     title,

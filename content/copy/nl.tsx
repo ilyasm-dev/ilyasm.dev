@@ -15,6 +15,7 @@ export const nl: Copy = {
     nav: { start: "Werkwijze", work: "Projecten", contact: "Contact" },
     theme: "Kleurthema wisselen",
     switchTo: { label: "EN", name: "English", lang: "en" },
+    offer: { region: "Taal", text: "Deze pagina is er ook in het Nederlands.", go: "Lees in het Nederlands", close: "Sluiten" },
     privacy: "Privacy",
     earlier: "Eerder werk (green-real)",
     cv: "Cv (Engels)",
@@ -113,7 +114,20 @@ export const nl: Copy = {
         native codegenerator, de registerallocator en de typechecker.
       </>
     ),
-    seeThem: "Bekijk ze",
+    seeThem: "Bekijk de Luau-fixes",
+    creditWasmtime: (
+      <>
+        De maintainers van Wasmtime namen er{" "}
+        <Ext href="https://github.com/bytecodealliance/wasmtime/pull/14778" note="nl">
+          nog een
+        </Ext>{" "}
+        over, in hun x64-codegenerator, en vermeldden mij als melder van een{" "}
+        <Ext href="https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-mghf-wjfp-p5xm" note="nl">
+          security advisory
+        </Ext>
+        .
+      </>
+    ),
     problemsTitle: "Problemen die ik oplos",
     areas: [
       {
@@ -131,6 +145,12 @@ export const nl: Copy = {
         title: "Een cloud- of GPU-rekening die harder groeit dan je aantal gebruikers",
         line: "Ik meet waar de rekenkracht naartoe gaat, spoor het werk op dat er niet hoort en los het op. Zo heeft hetzelfde verkeer minder hardware nodig.",
         proof: "In mijn voorbeeldaudit paste hetzelfde documentverkeer na één aangepaste instelling op 3 GPU's in plaats van 5.",
+      },
+      {
+        title: "Code in C, C++ of Rust die onbetrouwbare invoer verwerkt",
+        line: "Ik doorzoek één parser, codec, runtime of VM op de fouten die gemanipuleerde invoer kan uitlokken, en lever elke fout met een reproductie en een fix.",
+        proof:
+          "Wasmtime vermeldde mij als melder van een security advisory, en wabt en mruby namen mijn fixes over voor geheugengroottes en stringlengtes die overliepen.",
       },
     ],
     startTitle: "Begin met een onderzoek van twee weken",
@@ -171,6 +191,11 @@ export const nl: Copy = {
     ),
     workTogether: "Laten we samenwerken",
     priceFine: "Gehuurde GPU-tijd reken ik door tegen kostprijs, pas na jouw akkoord. Prijzen zijn exclusief btw.",
+    sweepTitle: "Of een hardening-sweep van twee weken",
+    sweepText:
+      "Eén onderdeel in C, C++ of Rust dat onbetrouwbare invoer verwerkt, zoals een parser, codec, runtime of VM. Je krijgt de fouten die gemanipuleerde invoer kan uitlokken, elk bevestigd voordat hij in het rapport komt.",
+    sweepIncluded: ["Alleen bevestigde fouten", "Een reproductie per fout", "Een fix per fout"],
+    sweepPrice: "Zelfde prijs en dezelfde twee weken als het onderzoek.",
     safeguardsTitle: "Werken in jouw systemen",
     safeguards: [
       "Ik teken je geheimhoudingsverklaring (NDA).",
@@ -244,6 +269,10 @@ export const nl: Copy = {
       game: "Gamepagina op Roblox",
       history: "Spelersaantallen op RoTrends",
     },
+    writingTitle: "Artikelen",
+    writingLead: "Hoe ik twee van deze vertragingen vond, stap voor stap, met de cijfers en de doodlopende sporen. De artikelen zijn in het Engels.",
+    writingMeta: "{n} min lezen",
+    writingAll: "Alle artikelen (Engels)",
     ossTitle: "Recente bijdragen aan open source",
     contributedTo: "Bijgedragen aan",
     highlights: [
@@ -258,24 +287,26 @@ export const nl: Copy = {
         text: "Kiest de matrixkernel op basis van de batchgrootte. 17 tot 52% meer outputtokens per seconde op één H100 NVL (Qwen3-8B-FP8) als vLLM zijn CUTLASS FP8-pad gebruikt. Nog twee PR's open.",
       },
       {
+        status: "gepubliceerd",
+        metric: "Vermeld als melder van een security advisory van Wasmtime",
+        unit: "GHSA-mghf-wjfp-p5xm, oktober 2026",
+        text: "Ik meldde een beveiligingsfout vertrouwelijk aan de maintainers van Wasmtime. Zij losten hem op in Wasmtime 36.0.19, 48.0.7 en 49.0.4, en publiceerden daarna de advisory met mij als melder.",
+      },
+      {
+        status: "gemerged",
+        metric: "Floats omzetten naar kleine integers laat de compiler niet meer crashen",
+        unit: "in Cranelift, de codegenerator van Wasmtime, op x64",
+        text: "Een float omzetten naar een integer van 8 of 16 bits liet de x64-backend van Cranelift crashen, terwijl de backends voor ARM64, RISC-V en s390x het al konden. Mijn fix rekent via 32 bits en begrenst de uitkomst of stopt met een trap. De maintainers hebben hem overgenomen, en daarmee is een issue uit 2022 gesloten.",
+      },
+      {
         status: "gemerged",
         metric: "Een geheugen van 4 GiB wordt geen 0 bytes meer",
         unit: "op 32-bitsystemen, in wasm2c van WebAssembly",
         text: "wasm2c zet WebAssembly om naar C. Op 32-bitsystemen werd een geheugen van 4 GiB 0 bytes groot, waardoor geheugen werd vrijgegeven dat nog in gebruik was. Mijn fix weigert groottes die niet passen, en de maintainers hebben hem overgenomen.",
       },
-      {
-        status: "issue open, fix klaar",
-        metric: (
-          <>
-            Float32-fout van <span className="val-bad">8.767</span> stappen naar <span className="val-good">3</span>
-          </>
-        ),
-        unit: "gemeten in de simulator van Tenstorrent",
-        text: "Issue met een fix die klaarligt, nog geen PR. De float32-logit week tot 8.767 ULP af (stappen van float32-precisie). Mijn fix brengt dat terug naar 3, gemeten in de simulator van Tenstorrent.",
-      },
     ],
     hardening:
-      "Ik maak ook code robuuster die onbetrouwbare invoer verwerkt. Voorbeelden zijn bounds checks in de C++-bibliotheek van LLVM en een fix voor een vastloper in zstd bij een gemanipuleerd bestand.",
+      "Ik maak ook code robuuster die onbetrouwbare invoer verwerkt. Voorbeelden zijn bounds checks in de C++-bibliotheek van LLVM, een fix voor een vastloper in zstd bij een gemanipuleerd bestand, en een gemergede fix in mruby voor stringlengtes die bij 2 GiB overliepen.",
     allPrs: "Pull requests aan andere projecten ({count})",
     prMix: "{merged} gemerged, {open} open, {projects} projecten",
     groupMerged: "{n} gemerged",
@@ -334,7 +365,7 @@ export const nl: Copy = {
       {
         title: "Deze website",
         paragraphs: [
-          "De site is statisch en staat op GitHub Pages. Er zijn geen formulieren, geen accounts en geen cookies. Cloudflare Web Analytics telt paginaweergaven en verwerkt daarvoor je IP-adres, zonder cookies en zonder je over andere sites te volgen. De lettertypen komen van deze site zelf. Je browser bewaart één instelling, licht of donker thema, in de lokale opslag op je apparaat. Die krijg ik nooit te zien.",
+          "De site is statisch en staat op GitHub Pages. Er zijn geen formulieren, geen accounts en geen cookies. Cloudflare Web Analytics telt paginaweergaven en verwerkt daarvoor je IP-adres, zonder cookies en zonder je over andere sites te volgen. De lettertypen komen van deze site zelf. Je browser bewaart twee instellingen in de lokale opslag op je apparaat: licht of donker thema, en de taal die je kiest. Die krijg ik nooit te zien.",
         ],
       },
       {

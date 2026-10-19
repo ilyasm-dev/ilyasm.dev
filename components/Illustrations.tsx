@@ -51,6 +51,20 @@ export function BillClimb() {
   );
 }
 
+/** A crafted file goes into a component, which a shield and a check guard. */
+export function ShieldInput() {
+  return (
+    <svg className="il il-symptom" viewBox="0 0 88 48" aria-hidden="true">
+      <path className="il-hot-line" d="M8 8h13l6 6v26H8z M21 8v6h6" />
+      <path className="il-hot-line" d="M12 22h11M12 28h8M12 34h10" />
+      <path className="il-line" d="M34 24h14m-5-5 5 5-5 5" />
+      <path className="il-accent" d="M68 6l14 5v11c0 9-6 15-14 19c-8-4-14-10-14-19V11z" />
+      <circle className="il-ok-fill" cx="79" cy="36" r="7" />
+      <path className="il-on-ok" d="M75.8 36.2l2.2 2.2 4.2-4.6" />
+    </svg>
+  );
+}
+
 /** llama.cpp: before the fix a small value detoured through slow local memory, after it stays in registers. */
 export function MemoryDetour() {
   return (

@@ -10,12 +10,21 @@ export const HOME: Record<Lang, string> = { en: "/", nl: "/nl/" };
 
 const withSlash = (path: string) => (path.endsWith("/") ? path : `${path}/`);
 
-// The same page in the other language, or that language's home page when the page has no translation.
-export function otherLanguagePath(path: string, from: Lang): string {
+// Pages in these languages offer their translation to a visitor whose browser prefers the other language.
+// Dutch pages make no English offer: a visit to /nl/ is nearly always a choice, and many Dutch readers run English browsers.
+export const OFFERS_FROM: Lang[] = ["en"];
+
+// The same page in the other language, or null when the page has no translation.
+export function translatedPath(path: string, from: Lang): string | null {
   const p = withSlash(path);
   const pair = PAIRS.find(([en, nl]) => (from === "en" ? en : nl) === p);
-  if (pair) return from === "en" ? pair[1] : pair[0];
-  return from === "en" ? HOME.nl : HOME.en;
+  if (!pair) return null;
+  return from === "en" ? pair[1] : pair[0];
+}
+
+// The same page in the other language, or that language's home page when the page has no translation.
+export function otherLanguagePath(path: string, from: Lang): string {
+  return translatedPath(path, from) ?? (from === "en" ? HOME.nl : HOME.en);
 }
 
 // hreflang alternates for a page with a translation, in the shape Next's metadata and sitemap take.

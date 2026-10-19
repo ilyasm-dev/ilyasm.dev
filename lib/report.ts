@@ -19,14 +19,17 @@ export function getReport() {
 const stripTags = (s: string) => s.replace(/<[^>]+>/g, "").replace(/"/g, "&quot;").trim();
 
 // Tables with four or more columns get a column label on every cell, so CSS can show each row as a card on phones.
-function stackTables(html: string) {
+// An empty cell is marked, so its card leaves out the label.
+export function stackTables(html: string) {
   return html.replace(/<table>([\s\S]*?)<\/table>/g, (table, inner: string) => {
     const labels = [...(inner.match(/<thead>[\s\S]*?<\/thead>/)?.[0] ?? "").matchAll(/<th[^>]*>([\s\S]*?)<\/th>/g)].map((m) => stripTags(m[1]));
     if (labels.length < 4) return table;
     const body = inner.replace(/<tr>([\s\S]*?)<\/tr>/g, (row, cells: string) => {
       let i = 0;
       // The span keeps text and inline code together as one grid item beside the label.
-      const labelled = cells.replace(/<td([^>]*)>([\s\S]*?)<\/td>/g, (_, attrs: string, content: string) => `<td${attrs} data-label="${labels[i++] ?? ""}"><span>${content}</span></td>`);
+      const labelled = cells.replace(/<td([^>]*)>([\s\S]*?)<\/td>/g, (_, attrs: string, content: string) =>
+        content.trim() ? `<td${attrs} data-label="${labels[i++] ?? ""}"><span>${content}</span></td>` : `<td${attrs} data-label="${labels[i++] ?? ""}" data-empty></td>`,
+      );
       return `<tr>${labelled}</tr>`;
     });
     return `<table class="table-stack">${body}</table>`;

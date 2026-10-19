@@ -90,6 +90,10 @@ export default function LlamaCase() {
           <p className="case-proof">
             The fix is <Ext href="https://github.com/ggml-org/llama.cpp/pull/30077">pull request #30077</Ext>, open and in review.
           </p>
+          <p>
+            The full investigation, with the compiler output and the review, is in{" "}
+            <Link href="/writing/blackwell-q4_0-cuda-12-8/">the write-up</Link>.
+          </p>
         </section>
 
         <p className="report-cta">

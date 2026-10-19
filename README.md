@@ -29,6 +29,8 @@ hub's `assets/Ilyas-Mallah-CV.pdf`. Refresh it when the CV changes.
 
 English pages live in `app/(en)/`, Dutch ones in `app/(nl)/nl/`. Each group has its own root layout, so every page gets the right `html lang`, and `app/global-not-found.tsx` is the one 404. The home and privacy pages are shared components (`components/HomePage.tsx`, `components/PrivacyPage.tsx`) that take their text from `content/copy/en.tsx` or `content/copy/nl.tsx`. `lib/i18n.ts` lists the pages that exist in both languages, which drives the language switch, the hreflang links and the sitemap. Every other page is English only.
 
+`components/LangOffer.tsx` offers the Dutch page on its English twin when the browser lists Dutch before English, or the visitor picked Dutch before. It renders only in the browser and floats at the bottom, so crawlers and the layout never see it. A click on the switch or the offer, or closing the offer, is saved as `lang` in local storage. `OFFERS_FROM` in `lib/i18n.ts` turns on the English offer on Dutch pages, with its text already in `content/copy/en.tsx`.
+
 ## Deploy
 
 `npm run build` first runs `scripts/fetch-prs.mjs`, which writes `data/prs.json` from the GitHub search API (open and merged pull requests by `ilyas-mallah` and `green-real` in other people's repos). If the fetch fails, the committed snapshot is used and the build continues. `.github/workflows/deploy.yml` builds on every push to `main` and daily, then deploys `out/` to GitHub Pages (Settings, Pages, "Source: GitHub Actions").

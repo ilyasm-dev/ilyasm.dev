@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Ext from "@/components/ExternalLink";
+import LangOffer from "@/components/LangOffer";
 import LangSwitch from "@/components/LangSwitch";
 import { allPosts } from "@/lib/posts";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -62,6 +63,7 @@ export default function SiteShell({ lang, fontClass, children }: { lang: Lang; f
             </nav>
           </div>
         </header>
+        <LangOffer from={lang} to={t.switchTo.lang} text={COPY[t.switchTo.lang].site.offer} />
         {children}
         <footer className="site-footer">
           <div className="wrap footer-inner">

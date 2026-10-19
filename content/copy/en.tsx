@@ -14,6 +14,7 @@ export const en: Copy = {
     nav: { start: "How it works", work: "Work", contact: "Contact" },
     theme: "Switch color theme",
     switchTo: { label: "NL", name: "Nederlands", lang: "nl" },
+    offer: { region: "Language", text: "This page is also in English.", go: "Read in English", close: "Close" },
     privacy: "Privacy",
     earlier: "Earlier work (green-real)",
     cv: "CV",
@@ -111,7 +112,14 @@ export const en: Copy = {
         generator, register allocator and type checker.
       </>
     ),
-    seeThem: "See them",
+    seeThem: "See the Luau fixes",
+    creditWasmtime: (
+      <>
+        Wasmtime&apos;s maintainers merged <Ext href="https://github.com/bytecodealliance/wasmtime/pull/14778">another</Ext>, to its
+        x64 code generator, and credited me as the reporter of a{" "}
+        <Ext href="https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-mghf-wjfp-p5xm">security advisory</Ext>.
+      </>
+    ),
     problemsTitle: "Problems I solve",
     areas: [
       {
@@ -129,6 +137,12 @@ export const en: Copy = {
         title: "A cloud or GPU bill growing faster than your users",
         line: "I profile where the compute goes, find the work that should not be there, and fix it, so the same traffic needs less hardware.",
         proof: "In my sample audit, the same document traffic fit on 3 GPUs instead of 5 after one setting change.",
+      },
+      {
+        title: "C, C++ or Rust code that reads untrusted input",
+        line: "I sweep one parser, codec, runtime or VM for the bugs crafted input can trigger, and deliver each one with a reproducer and a fix.",
+        proof:
+          "Wasmtime's maintainers credited me as the reporter of a security advisory, and wabt and mruby merged my fixes for memory sizes and string lengths that wrapped.",
       },
     ],
     startTitle: "Start with a two-week investigation",
@@ -169,6 +183,11 @@ export const en: Copy = {
     ),
     workTogether: "Let's work together",
     priceFine: "Rented GPU time is billed at cost, with your approval first. Prices exclude VAT.",
+    sweepTitle: "Or a two-week hardening sweep",
+    sweepText:
+      "One C, C++ or Rust component that reads untrusted input, such as a parser, codec, runtime or VM. You get the bugs crafted input can trigger, each confirmed before it goes in the report.",
+    sweepIncluded: ["Confirmed findings only", "A reproducer for each", "A fix for each"],
+    sweepPrice: "Same price and the same two weeks as the investigation.",
     safeguardsTitle: "Working in your systems",
     safeguards: [
       "I sign your NDA.",
@@ -242,6 +261,10 @@ export const en: Copy = {
       game: "Game page on Roblox",
       history: "Player history on RoTrends",
     },
+    writingTitle: "Writing",
+    writingLead: "How I found two of these slowdowns, step by step, with the numbers and the dead ends.",
+    writingMeta: "{n} min read",
+    writingAll: "All writing",
     ossTitle: "Recent open source work",
     contributedTo: "Contributed to",
     highlights: [
@@ -256,24 +279,26 @@ export const en: Copy = {
         text: "Picks the matrix kernel by batch size. 17 to 52% more output tokens per second on one H100 NVL (Qwen3-8B-FP8) when vLLM uses its CUTLASS FP8 path. Two more PRs open.",
       },
       {
+        status: "published",
+        metric: "Credited reporter of a Wasmtime security advisory",
+        unit: "GHSA-mghf-wjfp-p5xm, October 2026",
+        text: "I reported a security bug to the Wasmtime maintainers in private. They fixed it in Wasmtime 36.0.19, 48.0.7 and 49.0.4, then published the advisory with me as its reporter.",
+      },
+      {
+        status: "merged",
+        metric: "Float to small integer conversions no longer crash the compiler",
+        unit: "in Cranelift, Wasmtime's code generator, on x64",
+        text: "Converting a float to an 8- or 16-bit integer crashed Cranelift's x64 backend, while its ARM64, RISC-V and s390x backends handled it. My fix converts through 32 bits, then saturates or traps. The maintainers merged it, which closed an issue open since 2022.",
+      },
+      {
         status: "merged",
         metric: "A 4 GiB memory no longer becomes 0 bytes",
         unit: "on 32-bit hosts, in WebAssembly's wasm2c",
         text: "wasm2c turns WebAssembly into C. On 32-bit hosts a 4 GiB memory size wrapped to 0, which freed memory still in use. My fix refuses sizes that don't fit, and the maintainers merged it.",
       },
-      {
-        status: "issue open, fix ready",
-        metric: (
-          <>
-            Float32 error from <span className="val-bad">8,767</span> steps to <span className="val-good">3</span>
-          </>
-        ),
-        unit: "measured in Tenstorrent's simulator",
-        text: "Issue with a fix ready, not yet a PR. Float32 logit was off by up to 8,767 ULP (steps of float32 precision). My fix brings it to 3, measured in Tenstorrent's simulator.",
-      },
     ],
     hardening:
-      "I also harden code that handles untrusted input, with bounds checks in LLVM's C++ library and a fix for a hang in zstd on a crafted file.",
+      "I also harden code that handles untrusted input, with bounds checks in LLVM's C++ library, a fix for a hang in zstd on a crafted file, and a merged mruby fix for string lengths that wrapped at 2 GiB.",
     allPrs: "Pull requests to other projects ({count})",
     prMix: "{merged} merged, {open} open, {projects} projects",
     groupMerged: "{n} merged",
@@ -334,7 +359,7 @@ export const en: Copy = {
       {
         title: "This website",
         paragraphs: [
-          "The site is static and hosted on GitHub Pages. It has no forms, no accounts and no cookies. Cloudflare Web Analytics counts page views and processes your IP address to do it, without cookies and without following you across sites. Fonts are served from this site. Your browser keeps one setting, light or dark theme, in local storage on your device. I never receive it.",
+          "The site is static and hosted on GitHub Pages. It has no forms, no accounts and no cookies. Cloudflare Web Analytics counts page views and processes your IP address to do it, without cookies and without following you across sites. Fonts are served from this site. Your browser keeps two settings in local storage on your device: light or dark theme, and the language you pick. I never receive them.",
         ],
       },
       {

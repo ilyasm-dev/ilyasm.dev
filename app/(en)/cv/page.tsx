@@ -128,9 +128,11 @@ export default function Cv() {
             <li>
               <p>
                 <strong>Wasmtime</strong> (WebAssembly runtime, Cranelift code generator). Added float to 8- and 16-bit integer
-                conversions to the x64 backend, which panicked on them, closing an issue open since 2022. Merged in October 2026 (
+                conversions to the x64 backend, which panicked on them, closing an issue open since 2022 (
                 <Pr repo="bytecodealliance/wasmtime" n={14778} />
-                ). Credited reporter of security advisory{" "}
+                ). Made <code>fpromote</code> and <code>fdemote</code> with f16 or f128 operands fail cleanly, where aarch64 compiled
+                them to wrong values and x64 and s390x panicked (<Pr repo="bytecodealliance/wasmtime" n={14883} />
+                ). Both merged in October 2026. Credited reporter of security advisory{" "}
                 <Ext href="https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-mghf-wjfp-p5xm">GHSA-mghf-wjfp-p5xm</Ext>,
                 published in October 2026 and fixed in Wasmtime 36.0.19, 48.0.7 and 49.0.4.
               </p>
@@ -139,14 +141,18 @@ export default function Cv() {
               <p>
                 <strong>wabt</strong> (WebAssembly tools). Fixed wasm2c on 32-bit hosts, where a 4 GiB memory size wrapped to 0 and
                 freed memory still in use. Merged in October 2026 (<Pr repo="WebAssembly/wabt" n={2874} />
+                ). A second fix is approved: four wabt tools exited 0 when they could not write their output file, and now exit with an
+                error (<Pr repo="WebAssembly/wabt" n={2889} />
                 ).
               </p>
             </li>
             <li>
               <p>
                 <strong>mruby</strong> (embedded Ruby). Fixed <code>pack</code> and <code>unpack</code> string lengths that wrapped
-                negative at 2 GiB and read outside the string. Merged in October 2026 (<Pr repo="mruby/mruby" n={7692} />
-                ).
+                negative at 2 GiB and read outside the string (<Pr repo="mruby/mruby" n={7692} />
+                ). Fixed <code>Float(&quot;0&quot;)</code> raising an error, a regression since 4.1.0-rc (
+                <Pr repo="mruby/mruby" n={7701} />
+                ). Both merged in October 2026.
               </p>
             </li>
             <li>

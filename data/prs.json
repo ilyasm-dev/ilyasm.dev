@@ -1,5 +1,85 @@
 [
   {
+    "repo": "mruby/mruby",
+    "number": 7703,
+    "title": "mruby-rational: keep the denominator of a Float below 2**-10",
+    "url": "https://github.com/mruby/mruby/pull/7703",
+    "state": "open",
+    "createdAt": "2026-10-21",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "wasm-micro-runtime/wasm-micro-runtime",
+    "number": 5174,
+    "title": "fix(loader): widen the tag array size in load_tag_section",
+    "url": "https://github.com/wasm-micro-runtime/wasm-micro-runtime/pull/5174",
+    "state": "open",
+    "createdAt": "2026-10-21",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "WebAssembly/wabt",
+    "number": 2894,
+    "title": "Fix rounding of hex float literals",
+    "url": "https://github.com/WebAssembly/wabt/pull/2894",
+    "state": "open",
+    "createdAt": "2026-10-21",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "bytecodealliance/wasmtime",
+    "number": 14883,
+    "title": "Cranelift: fail cleanly on fpromote/fdemote with f16 or f128 types",
+    "url": "https://github.com/bytecodealliance/wasmtime/pull/14883",
+    "state": "merged",
+    "createdAt": "2026-10-20",
+    "mergedAt": "2026-10-20",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "gfx-rs/wgpu",
+    "number": 10676,
+    "title": "[naga] Check out-of-bounds `let` indices at runtime instead of rejecting them",
+    "url": "https://github.com/gfx-rs/wgpu/pull/10676",
+    "state": "open",
+    "createdAt": "2026-10-20",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "mruby/mruby",
+    "number": 7701,
+    "title": "fp_uscale.c: accept a string of only zeros in Float()",
+    "url": "https://github.com/mruby/mruby/pull/7701",
+    "state": "merged",
+    "createdAt": "2026-10-20",
+    "mergedAt": "2026-10-20",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "wasm-micro-runtime/wasm-micro-runtime",
+    "number": 5172,
+    "title": "fix(sock_addr_resolve): allow addr_info_size of 0",
+    "url": "https://github.com/wasm-micro-runtime/wasm-micro-runtime/pull/5172",
+    "state": "open",
+    "createdAt": "2026-10-20",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "WebAssembly/wabt",
+    "number": 2889,
+    "title": "Exit with an error when an output file cannot be written",
+    "url": "https://github.com/WebAssembly/wabt/pull/2889",
+    "state": "open",
+    "createdAt": "2026-10-20",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "llvm/llvm-project",
     "number": 233604,
     "title": "[clang][-Wunsafe-buffer-usage] Add per-family subgroups of -Wunsafe-buffer-usage-in-libc-call",

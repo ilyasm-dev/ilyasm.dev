@@ -114,12 +114,14 @@ export default function Cv() {
             </li>
             <li>
               <p>
-                <strong>LLVM</strong> (libc++, Clang). Eight PRs in review: hardening assertions for <code>insert</code>/
+                <strong>LLVM</strong> (libc++, Clang). Nine PRs in review: hardening assertions for <code>insert</code>/
                 <code>emplace</code> positions (<Pr repo="llvm/llvm-project" n={230490} />
                 ), <code>resize_and_overwrite</code> bounds (<Pr repo="llvm/llvm-project" n={230605} />
                 ), <code>valarray</code> sizes (<Pr repo="llvm/llvm-project" n={230606} />
                 ), <code>splice</code> preconditions (<Pr repo="llvm/llvm-project" n={232538} />) and <code>erase</code>/
                 <code>extract</code> of <code>end()</code> (<Pr repo="llvm/llvm-project" n={232661} />
+                ), negative counts in <code>views::drop</code>, <code>views::take</code> and <code>views::counted</code> (
+                <Pr repo="llvm/llvm-project" n={234068} />
                 ), plus three Clang warning changes (<Pr repo="llvm/llvm-project" n={230491} />,{" "}
                 <Pr repo="llvm/llvm-project" n={232898} />, <Pr repo="llvm/llvm-project" n={233604} />
                 ).
@@ -152,7 +154,9 @@ export default function Cv() {
                 negative at 2 GiB and read outside the string (<Pr repo="mruby/mruby" n={7692} />
                 ). Fixed <code>Float(&quot;0&quot;)</code> raising an error, a regression since 4.1.0-rc (
                 <Pr repo="mruby/mruby" n={7701} />
-                ). Both merged in October 2026.
+                ). Fixed <code>Float#to_r</code> and <code>Rational(float)</code> raising <code>ZeroDivisionError</code> for very small
+                floats (<Pr repo="mruby/mruby" n={7703} />
+                ). All three merged in October 2026.
               </p>
             </li>
             <li>

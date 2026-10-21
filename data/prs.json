@@ -1,12 +1,32 @@
 [
   {
+    "repo": "llvm/llvm-project",
+    "number": 234068,
+    "title": "[libc++] Assert non-negative counts in views::drop, views::take and views::counted",
+    "url": "https://github.com/llvm/llvm-project/pull/234068",
+    "state": "open",
+    "createdAt": "2026-10-21",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "bytecodealliance/wasmtime",
+    "number": 14897,
+    "title": "Disable wasm SIMD on riscv64 without vector support",
+    "url": "https://github.com/bytecodealliance/wasmtime/pull/14897",
+    "state": "open",
+    "createdAt": "2026-10-21",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "mruby/mruby",
     "number": 7703,
     "title": "mruby-rational: keep the denominator of a Float below 2**-10",
     "url": "https://github.com/mruby/mruby/pull/7703",
-    "state": "open",
+    "state": "merged",
     "createdAt": "2026-10-21",
-    "mergedAt": null,
+    "mergedAt": "2026-10-21",
     "author": "ilyas-mallah"
   },
   {

@@ -140,10 +140,10 @@ export default function Cv() {
             <li>
               <p>
                 <strong>wabt</strong> (WebAssembly tools). Fixed wasm2c on 32-bit hosts, where a 4 GiB memory size wrapped to 0 and
-                freed memory still in use. Merged in October 2026 (<Pr repo="WebAssembly/wabt" n={2874} />
-                ). A second fix is approved: four wabt tools exited 0 when they could not write their output file, and now exit with an
-                error (<Pr repo="WebAssembly/wabt" n={2889} />
-                ).
+                freed memory still in use (<Pr repo="WebAssembly/wabt" n={2874} />
+                ). Fixed four wabt tools that exited 0 when they could not write their output file, so they now exit with an error (
+                <Pr repo="WebAssembly/wabt" n={2889} />
+                ). Both merged in October 2026.
               </p>
             </li>
             <li>

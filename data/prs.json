@@ -1,6 +1,86 @@
 [
   {
     "repo": "llvm/llvm-project",
+    "number": 234566,
+    "title": "[libc++] Assert that iterator ranges are valid in string insert, append and assign",
+    "url": "https://github.com/llvm/llvm-project/pull/234566",
+    "state": "open",
+    "createdAt": "2026-10-22",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "gfx-rs/wgpu",
+    "number": 10704,
+    "title": "[naga glsl-out] Cast u32 image levels and sample indices to int in bounds checks",
+    "url": "https://github.com/gfx-rs/wgpu/pull/10704",
+    "state": "open",
+    "createdAt": "2026-10-22",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "onnx/onnx",
+    "number": 8650,
+    "title": "fix(shape_inference): reject unsupported characters in Einsum equations",
+    "url": "https://github.com/onnx/onnx/pull/8650",
+    "state": "open",
+    "createdAt": "2026-10-22",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "onnx/onnx",
+    "number": 8648,
+    "title": "fix(shape_inference): reject negative indices dimension in GatherND",
+    "url": "https://github.com/onnx/onnx/pull/8648",
+    "state": "merged",
+    "createdAt": "2026-10-21",
+    "mergedAt": "2026-10-22",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "mruby/mruby",
+    "number": 7705,
+    "title": "range.c: keep every element of Range#to_a with a Float end",
+    "url": "https://github.com/mruby/mruby/pull/7705",
+    "state": "merged",
+    "createdAt": "2026-10-22",
+    "mergedAt": "2026-10-22",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "alibaba/MNN",
+    "number": 5028,
+    "title": "[LLM:Perf] Stop copying the rest of the prompt for every regex match in HuggingfaceTokenizer::encode",
+    "url": "https://github.com/alibaba/MNN/pull/5028",
+    "state": "open",
+    "createdAt": "2026-10-22",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "WebAssembly/wabt",
+    "number": 2898,
+    "title": "[interp] Fix tail calls to host functions that trap or return to the host",
+    "url": "https://github.com/WebAssembly/wabt/pull/2898",
+    "state": "open",
+    "createdAt": "2026-10-22",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "axboe/liburing",
+    "number": 1659,
+    "title": "[GIT PULL] man: fix four small errors in man pages",
+    "url": "https://github.com/axboe/liburing/pull/1659",
+    "state": "merged",
+    "createdAt": "2026-10-22",
+    "mergedAt": "2026-10-22",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
     "number": 234068,
     "title": "[libc++] Assert non-negative counts in views::drop, views::take and views::counted",
     "url": "https://github.com/llvm/llvm-project/pull/234068",
@@ -12,7 +92,7 @@
   {
     "repo": "bytecodealliance/wasmtime",
     "number": 14897,
-    "title": "Disable wasm SIMD on riscv64 without vector support",
+    "title": "Error on wasm SIMD for riscv64 without vector support",
     "url": "https://github.com/bytecodealliance/wasmtime/pull/14897",
     "state": "open",
     "createdAt": "2026-10-21",
@@ -30,10 +110,30 @@
     "author": "ilyas-mallah"
   },
   {
+    "repo": "KhronosGroup/SPIRV-Tools",
+    "number": 6985,
+    "title": "spirv-opt: Handle empty constraints in the loop dependence Delta test",
+    "url": "https://github.com/KhronosGroup/SPIRV-Tools/pull/6985",
+    "state": "open",
+    "createdAt": "2026-10-21",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "wasm-micro-runtime/wasm-micro-runtime",
     "number": 5174,
     "title": "fix(loader): widen the tag array size in load_tag_section",
     "url": "https://github.com/wasm-micro-runtime/wasm-micro-runtime/pull/5174",
+    "state": "open",
+    "createdAt": "2026-10-21",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "libarchive/libarchive",
+    "number": 3737,
+    "title": "read_data_into_fd: Fix spurious \"Seek error\" when appending to a non-empty file",
+    "url": "https://github.com/libarchive/libarchive/pull/3737",
     "state": "open",
     "createdAt": "2026-10-21",
     "mergedAt": null,
@@ -57,6 +157,26 @@
     "state": "merged",
     "createdAt": "2026-10-20",
     "mergedAt": "2026-10-21",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "axboe/liburing",
+    "number": 1658,
+    "title": "[GIT PULL] src/liburing-ffi.map: add io_uring_buf_ring_head",
+    "url": "https://github.com/axboe/liburing/pull/1658",
+    "state": "merged",
+    "createdAt": "2026-10-21",
+    "mergedAt": "2026-10-21",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "google/nsjail",
+    "number": 367,
+    "title": "cgroup: cap RAM when only cgroup_mem_memsw_max is set",
+    "url": "https://github.com/google/nsjail/pull/367",
+    "state": "open",
+    "createdAt": "2026-10-21",
+    "mergedAt": null,
     "author": "ilyas-mallah"
   },
   {

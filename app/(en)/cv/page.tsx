@@ -114,10 +114,11 @@ export default function Cv() {
             </li>
             <li>
               <p>
-                <strong>LLVM</strong> (libc++, Clang). Nine PRs in review: hardening assertions for <code>insert</code>/
+                <strong>LLVM</strong> (libc++, Clang). Ten PRs in review: hardening assertions for <code>insert</code>/
                 <code>emplace</code> positions (<Pr repo="llvm/llvm-project" n={230490} />
                 ), <code>resize_and_overwrite</code> bounds (<Pr repo="llvm/llvm-project" n={230605} />
                 ), <code>valarray</code> sizes (<Pr repo="llvm/llvm-project" n={230606} />
+                ), iterator ranges in <code>string</code> <code>insert</code>, <code>append</code> and <code>assign</code> (<Pr repo="llvm/llvm-project" n={234566} />
                 ), <code>splice</code> preconditions (<Pr repo="llvm/llvm-project" n={232538} />) and <code>erase</code>/
                 <code>extract</code> of <code>end()</code> (<Pr repo="llvm/llvm-project" n={232661} />
                 ), negative counts in <code>views::drop</code>, <code>views::take</code> and <code>views::counted</code> (

@@ -106,12 +106,8 @@ export const en: Copy = {
         stack has inefficiencies of its own on top of that, and that&apos;s where I start.
       </>
     ),
-    creditLuau: (
-      <>
-        I work inside compilers and language runtimes too. Roblox&apos;s Luau team has merged 7 of my fixes to its native code
-        generator, register allocator and type checker.
-      </>
-    ),
+    creditLuau:
+      "I work inside compilers and language runtimes too. Roblox's Luau team has merged {n} of my fixes to its native code generator, register allocator and type checker.",
     seeThem: "See the Luau fixes",
     creditWasmtime: (
       <>
@@ -238,8 +234,8 @@ export const en: Copy = {
     },
     luau: {
       title: "Luau compiler and runtime",
-      status: "7 merged",
-      text: "Luau is the language behind Roblox. Its maintainers merged 7 of my fixes in 2026, to the native code generator, register allocator and type checker.",
+      status: "{n} merged",
+      text: "Luau is the language behind Roblox. Its maintainers merged {n} of my fixes in 2026, to the native code generator, register allocator and type checker.",
       prs: [
         "x64 register allocator converted a value wrongly on reload from the stack",
         <>
@@ -276,7 +272,7 @@ export const en: Copy = {
           </>
         ),
         unit: "on the CUTLASS FP8 path, one H100 NVL",
-        text: "Picks the matrix kernel by batch size. 17 to 52% more output tokens per second on one H100 NVL (Qwen3-8B-FP8) when vLLM uses its CUTLASS FP8 path. Two more PRs open.",
+        text: "Picks the matrix kernel by batch size. 17 to 52% more output tokens per second on one H100 NVL (Qwen3-8B-FP8) when vLLM uses its CUTLASS FP8 path.",
       },
       {
         status: "published",
@@ -297,6 +293,8 @@ export const en: Copy = {
         text: "wasm2c turns WebAssembly into C. On 32-bit hosts a 4 GiB memory size wrapped to 0, which freed memory still in use. My fix refuses sizes that don't fit, and the maintainers merged it.",
       },
     ],
+    morePrsOne: "One more PR open.",
+    morePrsMany: "{n} more PRs open.",
     hardening:
       "I also harden code that handles untrusted input, with bounds checks in LLVM's C++ library, a fix for a hang in zstd on a crafted file, and a merged mruby fix for string lengths that wrapped at 2 GiB.",
     allPrs: "Pull requests to other projects ({count})",

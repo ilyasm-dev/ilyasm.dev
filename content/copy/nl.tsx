@@ -108,12 +108,8 @@ export const nl: Copy = {
         eigen stack heeft daarbovenop zijn eigen inefficiënties, en daar begin ik.
       </>
     ),
-    creditLuau: (
-      <>
-        Ik werk ook in compilers en runtimes van programmeertalen. Het Luau-team van Roblox heeft 7 fixes van mij overgenomen, in de
-        native codegenerator, de registerallocator en de typechecker.
-      </>
-    ),
+    creditLuau:
+      "Ik werk ook in compilers en runtimes van programmeertalen. Het Luau-team van Roblox heeft {n} fixes van mij overgenomen, in de native codegenerator, de registerallocator en de typechecker.",
     seeThem: "Bekijk de Luau-fixes",
     creditWasmtime: (
       <>
@@ -246,8 +242,8 @@ export const nl: Copy = {
     },
     luau: {
       title: "Luau-compiler en -runtime",
-      status: "7 gemerged",
-      text: "Luau is de programmeertaal achter Roblox. De maintainers namen in 2026 7 fixes van mij over, in de native codegenerator, de registerallocator en de typechecker.",
+      status: "{n} gemerged",
+      text: "Luau is de programmeertaal achter Roblox. De maintainers namen in 2026 {n} fixes van mij over, in de native codegenerator, de registerallocator en de typechecker.",
       prs: [
         "De x64-registerallocator zette een waarde verkeerd om bij het terugladen van de stack",
         <>
@@ -284,7 +280,7 @@ export const nl: Copy = {
           </>
         ),
         unit: "op het CUTLASS FP8-pad, één H100 NVL",
-        text: "Kiest de matrixkernel op basis van de batchgrootte. 17 tot 52% meer outputtokens per seconde op één H100 NVL (Qwen3-8B-FP8) als vLLM zijn CUTLASS FP8-pad gebruikt. Nog twee PR's open.",
+        text: "Kiest de matrixkernel op basis van de batchgrootte. 17 tot 52% meer outputtokens per seconde op één H100 NVL (Qwen3-8B-FP8) als vLLM zijn CUTLASS FP8-pad gebruikt.",
       },
       {
         status: "gepubliceerd",
@@ -305,6 +301,8 @@ export const nl: Copy = {
         text: "wasm2c zet WebAssembly om naar C. Op 32-bitsystemen werd een geheugen van 4 GiB 0 bytes groot, waardoor geheugen werd vrijgegeven dat nog in gebruik was. Mijn fix weigert groottes die niet passen, en de maintainers hebben hem overgenomen.",
       },
     ],
+    morePrsOne: "Nog één PR open.",
+    morePrsMany: "Nog {n} PR's open.",
     hardening:
       "Ik maak ook code robuuster die onbetrouwbare invoer verwerkt. Voorbeelden zijn bounds checks in de C++-bibliotheek van LLVM, een fix voor een vastloper in zstd bij een gemanipuleerd bestand, en een gemergede fix in mruby voor stringlengtes die bij 2 GiB overliepen.",
     allPrs: "Pull requests aan andere projecten ({count})",

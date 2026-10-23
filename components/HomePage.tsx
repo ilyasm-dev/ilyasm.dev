@@ -41,6 +41,7 @@ import SocialIcon, { type IconName } from "@/components/SocialIcons";
 import { COPY } from "@/content/copy";
 import prsData from "@/data/prs.json";
 import { fill, type Lang } from "@/lib/i18n";
+import { countWord, prCount, upperFirst } from "@/lib/prCounts";
 import { allPosts, monthYear } from "@/lib/posts";
 import { tokenize } from "@/lib/race";
 
@@ -89,6 +90,10 @@ const HIGHLIGHTS: { name: string; icon: LucideIcon; href: string; status: Status
 
 type Pr = { repo: string; number: number; title: string; url: string; state: "open" | "merged"; createdAt: string; mergedAt: string | null; author: string };
 const PRS = prsData as Pr[];
+// The vLLM highlight is #60464. Its sentence counts the other open vLLM PRs from the same data.
+const VLLM_FEATURED = 60464;
+const VLLM_MORE = prCount("vllm-project/vllm", "open", [VLLM_FEATURED]);
+const LUAU_COUNT = prCount("luau-lang/luau", "merged");
 const MERGED = PRS.filter((p) => p.state === "merged").length;
 const dateOf = (p: Pr) => p.mergedAt ?? p.createdAt;
 
@@ -175,7 +180,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
         <p className="hero-credit">
           <GitMerge size={16} strokeWidth={2} aria-hidden="true" />
           <span>
-            {c.creditLuau} {c.creditWasmtime}{" "}
+            {fill(c.creditLuau, { n: LUAU_COUNT })} {c.creditWasmtime}{" "}
             <Ext href={LUAU_MERGED} note={lang}>
               {c.seeThem}
             </Ext>
@@ -283,9 +288,9 @@ export default function HomePage({ lang }: { lang: Lang }) {
               <div className="card-head-text">
                 <h3 className="card-title">{c.luau.title}</h3>
               </div>
-              <Status kind="merged">{c.luau.status}</Status>
+              <Status kind="merged">{fill(c.luau.status, { n: LUAU_COUNT })}</Status>
             </div>
-            <p className="card-text">{c.luau.text}</p>
+            <p className="card-text">{fill(c.luau.text, { n: LUAU_COUNT })}</p>
             <ul className="pr-list">
               {LUAU_PRS.map((l, i) => (
                 <li key={l.href}>
@@ -509,7 +514,11 @@ export default function HomePage({ lang }: { lang: Lang }) {
                 <strong>{c.highlights[i].metric}</strong>
                 <span>{c.highlights[i].unit}</span>
               </p>
-              <p className="oss-text">{c.highlights[i].text}</p>
+              <p className="oss-text">
+                {i === 0 && VLLM_MORE > 0
+                  ? `${c.highlights[i].text} ${upperFirst(fill(VLLM_MORE === 1 ? c.morePrsOne : c.morePrsMany, { n: countWord(VLLM_MORE, lang) }))}`
+                  : c.highlights[i].text}
+              </p>
             </li>
           ))}
         </ul>

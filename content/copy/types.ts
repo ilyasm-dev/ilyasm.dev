@@ -70,7 +70,7 @@ export type Copy = {
     howItWorks: string;
     available: string;
     creditEngines: ReactNode;
-    creditLuau: ReactNode;
+    creditLuau: string;
     seeThem: string;
     creditWasmtime: ReactNode;
     problemsTitle: string;
@@ -118,6 +118,8 @@ export type Copy = {
     ossTitle: string;
     contributedTo: string;
     highlights: [Highlight, Highlight, Highlight, Highlight];
+    morePrsOne: string;
+    morePrsMany: string;
     hardening: string;
     allPrs: string;
     prMix: string;

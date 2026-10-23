@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Download, Mail } from "lucide-react";
 import Ext from "@/components/ExternalLink";
 import { pageMeta } from "@/lib/pageMeta";
+import { countWord, prCount, upperFirst } from "@/lib/prCounts";
 
 // The page for hiring readers. The CV PDF and the hub's assets/cv.md link here, and its text follows that CV. CV
 // visits stay their own path in Cloudflare Web Analytics, which drops query strings: a click from the PDF arrives
@@ -13,6 +14,10 @@ export const metadata: Metadata = pageMeta(
   "/cv/",
 );
 
+// The counts in the bullets come from data/prs.json, which every build rewrites from GitHub.
+const VLLM_OPEN = prCount("vllm-project/vllm", "open");
+const LLVM_OPEN = prCount("llvm/llvm-project", "open");
+const LUAU_MERGED = prCount("luau-lang/luau", "merged");
 const PDF = "/Ilyas-Mallah-CV.pdf";
 const EMAIL = "hello@ilyasm.dev";
 const gh = (repo: string, n: number, kind: "pull" | "issues" = "pull") => `https://github.com/${repo}/${kind}/${n}`;
@@ -85,7 +90,7 @@ export default function Cv() {
                 <Ext href="https://github.com/luau-lang/luau/pulls?q=is%3Apr+author%3Agreen-real+is%3Amerged">
                   <code>green-real</code>
                 </Ext>
-                ). 7 changes merged in 2026 into the x64 and AArch64 native code generator, the register allocator and the type
+                ). {LUAU_MERGED} changes merged in 2026 into the x64 and AArch64 native code generator, the register allocator and the type
                 checker.
               </p>
               <ul>
@@ -114,7 +119,7 @@ export default function Cv() {
             </li>
             <li>
               <p>
-                <strong>LLVM</strong> (libc++, Clang). Ten PRs in review: hardening assertions for <code>insert</code>/
+                <strong>LLVM</strong> (libc++, Clang). {upperFirst(countWord(LLVM_OPEN, "en"))} {LLVM_OPEN === 1 ? "PR" : "PRs"} in review: hardening assertions for <code>insert</code>/
                 <code>emplace</code> positions (<Pr repo="llvm/llvm-project" n={230490} />
                 ), <code>resize_and_overwrite</code> bounds (<Pr repo="llvm/llvm-project" n={230605} />
                 ), <code>valarray</code> sizes (<Pr repo="llvm/llvm-project" n={230606} />
@@ -123,6 +128,8 @@ export default function Cv() {
                 <code>extract</code> of <code>end()</code> (<Pr repo="llvm/llvm-project" n={232661} />
                 ), negative counts in <code>views::drop</code>, <code>views::take</code> and <code>views::counted</code> (
                 <Pr repo="llvm/llvm-project" n={234068} />
+                ), a missing XMM register save in x86 variadic functions built with stack clash protection (
+                <Pr repo="llvm/llvm-project" n={234871} />
                 ), plus three Clang warning changes (<Pr repo="llvm/llvm-project" n={230491} />,{" "}
                 <Pr repo="llvm/llvm-project" n={232898} />, <Pr repo="llvm/llvm-project" n={233604} />
                 ).
@@ -177,12 +184,14 @@ export default function Cv() {
             </li>
             <li>
               <p>
-                <strong>vLLM</strong> (LLM serving, three PRs in review). On Hopper, picked the CUTLASS block-FP8 kernel by batch
+                <strong>vLLM</strong> (LLM serving, {countWord(VLLM_OPEN, "en")} {VLLM_OPEN === 1 ? "PR" : "PRs"} in review). On Hopper, picked the CUTLASS block-FP8 kernel by batch
                 size: 17 to 52% more serving throughput on an H100 NVL with Qwen3-8B FP8 (<Pr repo="vllm-project/vllm" n={60464} />
                 ). Stopped block-FP8 models from crashing at startup when nvcc is older than 12.9 (
                 <Pr repo="vllm-project/vllm" n={60438} />
                 ). Removed a residual copy per layer that a compiler pass left in block-FP8 models (
                 <Pr repo="vllm-project/vllm" n={60481} />
+                ). Added a context window for EAGLE-3 speculative decoding drafters: decode at 32k tokens goes from 16 to 34 tok/s on an
+                A40 with Llama-3.1-8B (<Pr repo="vllm-project/vllm" n={63245} />
                 ).
               </p>
             </li>

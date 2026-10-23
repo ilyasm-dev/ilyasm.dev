@@ -1,6 +1,46 @@
 [
   {
     "repo": "llvm/llvm-project",
+    "number": 234871,
+    "title": "[X86] Expand VASTART_SAVE_XMM_REGS outside the entry block",
+    "url": "https://github.com/llvm/llvm-project/pull/234871",
+    "state": "open",
+    "createdAt": "2026-10-23",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "vllm-project/vllm",
+    "number": 63245,
+    "title": "[Spec Decode] Add draft_context_window for EAGLE-3 drafters",
+    "url": "https://github.com/vllm-project/vllm/pull/63245",
+    "state": "open",
+    "createdAt": "2026-10-23",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "KhronosGroup/SPIRV-Tools",
+    "number": 6995,
+    "title": "spirv-opt: Skip function declarations in more passes",
+    "url": "https://github.com/KhronosGroup/SPIRV-Tools/pull/6995",
+    "state": "open",
+    "createdAt": "2026-10-23",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "alibaba/MNN",
+    "number": 5028,
+    "title": "[LLM:Perf] Stop copying the rest of the prompt for every regex match in HuggingfaceTokenizer::encode",
+    "url": "https://github.com/alibaba/MNN/pull/5028",
+    "state": "merged",
+    "createdAt": "2026-10-22",
+    "mergedAt": "2026-10-23",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
     "number": 234566,
     "title": "[libc++] Assert that iterator ranges are valid in string insert, append and assign",
     "url": "https://github.com/llvm/llvm-project/pull/234566",
@@ -47,16 +87,6 @@
     "state": "merged",
     "createdAt": "2026-10-22",
     "mergedAt": "2026-10-22",
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "alibaba/MNN",
-    "number": 5028,
-    "title": "[LLM:Perf] Stop copying the rest of the prompt for every regex match in HuggingfaceTokenizer::encode",
-    "url": "https://github.com/alibaba/MNN/pull/5028",
-    "state": "open",
-    "createdAt": "2026-10-22",
-    "mergedAt": null,
     "author": "ilyas-mallah"
   },
   {

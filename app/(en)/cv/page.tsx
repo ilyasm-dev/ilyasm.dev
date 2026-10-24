@@ -124,14 +124,15 @@ export default function Cv() {
                 ), <code>resize_and_overwrite</code> bounds (<Pr repo="llvm/llvm-project" n={230605} />
                 ), <code>valarray</code> sizes (<Pr repo="llvm/llvm-project" n={230606} />
                 ), iterator ranges in <code>string</code> <code>insert</code>, <code>append</code> and <code>assign</code> (<Pr repo="llvm/llvm-project" n={234566} />
-                ), <code>splice</code> preconditions (<Pr repo="llvm/llvm-project" n={232538} />) and <code>erase</code>/
-                <code>extract</code> of <code>end()</code> (<Pr repo="llvm/llvm-project" n={232661} />
+                ), <code>list::splice</code> and <code>erase(end())</code> (<Pr repo="llvm/llvm-project" n={232538} />,{" "}
+                <Pr repo="llvm/llvm-project" n={232661} />
                 ), negative counts in <code>views::drop</code>, <code>views::take</code> and <code>views::counted</code> (
                 <Pr repo="llvm/llvm-project" n={234068} />
                 ), a missing XMM register save in x86 variadic functions built with stack clash protection (
                 <Pr repo="llvm/llvm-project" n={234871} />
-                ), plus three Clang warning changes (<Pr repo="llvm/llvm-project" n={230491} />,{" "}
-                <Pr repo="llvm/llvm-project" n={232898} />, <Pr repo="llvm/llvm-project" n={233604} />
+                ), a Clang warning (<Pr repo="llvm/llvm-project" n={230491} />
+                ), and a Clang Safe Buffers gate and its libc-call subgroups (<Pr repo="llvm/llvm-project" n={232898} />,{" "}
+                <Pr repo="llvm/llvm-project" n={233604} />
                 ).
               </p>
             </li>
@@ -143,7 +144,7 @@ export default function Cv() {
                 ). Made <code>fpromote</code> and <code>fdemote</code> with f16 or f128 operands fail cleanly, where aarch64 compiled
                 them to wrong values and x64 and s390x panicked (<Pr repo="bytecodealliance/wasmtime" n={14883} />
                 ). Both merged in October 2026. Credited reporter of security advisory{" "}
-                <Ext href="https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-mghf-wjfp-p5xm">GHSA-mghf-wjfp-p5xm</Ext>,
+                <Ext href="https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-mghf-wjfp-p5xm">GHSA-mghf-wjfp-p5xm</Ext> (<span style={{ whiteSpace: "nowrap" }}>CVE-2026-115893</span>),
                 published in October 2026 and fixed in Wasmtime 36.0.19, 48.0.7 and 49.0.4.
               </p>
             </li>

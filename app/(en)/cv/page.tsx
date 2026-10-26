@@ -130,6 +130,8 @@ export default function Cv() {
                 <Pr repo="llvm/llvm-project" n={234068} />
                 ), a missing XMM register save in x86 variadic functions built with stack clash protection (
                 <Pr repo="llvm/llvm-project" n={234871} />
+                ), the callee pop size of x86 tail calls with 16-byte aligned stack arguments (
+                <Pr repo="llvm/llvm-project" n={235417} />
                 ), a Clang warning (<Pr repo="llvm/llvm-project" n={230491} />
                 ), and a Clang Safe Buffers gate and its libc-call subgroups (<Pr repo="llvm/llvm-project" n={232898} />,{" "}
                 <Pr repo="llvm/llvm-project" n={233604} />

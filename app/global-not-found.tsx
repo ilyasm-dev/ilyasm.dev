@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteShell from "@/components/SiteShell";
-import { mono } from "@/lib/fonts";
+import { fontVars } from "@/lib/fonts";
 import { siteMeta } from "@/lib/pageMeta";
 import "./globals.css";
 
@@ -12,7 +12,7 @@ export { viewport } from "@/lib/pageMeta";
 
 export default function GlobalNotFound() {
   return (
-    <SiteShell lang="en" fontClass={mono.variable}>
+    <SiteShell lang="en" fontClass={fontVars}>
       <main id="main" className="wrap section page">
         <article className="article">
           <span className="tag tag-soft">404</span>

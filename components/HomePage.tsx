@@ -1,54 +1,22 @@
-import {
-  Archive,
-  ArrowDown,
-  Award,
-  ArrowRight,
-  Braces,
-  Brain,
-  Check,
-  Code,
-  Cpu,
-  Database,
-  Eye,
-  FileCode,
-  FileSignature,
-  FileText,
-  Gamepad2,
-  Gauge,
-  GitMerge,
-  GitPullRequest,
-  Gpu,
-  Lock,
-  Mail,
-  Server,
-  ShieldCheck,
-  Stethoscope,
-  Timer,
-  Users,
-  Wrench,
-  PackageCheck,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowDown, ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
-import { ChartQueryBars, DecodeBars } from "@/components/BeforeAfterBars";
+import { ServingBars, TokenizerBars } from "@/components/BeforeAfterBars";
 import CopyButton from "@/components/CopyButton";
 import Ext from "@/components/ExternalLink";
-import { BillClimb, DatabaseMove, GaugeHalf, ShieldInput } from "@/components/Illustrations";
-import { Mark, Status, type StatusKind } from "@/components/Marks";
+import { Status, type StatusKind } from "@/components/Status";
 import ReplyHours from "@/components/ReplyHours";
 import Showcase from "@/components/Showcase";
 import SocialIcon, { type IconName } from "@/components/SocialIcons";
 import { COPY } from "@/content/copy";
+import type { Stat } from "@/content/copy/types";
 import prsData from "@/data/prs.json";
 import { fill, type Lang } from "@/lib/i18n";
-import { countWord, prCount, upperFirst } from "@/lib/prCounts";
+import { prCount } from "@/lib/prCounts";
 import { allPosts, monthYear } from "@/lib/posts";
 import { tokenize } from "@/lib/race";
 
 // The home page in either language. All text comes from content/copy. Links, icons and figures from data stay here,
 // so both languages share them.
-
-const ICON = { size: 20, strokeWidth: 1.75, "aria-hidden": true } as const;
 
 const SOCIALS: { name: string; href: string; aria: "linkedin" | "github" | "x" | "discord"; icon: IconName }[] = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/ilyas-mallah", aria: "linkedin", icon: "linkedin" },
@@ -57,12 +25,10 @@ const SOCIALS: { name: string; href: string; aria: "linkedin" | "github" | "x" |
   { name: "Discord", href: "https://discord.com/users/1557401037042618432", aria: "discord", icon: "discord" },
 ];
 
-// Path of a square photo in public/, such as "/ilyas.jpg". Until it's set, the IM monogram is the avatar.
+// Path of a square photo in public/, such as "/ilyas.jpg". Until it's set, the about card shows the name and role only.
 const ABOUT_PHOTO: string | null = null;
 
 const EMAIL = "hello@ilyasm.dev";
-
-const SAFEGUARD_ICONS: LucideIcon[] = [FileSignature, Eye, Lock, GitPullRequest, PackageCheck];
 
 const CONTRIBUTED: { name: string; by?: string }[] = [
   { name: "LLVM" },
@@ -77,22 +43,21 @@ const CONTRIBUTED: { name: string; by?: string }[] = [
   { name: "tt-metal", by: "Tenstorrent" },
 ];
 
-const AREA_ART = [GaugeHalf, DatabaseMove, BillClimb, ShieldInput];
-
-// Highlights are from the hub's contributions/README.md. The full list is data/prs.json, written at build time by scripts/fetch-prs.mjs.
-// The advisory is shown at the level of its public page only: the credit and the fixed versions.
-const HIGHLIGHTS: { name: string; icon: LucideIcon; href: string; status: StatusKind }[] = [
-  { name: "vLLM", icon: Server, href: "https://github.com/vllm-project/vllm/pull/60464", status: "review" },
-  { name: "Wasmtime", icon: Award, href: "https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-mghf-wjfp-p5xm", status: "done" },
-  { name: "Wasmtime", icon: Cpu, href: "https://github.com/bytecodealliance/wasmtime/pull/14778", status: "merged" },
-  { name: "wabt", icon: ShieldCheck, href: "https://github.com/WebAssembly/wabt/pull/2874", status: "merged" },
+// Merged fixes of the Selected work section, from the hub's contributions/README.md, each with the setup it was checked in.
+// The advisory is shown at the level of its public page only: the ID, the credit and the fixed versions.
+const PROOFS: { name: string; href: string; status: StatusKind }[] = [
+  { name: "Wasmtime", href: "https://github.com/bytecodealliance/wasmtime/security/advisories/GHSA-mghf-wjfp-p5xm", status: "done" },
+  { name: "Wasmtime", href: "https://github.com/bytecodealliance/wasmtime/pull/14778", status: "merged" },
+  { name: "ONNX", href: "https://github.com/onnx/onnx/pull/8650", status: "merged" },
+  { name: "wabt", href: "https://github.com/WebAssembly/wabt/pull/2874", status: "merged" },
+  { name: "mruby", href: "https://github.com/mruby/mruby/pull/7692", status: "merged" },
 ];
+
+// The one open source highlight, work merged under the handle green-real. The full list is data/prs.json, written at build time by scripts/fetch-prs.mjs.
+const LUAU_HIGHLIGHT = { name: "Luau", href: "https://github.com/luau-lang/luau/pull/2571", status: "merged" as StatusKind };
 
 type Pr = { repo: string; number: number; title: string; url: string; state: "open" | "merged"; createdAt: string; mergedAt: string | null; author: string };
 const PRS = prsData as Pr[];
-// The vLLM highlight is #60464. Its sentence counts the other open vLLM PRs from the same data.
-const VLLM_FEATURED = 60464;
-const VLLM_MORE = prCount("vllm-project/vllm", "open", [VLLM_FEATURED]);
 const LUAU_COUNT = prCount("luau-lang/luau", "merged");
 const MERGED = PRS.filter((p) => p.state === "merged").length;
 const dateOf = (p: Pr) => p.mergedAt ?? p.createdAt;
@@ -115,27 +80,29 @@ const GROUPS = Object.values(
 // PR titles mark code with backticks. Show those parts as code.
 const withCode = (title: string) => title.split("`").map((part, i) => (i % 2 ? <code key={i}>{part}</code> : part));
 
-// Merged, from the hub's contributions/README.md. The ns figures for #2571 are in projects/luau/README.md and assets/cv.md.
-const LUAU_PRS: { label: string; href: string }[] = [
-  { label: "#2987", href: "https://github.com/luau-lang/luau/pull/2987" },
-  { label: "#2571", href: "https://github.com/luau-lang/luau/pull/2571" },
-  { label: "#2683", href: "https://github.com/luau-lang/luau/pull/2683" },
-  { label: "#2648", href: "https://github.com/luau-lang/luau/pull/2648" },
-];
-
 const LUAU_MERGED = "https://github.com/luau-lang/luau/pulls?q=is%3Apr+author%3Agreen-real+is%3Amerged";
 
-const IN_PROGRESS: { name: string; icon: LucideIcon; kind: StatusKind }[] = [
-  { name: "Ulana", icon: FileCode, kind: "dev" },
-  { name: "Ganglion", icon: Brain, kind: "dev" },
-  { name: "infdoc", icon: Stethoscope, kind: "dev" },
-];
+const IN_PROGRESS = ["Ulana", "Ganglion", "infdoc"];
 
 // Published posts, newest first. They are English, so the Dutch page marks them as such.
 const POSTS = allPosts();
 
 // The chat race runs on the English answer's length in every language, so the measured seconds stay the same.
 const RACE_TOKENS = tokenize(COPY.en.showcase.chatAnswer).length;
+
+// The two figures of a work card. Each leads with its number, then the setup it was measured in.
+function Stats({ stats }: { stats: [Stat, Stat] }) {
+  return (
+    <div className="stats">
+      {stats.map((st, i) => (
+        <div key={i}>
+          <strong>{st.value}</strong>
+          <span>{st.sub}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function HomePage({ lang }: { lang: Lang }) {
   const copy = COPY[lang];
@@ -159,12 +126,11 @@ export default function HomePage({ lang }: { lang: Lang }) {
         <h1>
           {c.title[0]}
           <br />
-          <span className="grad">{c.title[1]}</span>
+          {c.title[1]}
         </h1>
         <p className="lede">{c.lede}</p>
         <div className="cta-row">
           <a className="button" href="#contact">
-            <Mail {...ICON} size={17} />
             {c.contact}
           </a>
           <a className="button button-quiet" href="#start">
@@ -173,18 +139,12 @@ export default function HomePage({ lang }: { lang: Lang }) {
           <span className="cta-note">{c.available}</span>
         </div>
         <Showcase copy={copy.showcase} lang={lang} raceTokens={RACE_TOKENS} />
+        <p className="hero-credit">{c.creditEngines}</p>
         <p className="hero-credit">
-          <Wrench size={16} strokeWidth={2} aria-hidden="true" />
-          <span>{c.creditEngines}</span>
-        </p>
-        <p className="hero-credit">
-          <GitMerge size={16} strokeWidth={2} aria-hidden="true" />
-          <span>
-            {fill(c.creditLuau, { n: LUAU_COUNT })} {c.creditWasmtime}{" "}
-            <Ext href={LUAU_MERGED} note={lang}>
-              {c.seeThem}
-            </Ext>
-          </span>
+          {fill(c.creditLuau, { n: LUAU_COUNT })} {c.creditWasmtime}{" "}
+          <Ext href={LUAU_MERGED} note={lang}>
+            {c.seeThem}
+          </Ext>
         </p>
         <div className="contributed hero-contributed">
           <span className="contributed-label">{c.contributedTo}</span>
@@ -202,144 +162,91 @@ export default function HomePage({ lang }: { lang: Lang }) {
       <section className="wrap section">
         <h2 className="section-title">{c.problemsTitle}</h2>
         <div className="areas">
-          {c.areas.map((a, i) => {
-            const Art = AREA_ART[i];
-            return (
-              <article className="area" key={a.title}>
-                <span className="area-art">
-                  <Art />
-                </span>
-                <h3>{a.title}</h3>
-                <p>{a.line}</p>
-                <p className="proof">{a.proof}</p>
-              </article>
-            );
-          })}
+          {c.areas.map((a) => (
+            <article className="area" key={a.title}>
+              <h3>{a.title}</h3>
+              <p>{a.line}</p>
+              <p className="proof">{a.proof}</p>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="wrap section" id="work">
         <h2 className="section-title">{c.workTitle}</h2>
+        <p className="start-lead">{c.workLead}</p>
 
-        <div className="work-grid">
-          <article className="card work-card">
-            <div className="card-head">
-              <Mark icon={Database} />
-              <div className="card-head-text">
-                <h3 className="card-title">Rolantir</h3>
-              </div>
-              <Status kind="done">{c.rolantir.status}</Status>
-            </div>
-            <p className="card-text">{c.rolantir.text}</p>
-            <div className="stats">
-              <div>
-                <Timer size={18} strokeWidth={1.75} aria-hidden="true" />
-                <strong>{c.rolantir.stats[0].value}</strong>
-                <span>{c.rolantir.stats[0].sub}</span>
-              </div>
-              <div>
-                <Archive size={18} strokeWidth={1.75} aria-hidden="true" />
-                <strong>{c.rolantir.stats[1].value}</strong>
-                <span>{c.rolantir.stats[1].sub}</span>
-              </div>
-            </div>
-            <ChartQueryBars copy={copy.bars} />
+        <article className="card work-card work-lead">
+          <div className="work-lead-text">
+            <h3 className="card-title">MNN</h3>
+            <p className="card-text">{c.mnn.text}</p>
+            <Stats stats={c.mnn.stats} />
             <p className="card-more work-foot">
-              {caseLink("/work/rolantir/")}
-              <Ext href="https://rolantir.dev" note={lang}>
-                rolantir.dev (beta)
+              <Ext href="https://github.com/alibaba/MNN/pull/5028" note={lang}>
+                {c.mnn.pr}
               </Ext>
             </p>
-          </article>
+          </div>
+          <div className="work-lead-viz">
+            <TokenizerBars copy={copy.bars} />
+          </div>
+        </article>
 
-          <article className="card work-card">
-            <div className="card-head">
-              <Mark icon={Gpu} />
-              <div className="card-head-text">
-                <h3 className="card-title">llama.cpp</h3>
-              </div>
-              <Status kind="review">{c.llama.status}</Status>
-            </div>
-            <p className="card-text">{c.llama.text}</p>
-            <div className="stats">
-              <div>
-                <Gauge size={18} strokeWidth={1.75} aria-hidden="true" />
-                <strong>{c.llama.stats[0].value}</strong>
-                <span>{c.llama.stats[0].sub}</span>
-              </div>
-              <div>
-                <Code size={18} strokeWidth={1.75} aria-hidden="true" />
-                <strong>{c.llama.stats[1].value}</strong>
-                <span>{c.llama.stats[1].sub}</span>
-              </div>
-            </div>
-            <DecodeBars copy={copy.bars} lang={lang} />
-            <p className="card-more work-foot">
-              {caseLink("/work/llama-cpp/")}
-              <Ext href="https://github.com/ggml-org/llama.cpp/pull/30077" note={lang}>
-                {c.llama.pr}
-              </Ext>
-            </p>
-          </article>
-
-          <article className="card work-card">
-            <div className="card-head">
-              <Mark icon={Braces} />
-              <div className="card-head-text">
-                <h3 className="card-title">{c.luau.title}</h3>
-              </div>
-              <Status kind="merged">{fill(c.luau.status, { n: LUAU_COUNT })}</Status>
-            </div>
-            <p className="card-text">{fill(c.luau.text, { n: LUAU_COUNT })}</p>
-            <ul className="pr-list">
-              {LUAU_PRS.map((l, i) => (
-                <li key={l.href}>
-                  <Ext href={l.href} note={lang}>
-                    <GitMerge size={14} strokeWidth={2} aria-hidden="true" />
-                    {l.label}
+        <h3 className="sub-title work-sub">{c.proofsTitle}</h3>
+        <ul className="proofs">
+          {PROOFS.map((p, i) => (
+            <li className="proof" key={p.href}>
+              <div className="proof-who">
+                <strong>{p.name}</strong>
+                <span className="proof-links">
+                  <Ext href={p.href} note={lang}>
+                    {c.proofs[i].pr}
                   </Ext>
-                  <span>{c.luau.prs[i]}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="card-more work-foot">
-              <Ext href={LUAU_MERGED} note={lang}>
-                {c.luau.all}
-              </Ext>
-            </p>
-          </article>
+                  <Status kind={p.status}>{c.proofs[i].status}</Status>
+                </span>
+              </div>
+              <div className="proof-what">
+                <p className="proof-metric">{c.proofs[i].metric}</p>
+                <p className="proof-unit">{c.proofs[i].unit}</p>
+                <p className="proof-text">{c.proofs[i].text}</p>
+              </div>
+              <div className="proof-check">
+                <span className="proof-check-label">{c.checkedLabel}</span>
+                <p>{c.proofs[i].check}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
 
-          <article className="card work-card">
-            <div className="card-head">
-              <Mark icon={Gamepad2} />
-              <div className="card-head-text">
-                <h3 className="card-title">Dig It</h3>
-              </div>
-              <Status kind="done">{c.digIt.status}</Status>
-            </div>
-            <p className="card-text">{c.digIt.text}</p>
-            <div className="stats">
-              <div>
-                <Eye size={18} strokeWidth={1.75} aria-hidden="true" />
-                <strong>{c.digIt.stats[0].value}</strong>
-                <span>{c.digIt.stats[0].sub}</span>
-              </div>
-              <div>
-                <Users size={18} strokeWidth={1.75} aria-hidden="true" />
-                <strong>{c.digIt.stats[1].value}</strong>
-                <span>{c.digIt.stats[1].sub}</span>
-              </div>
-            </div>
+        <h3 className="sub-title work-sub">{c.openTitle}</h3>
+        <article className="card work-card work-lead">
+          <div className="work-lead-text">
+            <h3 className="card-title">vLLM</h3>
+            <p className="card-text">{c.vllm.text}</p>
+            <Stats stats={c.vllm.stats} />
             <p className="card-more work-foot">
-              <Ext href="https://www.roblox.com/games/76455837887178" note={lang}>
-                {c.digIt.game}
-              </Ext>
-              <Ext href="https://www.rotrends.com/game/6705549208" note={lang}>
-                {c.digIt.history}
+              <Link className="flow-link" href="/writing/fp8-slower-than-bf16/" hrefLang={enOnly}>
+                {c.vllm.post}
+                <ArrowRight size={15} strokeWidth={2} aria-hidden="true" />
+              </Link>
+              <Ext href="https://github.com/vllm-project/vllm/pull/60464" note={lang}>
+                {c.vllm.pr}
               </Ext>
             </p>
-          </article>
-        </div>
+          </div>
+          <div className="work-lead-viz">
+            <ServingBars copy={copy.bars} />
+          </div>
+        </article>
+
+        <p className="work-also">
+          {c.llamaAlso.text}
+          <span className="work-also-links">{caseLink("/work/llama-cpp/")}</span>
+        </p>
+        <p className="work-also">
+          {c.earlier.text}
+          <span className="work-also-links">{caseLink("/work/rolantir/")}</span>
+        </p>
       </section>
 
       {POSTS.length > 0 && (
@@ -385,10 +292,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
                 <h3 className="phase-label" id="phase-1">
                   <span className="phase-num">1</span> {c.investigation}
                 </h3>
-                <span className="phase-time">
-                  <Timer size={15} strokeWidth={2} aria-hidden="true" />
-                  {c.weeks}
-                </span>
+                <span className="phase-time">{c.weeks}</span>
               </div>
               <span className="price-badge">{c.introBadge}</span>
               <p className="price-now">
@@ -416,7 +320,6 @@ export default function HomePage({ lang }: { lang: Lang }) {
             </ul>
             <div className="phase-foot">
               <Link className="flow-link" href="/sample-report/" hrefLang={enOnly}>
-                <FileText size={16} strokeWidth={1.75} aria-hidden="true" />
                 {c.sampleReport}
                 <ArrowRight size={15} strokeWidth={2} aria-hidden="true" />
               </Link>
@@ -450,10 +353,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
               ))}
             </ol>
             <div className="phase-alt">
-              <p>
-                <Users size={16} strokeWidth={2} aria-hidden="true" />
-                <span>{c.teamFixes}</span>
-              </p>
+              <p>{c.teamFixes}</p>
             </div>
             <div className="phase-foot">
               <a className="button" href="#contact">
@@ -475,57 +375,34 @@ export default function HomePage({ lang }: { lang: Lang }) {
               </li>
             ))}
           </ul>
-          <p className="sweep-price">
-            <Timer size={15} strokeWidth={2} aria-hidden="true" />
-            {c.sweepPrice}
-          </p>
+          <p className="sweep-price">{c.sweepPrice}</p>
         </div>
         <div className="safeguards">
           <h3 className="sub-title">{c.safeguardsTitle}</h3>
           <ul>
-            {c.safeguards.map((text, i) => {
-              const Icon = SAFEGUARD_ICONS[i];
-              return (
-                <li key={text}>
-                  <Icon size={18} strokeWidth={1.75} aria-hidden="true" />
-                  <span>{text}</span>
-                </li>
-              );
-            })}
+            {c.safeguards.map((text) => (
+              <li key={text}>{text}</li>
+            ))}
           </ul>
         </div>
       </section>
 
       <section className="wrap section">
         <h2 className="section-title">{c.ossTitle}</h2>
-        <ul className="highlights">
-          {HIGHLIGHTS.map((h, i) => (
-            <li className="oss" key={h.href}>
-              <div className="oss-head">
-                <Mark icon={h.icon} />
-                <div>
-                  <Ext href={h.href} note={lang}>
-                    {h.name}
-                  </Ext>
-                  <Status kind={h.status}>{c.highlights[i].status}</Status>
-                </div>
-              </div>
-              <p className="oss-metric">
-                <strong>{c.highlights[i].metric}</strong>
-                <span>{c.highlights[i].unit}</span>
-              </p>
-              <p className="oss-text">
-                {i === 0 && VLLM_MORE > 0
-                  ? `${c.highlights[i].text} ${upperFirst(fill(VLLM_MORE === 1 ? c.morePrsOne : c.morePrsMany, { n: countWord(VLLM_MORE, lang) }))}`
-                  : c.highlights[i].text}
-              </p>
-            </li>
-          ))}
-        </ul>
-        <p className="hero-credit">
-          <ShieldCheck size={16} strokeWidth={2} aria-hidden="true" />
-          <span>{c.hardening}</span>
-        </p>
+        <div className="oss">
+          <div className="oss-head">
+            <Ext href={LUAU_HIGHLIGHT.href} note={lang}>
+              {LUAU_HIGHLIGHT.name}
+            </Ext>
+            <Status kind={LUAU_HIGHLIGHT.status}>{c.highlight.status}</Status>
+          </div>
+          <p className="oss-metric">
+            <strong>{c.highlight.metric}</strong>
+            <span>{c.highlight.unit}</span>
+          </p>
+          <p className="oss-text">{fill(c.highlight.text, { n: LUAU_COUNT })}</p>
+        </div>
+        <p className="hero-credit">{c.hardening}</p>
         <details className="all-prs">
           <summary>
             <span>{fill(c.allPrs, { count: PRS.length })}</span>
@@ -567,13 +444,9 @@ export default function HomePage({ lang }: { lang: Lang }) {
       <section className="wrap section">
         <h2 className="section-title">{c.buildingTitle}</h2>
         <div className="progress-list">
-          {IN_PROGRESS.map((p, i) => (
-            <article className="progress" key={p.name}>
-              <div className="card-head">
-                <Mark icon={p.icon} />
-                <span className="card-title">{p.name}</span>
-                <Status kind={p.kind}>{c.building[i].tag}</Status>
-              </div>
+          {IN_PROGRESS.map((name, i) => (
+            <article className="progress" key={name}>
+              <h3 className="card-title">{name}</h3>
               <p className="card-text">{c.building[i].text}</p>
             </article>
           ))}
@@ -585,13 +458,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
         <div className="about-card">
           <div className="about-who">
             <div className="about-id">
-              {ABOUT_PHOTO ? (
-                <img className="about-mark about-photo" src={ABOUT_PHOTO} alt="Ilyas Mallah" width={88} height={88} />
-              ) : (
-                <span className="about-mark" aria-hidden="true">
-                  IM
-                </span>
-              )}
+              {ABOUT_PHOTO && <img className="about-photo" src={ABOUT_PHOTO} alt="Ilyas Mallah" width={88} height={88} />}
               <h3 className="about-name">Ilyas Mallah</h3>
               <p className="about-role">{c.role}</p>
             </div>
@@ -601,14 +468,12 @@ export default function HomePage({ lang }: { lang: Lang }) {
             <h3>{c.ctaTitle}</h3>
             <p>{c.ctaText}</p>
             <div className="contact-email">
-              <Mail className="email-icon" size={22} strokeWidth={1.75} aria-hidden="true" />
               <a className="email" href={mailto}>
                 {EMAIL}
               </a>
               <CopyButton value={EMAIL} aria={copy.copyButton.aria} text={copy.copyButton.text} copiedText={copy.copyButton.copied} />
             </div>
             <p className="about-reply">
-              <span className="about-reply-dot" aria-hidden="true" />
               <ReplyHours lang={lang} copy={copy.reply} />
             </p>
             <ul className="socials">

@@ -92,6 +92,16 @@ export const en: Copy = {
     chartLabel: "Hourly chart query time, 400 to 900 ms before and 3 to 8 ms after the rewrite",
     decodeCaption: "Decode speed at 32k tokens of context, RTX 5090, CUDA 12.8.1",
     decodeLabel: "Decode speed at 32k tokens of context, {m} tokens per second before the fix and {f} after",
+    vllm: {
+      range: ["634 tok/s", "965 tok/s"],
+      caption: "Output tokens per second, 64 concurrent long prompts, H100 NVL, one session",
+      label: "Output tokens per second with 64 concurrent long prompts, 634 before the fix and 965 after",
+    },
+    tokenizer: {
+      range: ["1,182 ms", "235 ms"],
+      caption: "Encoding 125,906 tokens, i7-11700, g++ 13.3 -O2, best of 3",
+      label: "Time to encode 125,906 tokens, 1,182 ms before the fix and 235 ms after",
+    },
   },
   home: {
     eyebrow: "Performance engineer for AI and backend systems",
@@ -193,69 +203,89 @@ export const en: Copy = {
       "What I build for you is yours once paid.",
     ],
     workTitle: "Selected work",
+    workLead: "Merged work comes first, and each item says how I checked it. The one open pull request has measurements.",
     readCase: "Read the case",
-    rolantir: {
-      status: "co-founded",
-      text: "Analytics for the Roblox platform. It tracks 1M+ games in a 24.5 GB live database. I started it from the backend, crawler and game tracker, and moved it live from SQLite to PostgreSQL with TimescaleDB without losing history.",
+    mnn: {
+      text: "MNN is Alibaba's on-device inference engine. Its Hugging Face tokenizer copied the rest of the prompt after every piece of text it matched, so encoding time grew with the square of the prompt. My fix walks the prompt once.",
       stats: [
         {
           value: (
             <>
-              <span className="stat-good">50x</span> faster chart queries
+              <span className="stat-good">9.7x</span> faster tokenizing
             </>
           ),
-          sub: "measured on production",
+          sub: "at 252,000 tokens, 4.6 s to 0.47 s",
         },
-        {
-          value: (
-            <>
-              <span className="stat-good">9.5x</span> smaller history
-            </>
-          ),
-          sub: "35 GB stored in 3.7 GB",
-        },
+        { value: "Same token ids", sub: "on 616 edge cases and every size timed" },
       ],
+      pr: "PR #5028 (merged)",
     },
-    llama: {
-      status: "upstream fix",
-      text: "A fix in llama.cpp itself for long AI conversations on an RTX 5090. The compiler kept a small value in slow memory, and I changed how the kernel reads it.",
+    proofsTitle: "Merged fixes in other projects",
+    checkedLabel: "How it was checked",
+    proofs: [
+      {
+        status: "published",
+        pr: "Advisory",
+        metric: "Credited reporter of a Wasmtime security advisory",
+        unit: "GHSA-mghf-wjfp-p5xm, CVE-2026-115893, October 2026",
+        text: "I reported a security bug to the Wasmtime maintainers in private. They fixed it in Wasmtime 36.0.19, 48.0.7 and 49.0.4, then published the advisory with me as its reporter.",
+        check: "The advisory is public on GitHub. It lists me as the reporter and names the three fixed versions.",
+      },
+      {
+        status: "merged",
+        pr: "PR #14778",
+        metric: "Float to small integer conversions no longer crash the compiler",
+        unit: "in Cranelift, Wasmtime's code generator, on x64",
+        text: "Converting a float to an 8- or 16-bit integer crashed Cranelift's x64 backend, while its ARM64, RISC-V and s390x backends handled it. My fix converts through 32 bits, then saturates or traps. The maintainers merged it, which closed an issue open since 2022.",
+        check: "The existing 8- and 16-bit tests now run on x86_64. I ran 122 NaN and out-of-range inputs natively, and all 122 trapped.",
+      },
+      {
+        status: "merged",
+        pr: "PR #8650",
+        metric: "One bad character no longer hangs ONNX shape inference",
+        unit: "in ONNX, for Einsum equations such as i_j",
+        text: "ONNX is an open file format for machine learning models. A model with one Einsum node and a character that is not a letter made shape inference spin at 100% of a core and never return. My fix rejects the character with an error, as ONNX already does for other malformed equations.",
+        check: "Five equations hung before the change, each stopped by a 15 second timeout. All five now fail with an error, and 1,090 shape inference tests pass.",
+      },
+      {
+        status: "merged",
+        pr: "PR #2874",
+        metric: "A 4 GiB memory no longer becomes 0 bytes",
+        unit: "on 32-bit hosts, in WebAssembly's wasm2c",
+        text: "wasm2c turns WebAssembly into C. On 32-bit hosts a 4 GiB memory size wrapped to 0, which freed memory still in use. My fix refuses sizes that don't fit, and the maintainers merged it.",
+        check: "The new test grows a memory to 65,536 pages. On the old code, a 32-bit build under AddressSanitizer reports a heap use after free. With the fix it passes.",
+      },
+      {
+        status: "merged",
+        pr: "PR #7692",
+        metric: "String lengths no longer wrap at 2 GiB",
+        unit: "in mruby's pack and unpack",
+        text: "mruby is a small Ruby for embedding. On a string of 2 GiB or more, unpack counted its length as a negative number and read 2 GiB before the start of the string. My fix keeps the lengths in mrb_int, mruby's full-width integer type.",
+        check: "The crash reproduced under AddressSanitizer and is gone. The result matches CRuby, and the test suite passes.",
+      },
+    ],
+    openTitle: "In review, with measurements",
+    vllm: {
+      text: "vLLM chose its Hopper FP8 matrix kernel by whether the batch size divides by 4. That sent small batches that divide by 4, and large batches that don't, to the slower kernel. My fix chooses by size. It applies when vLLM runs its CUTLASS FP8 path, for example where DeepGEMM can't run.",
       stats: [
         {
           value: (
             <>
-              <span className="stat-good">2.1x</span> faster decoding
+              <span className="stat-good">17 to 52%</span> more output tokens per second
             </>
           ),
-          sub: "at 32k context",
+          sub: "H100 NVL, Qwen3-8B-FP8, four workloads",
         },
-        { value: "About 10 lines changed", sub: "in two functions" },
+        { value: "9.30 to 6.64 ms per decode step", sub: "at batch 8" },
       ],
-      pr: "PR #30077 (open)",
+      pr: "PR #60464 (open)",
+      post: "Read the write-up",
     },
-    luau: {
-      title: "Luau compiler and runtime",
-      status: "{n} merged",
-      text: "Luau is the language behind Roblox. Its maintainers merged {n} of my fixes in 2026, to the native code generator, register allocator and type checker.",
-      prs: [
-        "x64 register allocator converted a value wrongly on reload from the stack",
-        <>
-          Integer comparisons from <span className="val-bad">3.18 ns</span> to <span className="val-good">0.63 ns</span> with
-          predictable branches
-        </>,
-        "ARM64 fast path for looping over arrays, as x64 already had",
-        "Type checking for calls through a __call metamethod",
-      ],
-      all: "All merged pull requests",
+    llamaAlso: {
+      text: "Two llama.cpp pull requests are in review, on decoding speed at long context on RTX 50 GPUs and on server stalls while saving an idle conversation. I measured both, and the first has a case page.",
     },
-    digIt: {
-      status: "co-owned, sold",
-      text: "A Roblox game I co-founded and co-owned from October 2024 to March 2025, then sold. I did design, backend systems and live operations.",
-      stats: [
-        { value: "73M visits", sub: "on Roblox" },
-        { value: "27,400 players at once", sub: "at the peak" },
-      ],
-      game: "Game page on Roblox",
-      history: "Player history on RoTrends",
+    earlier: {
+      text: "Earlier, I co-founded Rolantir, analytics for the Roblox platform. I moved its live database from SQLite to PostgreSQL with TimescaleDB. Its hourly chart queries take 3 to 8 ms instead of 400 to 900 ms, measured on production.",
     },
     writingTitle: "Writing",
     writingLead: "How I found two of these slowdowns, step by step, with the numbers and the dead ends.",
@@ -263,40 +293,18 @@ export const en: Copy = {
     writingAll: "All writing",
     ossTitle: "Recent open source work",
     contributedTo: "Contributed to",
-    highlights: [
-      {
-        status: "PRs open",
-        metric: (
-          <>
-            Up to <span className="val-good">52%</span> more output tokens per second
-          </>
-        ),
-        unit: "on the CUTLASS FP8 path, one H100 NVL",
-        text: "Picks the matrix kernel by batch size. 17 to 52% more output tokens per second on one H100 NVL (Qwen3-8B-FP8) when vLLM uses its CUTLASS FP8 path.",
-      },
-      {
-        status: "published",
-        metric: "Credited reporter of a Wasmtime security advisory",
-        unit: "GHSA-mghf-wjfp-p5xm, October 2026",
-        text: "I reported a security bug to the Wasmtime maintainers in private. They fixed it in Wasmtime 36.0.19, 48.0.7 and 49.0.4, then published the advisory with me as its reporter.",
-      },
-      {
-        status: "merged",
-        metric: "Float to small integer conversions no longer crash the compiler",
-        unit: "in Cranelift, Wasmtime's code generator, on x64",
-        text: "Converting a float to an 8- or 16-bit integer crashed Cranelift's x64 backend, while its ARM64, RISC-V and s390x backends handled it. My fix converts through 32 bits, then saturates or traps. The maintainers merged it, which closed an issue open since 2022.",
-      },
-      {
-        status: "merged",
-        metric: "A 4 GiB memory no longer becomes 0 bytes",
-        unit: "on 32-bit hosts, in WebAssembly's wasm2c",
-        text: "wasm2c turns WebAssembly into C. On 32-bit hosts a 4 GiB memory size wrapped to 0, which freed memory still in use. My fix refuses sizes that don't fit, and the maintainers merged it.",
-      },
-    ],
-    morePrsOne: "One more PR open.",
-    morePrsMany: "{n} more PRs open.",
+    highlight: {
+      status: "merged",
+      metric: (
+        <>
+          Integer comparisons from <span className="val-bad">3.18 ns</span> to <span className="val-good">0.63 ns</span>
+        </>
+      ),
+      unit: "in Luau's native code generator, with predictable branches",
+      text: "Luau is the language behind Roblox. Its maintainers merged {n} of my fixes in 2026, to the native code generator, register allocator and type checker. This one gives integer == in a branch its own fast path on x64 and ARM64. With 50/50 branches it takes 5.9 to 3.75 ns.",
+    },
     hardening:
-      "I also harden code that handles untrusted input, with bounds checks in LLVM's C++ library, a fix for a hang in zstd on a crafted file, and a merged mruby fix for string lengths that wrapped at 2 GiB.",
+      "I also harden code that handles untrusted input. Bounds checks in LLVM's C++ library and a fix for a hang in zstd on a crafted file are in review.",
     allPrs: "Pull requests to other projects ({count})",
     prMix: "{merged} merged, {open} open, {projects} projects",
     groupMerged: "{n} merged",
@@ -330,15 +338,12 @@ export const en: Copy = {
     buildingTitle: "Also building",
     building: [
       {
-        tag: "in development",
         text: "Compiles WebAssembly to Luau. Ten real programs, including SQLite and QuickJS, match the wasmtime reference output.",
       },
       {
-        tag: "in development",
         text: "A Rust and CUDA simulator for an entire fly brain, all 165,122 neurons, with hand-written and optimized CPU and GPU kernels. One simulated second runs in 0.37 s on a consumer graphics card (RTX 3070 Ti).",
       },
       {
-        tag: "in development",
         text: "A command-line check for silent slowdowns in self-hosted LLM serving. Every rule comes from a measured case.",
       },
     ],

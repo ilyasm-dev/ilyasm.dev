@@ -94,6 +94,16 @@ export const nl: Copy = {
     chartLabel: "Querytijd van de uurgrafieken, 400 tot 900 ms vóór en 3 tot 8 ms na het herschrijven",
     decodeCaption: "Decodeersnelheid bij 32k tokens context, RTX 5090, CUDA 12.8.1",
     decodeLabel: "Decodeersnelheid bij 32k tokens context, {m} tokens per seconde vóór de fix en {f} erna",
+    vllm: {
+      range: ["634 tok/s", "965 tok/s"],
+      caption: "Outputtokens per seconde, 64 gelijktijdige lange prompts, H100 NVL, één sessie",
+      label: "Outputtokens per seconde bij 64 gelijktijdige lange prompts, 634 vóór de fix en 965 erna",
+    },
+    tokenizer: {
+      range: ["1.182 ms", "235 ms"],
+      caption: "Encoden van 125.906 tokens, i7-11700, g++ 13.3 -O2, beste van 3",
+      label: "Tijd om 125.906 tokens te encoden, 1.182 ms vóór de fix en 235 ms erna",
+    },
   },
   home: {
     eyebrow: "Performance engineer voor AI- en backendsystemen",
@@ -201,69 +211,89 @@ export const nl: Copy = {
       "Wat ik voor je bouw, is van jou zodra het betaald is.",
     ],
     workTitle: "Uitgelichte projecten",
+    workLead: "Gemergd werk staat voorop, en bij elk onderdeel staat hoe ik het gecontroleerd heb. De ene open pull request heeft metingen.",
     readCase: "Lees de case (Engels)",
-    rolantir: {
-      status: "medeoprichter",
-      text: "Analytics voor het Roblox-platform. Het volgt meer dan 1 miljoen games in een live database van 24,5 GB. Ik begon het met de backend, de crawler en de gametracker, en verhuisde het live van SQLite naar PostgreSQL met TimescaleDB zonder historie te verliezen.",
+    mnn: {
+      text: "MNN is de engine van Alibaba om AI-modellen op het apparaat zelf te draaien. De Hugging Face-tokenizer kopieerde na elk stukje tekst dat hij vond de rest van de prompt, waardoor de rekentijd met het kwadraat van de prompt groeide. Mijn fix loopt één keer door de prompt.",
       stats: [
         {
           value: (
             <>
-              <span className="stat-good">50x</span> snellere grafiekqueries
+              <span className="stat-good">9,7x</span> sneller tokenizen
             </>
           ),
-          sub: "gemeten in productie",
+          sub: "bij 252.000 tokens, 4,6 s naar 0,47 s",
         },
-        {
-          value: (
-            <>
-              <span className="stat-good">9,5x</span> kleinere historie
-            </>
-          ),
-          sub: "35 GB opgeslagen in 3,7 GB",
-        },
+        { value: "Dezelfde token-id's", sub: "bij 616 randgevallen en elke geteste grootte" },
       ],
+      pr: "PR #5028 (gemerged)",
     },
-    llama: {
-      status: "upstream fix",
-      text: "Een fix in llama.cpp zelf, voor lange AI-gesprekken op een RTX 5090. De compiler hield een kleine waarde in traag geheugen, en ik heb aangepast hoe de kernel die waarde leest.",
+    proofsTitle: "Gemergde fixes in andere projecten",
+    checkedLabel: "Hoe het is gecontroleerd",
+    proofs: [
+      {
+        status: "gepubliceerd",
+        pr: "Advisory",
+        metric: "Vermeld als melder van een security advisory van Wasmtime",
+        unit: "GHSA-mghf-wjfp-p5xm, CVE-2026-115893, oktober 2026",
+        text: "Ik meldde een beveiligingsfout vertrouwelijk aan de maintainers van Wasmtime. Zij losten hem op in Wasmtime 36.0.19, 48.0.7 en 49.0.4, en publiceerden daarna de advisory met mij als melder.",
+        check: "De advisory staat openbaar op GitHub. Ik sta erin als melder, met de drie opgeloste versies.",
+      },
+      {
+        status: "gemerged",
+        pr: "PR #14778",
+        metric: "Floats omzetten naar kleine integers laat de compiler niet meer crashen",
+        unit: "in Cranelift, de codegenerator van Wasmtime, op x64",
+        text: "Een float omzetten naar een integer van 8 of 16 bits liet de x64-backend van Cranelift crashen, terwijl de backends voor ARM64, RISC-V en s390x het al konden. Mijn fix rekent via 32 bits en begrenst de uitkomst of stopt met een trap. De maintainers hebben hem overgenomen, en daarmee is een issue uit 2022 gesloten.",
+        check: "De bestaande tests voor 8 en 16 bits draaien nu op x86_64. Ik draaide 122 NaN-waarden en waarden buiten het bereik native, en alle 122 gaven een trap.",
+      },
+      {
+        status: "gemerged",
+        pr: "PR #8650",
+        metric: "Eén ongeldig teken laat shape inference in ONNX niet meer vastlopen",
+        unit: "in ONNX, bij Einsum-vergelijkingen zoals i_j",
+        text: "ONNX is een open bestandsformaat voor machine learning-modellen. Een model met één Einsum-node en een teken dat geen letter is, liet shape inference op 100% van een core draaien zonder ooit terug te keren. Mijn fix weigert dat teken met een foutmelding, zoals ONNX dat al doet bij andere ongeldige vergelijkingen.",
+        check: "Vijf vergelijkingen bleven hangen vóór de wijziging, elk gestopt door een timeout van 15 seconden. Alle vijf geven nu een foutmelding, en 1.090 shape-inference-tests slagen.",
+      },
+      {
+        status: "gemerged",
+        pr: "PR #2874",
+        metric: "Een geheugen van 4 GiB wordt geen 0 bytes meer",
+        unit: "op 32-bitsystemen, in wasm2c van WebAssembly",
+        text: "wasm2c zet WebAssembly om naar C. Op 32-bitsystemen werd een geheugen van 4 GiB 0 bytes groot, waardoor geheugen werd vrijgegeven dat nog in gebruik was. Mijn fix weigert groottes die niet passen, en de maintainers hebben hem overgenomen.",
+        check: "De nieuwe test laat een geheugen groeien tot 65.536 pagina's. Op de oude code meldt een 32-bits build met AddressSanitizer een heap use after free. Met de fix slaagt de test.",
+      },
+      {
+        status: "gemerged",
+        pr: "PR #7692",
+        metric: "Stringlengtes lopen niet meer over bij 2 GiB",
+        unit: "in pack en unpack van mruby",
+        text: "mruby is een compacte Ruby om in andere software in te bouwen. Bij een string van 2 GiB of meer telde unpack de lengte als negatief getal en las het 2 GiB vóór het begin van de string. Mijn fix houdt de lengtes in mrb_int, het brede integertype van mruby.",
+        check: "De crash was te reproduceren met AddressSanitizer en is weg. De uitkomst komt overeen met CRuby, en de testsuite slaagt.",
+      },
+    ],
+    openTitle: "In review, met metingen",
+    vllm: {
+      text: "vLLM koos zijn FP8-matrixkernel voor Hopper op basis van de vraag of de batchgrootte deelbaar is door 4. Daardoor gingen kleine batches die deelbaar zijn door 4, en grote batches die dat niet zijn, naar de tragere kernel. Mijn fix kiest op grootte. Hij werkt als vLLM zijn CUTLASS FP8-pad gebruikt, bijvoorbeeld waar DeepGEMM niet kan draaien.",
       stats: [
         {
           value: (
             <>
-              <span className="stat-good">2,1x</span> sneller decoderen
+              <span className="stat-good">17 tot 52%</span> meer outputtokens per seconde
             </>
           ),
-          sub: "bij 32k context",
+          sub: "H100 NVL, Qwen3-8B-FP8, vier workloads",
         },
-        { value: "Ongeveer 10 regels gewijzigd", sub: "in twee functies" },
+        { value: "9,30 tot 6,64 ms per decodestap", sub: "bij batch 8" },
       ],
-      pr: "PR #30077 (open)",
+      pr: "PR #60464 (open)",
+      post: "Lees het artikel (Engels)",
     },
-    luau: {
-      title: "Luau-compiler en -runtime",
-      status: "{n} gemerged",
-      text: "Luau is de programmeertaal achter Roblox. De maintainers namen in 2026 {n} fixes van mij over, in de native codegenerator, de registerallocator en de typechecker.",
-      prs: [
-        "De x64-registerallocator zette een waarde verkeerd om bij het terugladen van de stack",
-        <>
-          Integervergelijkingen van <span className="val-bad">3,18 ns</span> naar <span className="val-good">0,63 ns</span> bij
-          voorspelbare branches
-        </>,
-        "Snel pad op ARM64 voor lussen over arrays, zoals x64 al had",
-        "Typecontrole voor aanroepen via een __call-metamethode",
-      ],
-      all: "Alle gemergede pull requests",
+    llamaAlso: {
+      text: "Twee pull requests voor llama.cpp zijn in review, over decodeersnelheid bij lange context op RTX 50-GPU's en over serverstoringen tijdens het opslaan van een inactief gesprek. Ik mat beide, en de eerste heeft een casepagina.",
     },
-    digIt: {
-      status: "mede-eigenaar, verkocht",
-      text: "Een Roblox-game die ik mee oprichtte. Van oktober 2024 tot maart 2025 was ik mede-eigenaar, daarna is de game verkocht. Ik deed het ontwerp, de backendsystemen en de live operations.",
-      stats: [
-        { value: "73 miljoen bezoeken", sub: "op Roblox" },
-        { value: "27.400 spelers tegelijk", sub: "op het hoogtepunt" },
-      ],
-      game: "Gamepagina op Roblox",
-      history: "Spelersaantallen op RoTrends",
+    earlier: {
+      text: "Eerder richtte ik Rolantir mee op, analytics voor het Roblox-platform. Ik verhuisde de live database van SQLite naar PostgreSQL met TimescaleDB. De uurgrafiekqueries duren 3 tot 8 ms in plaats van 400 tot 900 ms, gemeten in productie.",
     },
     writingTitle: "Artikelen",
     writingLead: "Hoe ik twee van deze vertragingen vond, stap voor stap, met de cijfers en de doodlopende sporen. De artikelen zijn in het Engels.",
@@ -271,40 +301,18 @@ export const nl: Copy = {
     writingAll: "Alle artikelen (Engels)",
     ossTitle: "Recente bijdragen aan open source",
     contributedTo: "Bijgedragen aan",
-    highlights: [
-      {
-        status: "PR's open",
-        metric: (
-          <>
-            Tot <span className="val-good">52%</span> meer outputtokens per seconde
-          </>
-        ),
-        unit: "op het CUTLASS FP8-pad, één H100 NVL",
-        text: "Kiest de matrixkernel op basis van de batchgrootte. 17 tot 52% meer outputtokens per seconde op één H100 NVL (Qwen3-8B-FP8) als vLLM zijn CUTLASS FP8-pad gebruikt.",
-      },
-      {
-        status: "gepubliceerd",
-        metric: "Vermeld als melder van een security advisory van Wasmtime",
-        unit: "GHSA-mghf-wjfp-p5xm, oktober 2026",
-        text: "Ik meldde een beveiligingsfout vertrouwelijk aan de maintainers van Wasmtime. Zij losten hem op in Wasmtime 36.0.19, 48.0.7 en 49.0.4, en publiceerden daarna de advisory met mij als melder.",
-      },
-      {
-        status: "gemerged",
-        metric: "Floats omzetten naar kleine integers laat de compiler niet meer crashen",
-        unit: "in Cranelift, de codegenerator van Wasmtime, op x64",
-        text: "Een float omzetten naar een integer van 8 of 16 bits liet de x64-backend van Cranelift crashen, terwijl de backends voor ARM64, RISC-V en s390x het al konden. Mijn fix rekent via 32 bits en begrenst de uitkomst of stopt met een trap. De maintainers hebben hem overgenomen, en daarmee is een issue uit 2022 gesloten.",
-      },
-      {
-        status: "gemerged",
-        metric: "Een geheugen van 4 GiB wordt geen 0 bytes meer",
-        unit: "op 32-bitsystemen, in wasm2c van WebAssembly",
-        text: "wasm2c zet WebAssembly om naar C. Op 32-bitsystemen werd een geheugen van 4 GiB 0 bytes groot, waardoor geheugen werd vrijgegeven dat nog in gebruik was. Mijn fix weigert groottes die niet passen, en de maintainers hebben hem overgenomen.",
-      },
-    ],
-    morePrsOne: "Nog één PR open.",
-    morePrsMany: "Nog {n} PR's open.",
+    highlight: {
+      status: "gemerged",
+      metric: (
+        <>
+          Integervergelijkingen van <span className="val-bad">3,18 ns</span> naar <span className="val-good">0,63 ns</span>
+        </>
+      ),
+      unit: "in de native codegenerator van Luau, bij voorspelbare branches",
+      text: "Luau is de programmeertaal achter Roblox. De maintainers namen in 2026 {n} fixes van mij over, in de native codegenerator, de registerallocator en de typechecker. Deze geeft een integer == in een branch een eigen snel pad op x64 en ARM64. Bij branches die 50/50 uitvallen kost het 5,9 tot 3,75 ns.",
+    },
     hardening:
-      "Ik maak ook code robuuster die onbetrouwbare invoer verwerkt. Voorbeelden zijn bounds checks in de C++-bibliotheek van LLVM, een fix voor een vastloper in zstd bij een gemanipuleerd bestand, en een gemergede fix in mruby voor stringlengtes die bij 2 GiB overliepen.",
+      "Ik maak ook code robuuster die onbetrouwbare invoer verwerkt. Bounds checks in de C++-bibliotheek van LLVM en een fix voor een vastloper in zstd bij een gemanipuleerd bestand zijn in review.",
     allPrs: "Pull requests aan andere projecten ({count})",
     prMix: "{merged} gemerged, {open} open, {projects} projecten",
     groupMerged: "{n} gemerged",
@@ -336,15 +344,12 @@ export const nl: Copy = {
     buildingTitle: "Waar ik verder aan bouw",
     building: [
       {
-        tag: "in ontwikkeling",
         text: "Compileert WebAssembly naar Luau. Tien echte programma's, waaronder SQLite en QuickJS, geven dezelfde uitvoer als de referentie in wasmtime.",
       },
       {
-        tag: "in ontwikkeling",
         text: "Een simulator in Rust en CUDA voor een volledig vliegenbrein, alle 165.122 neuronen, met zelfgeschreven en geoptimaliseerde CPU- en GPU-kernels. Eén gesimuleerde seconde draait in 0,37 s op een videokaart voor consumenten (RTX 3070 Ti).",
       },
       {
-        tag: "in ontwikkeling",
         text: "Een commandlinetool die stille vertragingen opspoort in zelf gehoste LLM-serving. Elke regel komt uit een gemeten praktijkgeval.",
       },
     ],

@@ -58,3 +58,17 @@ export function DecodeBars({ copy, lang }: { copy: BarsCopy; lang: Lang }) {
     />
   );
 }
+
+// vLLM #60464, 64 concurrent long prompts on one H100 NVL, stock against patched CUTLASS in one session (contributions/vllm/60464-sm90-blockwise-dispatch/pr.md).
+export function ServingBars({ copy }: { copy: BarsCopy }) {
+  return (
+    <Bars before={{ from: 634, text: copy.vllm.range[0] }} after={{ from: 965, text: copy.vllm.range[1] }} max={965} caption={copy.vllm.caption} label={copy.vllm.label} copy={copy} />
+  );
+}
+
+// MNN #5028, HuggingfaceTokenizer::encode on 512 KiB of text (contributions/mnn/5028-tokenizer-hf-quadratic/pr.md).
+export function TokenizerBars({ copy }: { copy: BarsCopy }) {
+  return (
+    <Bars before={{ from: 1182, text: copy.tokenizer.range[0] }} after={{ from: 235, text: copy.tokenizer.range[1] }} max={1182} caption={copy.tokenizer.caption} label={copy.tokenizer.label} copy={copy} />
+  );
+}

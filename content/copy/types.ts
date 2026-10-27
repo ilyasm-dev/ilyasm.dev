@@ -5,7 +5,7 @@ import type { Lang } from "@/lib/i18n";
 // components, so the two languages cannot drift apart in layout. Strings with {name} are filled in by the component.
 
 type Step = { title: string; text: string };
-export type Stat = { value: ReactNode; sub: string };
+type Stat = { value: ReactNode; sub: string };
 
 // Plain strings only: the showcase is a client component and gets this as a prop.
 export type ShowcaseCopy = {
@@ -61,17 +61,7 @@ export type Copy = {
   copyButton: { text: string; copied: string; aria: string };
   reply: ReplyCopy;
   showcase: ShowcaseCopy;
-  bars: {
-    before: string;
-    after: string;
-    chartRange: [string, string];
-    chartCaption: string;
-    chartLabel: string;
-    decodeCaption: string;
-    decodeLabel: string;
-    vllm: BarSet;
-    tokenizer: BarSet;
-  };
+  bars: { before: string; after: string; chartRange: [string, string]; chartCaption: string; chartLabel: string; decodeCaption: string; decodeLabel: string };
   home: {
     eyebrow: string;
     title: [string, string];
@@ -115,19 +105,11 @@ export type Copy = {
     safeguardsTitle: string;
     safeguards: [string, string, string, string, string];
     workTitle: string;
-    workLead: string;
     readCase: string;
-    mnn: { text: string; stats: [Stat, Stat]; pr: string };
-    // Merged fixes without a speedup figure: what was wrong, what changed, how it was checked.
-    proofsTitle: string;
-    checkedLabel: string;
-    proofs: [Proof, Proof, Proof, Proof, Proof];
-    // One open pull request, with measurements.
-    openTitle: string;
-    vllm: { text: string; stats: [Stat, Stat]; pr: string; post: string };
-    // Two quiet lines under the work: llama.cpp work in review, and earlier work that is not on GitHub.
-    llamaAlso: { text: string };
-    earlier: { text: string };
+    rolantir: { status: string; text: string; stats: [Stat, Stat] };
+    llama: { status: string; text: string; stats: [Stat, Stat]; pr: string };
+    luau: { title: string; status: string; text: string; prs: [ReactNode, ReactNode, ReactNode, ReactNode]; all: string };
+    digIt: { status: string; text: string; stats: [Stat, Stat]; game: string; history: string };
     // Posts are English only. {n} is the reading time in minutes.
     writingTitle: string;
     writingLead: string;
@@ -135,7 +117,9 @@ export type Copy = {
     writingAll: string;
     ossTitle: string;
     contributedTo: string;
-    highlight: Highlight;
+    highlights: [Highlight, Highlight, Highlight, Highlight];
+    morePrsOne: string;
+    morePrsMany: string;
     hardening: string;
     allPrs: string;
     prMix: string;
@@ -164,8 +148,5 @@ export type Copy = {
 };
 
 type Area = { title: string; line: string; proof: string };
-// The two value texts of a before and after chart, with its caption and its screen reader label.
-type BarSet = { range: [string, string]; caption: string; label: string };
-type Proof = { status: string; pr: string; metric: ReactNode; unit: string; text: string; check: string };
 type Highlight = { status: string; metric: ReactNode; unit: string; text: string };
-type Building = { text: string };
+type Building = { tag: string; text: string };

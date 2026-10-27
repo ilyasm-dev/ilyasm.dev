@@ -47,6 +47,9 @@ export default function SiteShell({ lang, fontClass, children }: { lang: Lang; f
         <header className="site-header">
           <div className="wrap header-inner">
             <Link href={home} className="brand">
+              <span className="brand-mark" aria-hidden="true">
+                IM
+              </span>
               Ilyas Mallah
             </Link>
             <nav>

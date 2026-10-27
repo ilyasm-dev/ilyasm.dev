@@ -1,6 +1,56 @@
 [
   {
     "repo": "llvm/llvm-project",
+    "number": 236120,
+    "title": "[libc++] Assert that the elements selected by a valarray subscript exist",
+    "url": "https://github.com/llvm/llvm-project/pull/236120",
+    "state": "open",
+    "createdAt": "2026-10-27",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
+    "number": 235417,
+    "title": "[X86] Match the callee pop size for tailcc calls with 16-byte aligned stack args",
+    "url": "https://github.com/llvm/llvm-project/pull/235417",
+    "state": "merged",
+    "createdAt": "2026-10-25",
+    "mergedAt": "2026-10-27",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "libarchive/libarchive",
+    "number": 3737,
+    "title": "read_data_into_fd: Fix spurious \"Seek error\" when appending to a non-empty file",
+    "url": "https://github.com/libarchive/libarchive/pull/3737",
+    "state": "merged",
+    "createdAt": "2026-10-21",
+    "mergedAt": "2026-10-27",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "onnx/onnx",
+    "number": 8663,
+    "title": "fix(shape_inference): bound allocations sized by model values",
+    "url": "https://github.com/onnx/onnx/pull/8663",
+    "state": "open",
+    "createdAt": "2026-10-25",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "bytecodealliance/wasmtime",
+    "number": 14788,
+    "title": "cranelift-jit: assert that relocations stay within their definition",
+    "url": "https://github.com/bytecodealliance/wasmtime/pull/14788",
+    "state": "merged",
+    "createdAt": "2026-10-16",
+    "mergedAt": "2026-10-24",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "llvm/llvm-project",
     "number": 234871,
     "title": "[X86] Expand VASTART_SAVE_XMM_REGS outside the entry block",
     "url": "https://github.com/llvm/llvm-project/pull/234871",
@@ -17,6 +67,36 @@
     "state": "open",
     "createdAt": "2026-10-23",
     "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "sgl-project/sglang",
+    "number": 46132,
+    "title": "[Perf] cuda-graph: Raise the decode graph ceiling default to 128 for 35 to 60 GiB GPUs",
+    "url": "https://github.com/sgl-project/sglang/pull/46132",
+    "state": "open",
+    "createdAt": "2026-10-23",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "bytecodealliance/wasmtime",
+    "number": 14897,
+    "title": "Error on wasm SIMD for riscv64 without vector support",
+    "url": "https://github.com/bytecodealliance/wasmtime/pull/14897",
+    "state": "merged",
+    "createdAt": "2026-10-21",
+    "mergedAt": "2026-10-23",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "onnx/onnx",
+    "number": 8650,
+    "title": "fix(shape_inference): reject unsupported characters in Einsum equations",
+    "url": "https://github.com/onnx/onnx/pull/8650",
+    "state": "merged",
+    "createdAt": "2026-10-22",
+    "mergedAt": "2026-10-23",
     "author": "ilyas-mallah"
   },
   {
@@ -54,16 +134,6 @@
     "number": 10704,
     "title": "[naga glsl-out] Cast u32 image levels and sample indices to int in bounds checks",
     "url": "https://github.com/gfx-rs/wgpu/pull/10704",
-    "state": "open",
-    "createdAt": "2026-10-22",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "onnx/onnx",
-    "number": 8650,
-    "title": "fix(shape_inference): reject unsupported characters in Einsum equations",
-    "url": "https://github.com/onnx/onnx/pull/8650",
     "state": "open",
     "createdAt": "2026-10-22",
     "mergedAt": null,
@@ -120,16 +190,6 @@
     "author": "ilyas-mallah"
   },
   {
-    "repo": "bytecodealliance/wasmtime",
-    "number": 14897,
-    "title": "Error on wasm SIMD for riscv64 without vector support",
-    "url": "https://github.com/bytecodealliance/wasmtime/pull/14897",
-    "state": "open",
-    "createdAt": "2026-10-21",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
     "repo": "mruby/mruby",
     "number": 7703,
     "title": "mruby-rational: keep the denominator of a Float below 2**-10",
@@ -154,16 +214,6 @@
     "number": 5174,
     "title": "fix(loader): widen the tag array size in load_tag_section",
     "url": "https://github.com/wasm-micro-runtime/wasm-micro-runtime/pull/5174",
-    "state": "open",
-    "createdAt": "2026-10-21",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "libarchive/libarchive",
-    "number": 3737,
-    "title": "read_data_into_fd: Fix spurious \"Seek error\" when appending to a non-empty file",
-    "url": "https://github.com/libarchive/libarchive/pull/3737",
     "state": "open",
     "createdAt": "2026-10-21",
     "mergedAt": null,
@@ -294,16 +344,6 @@
     "number": 30694,
     "title": "llama : merge nearby KV ranges when reading state into host memory",
     "url": "https://github.com/ggml-org/llama.cpp/pull/30694",
-    "state": "open",
-    "createdAt": "2026-10-16",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "bytecodealliance/wasmtime",
-    "number": 14788,
-    "title": "cranelift-jit: assert that relocations stay within their definition",
-    "url": "https://github.com/bytecodealliance/wasmtime/pull/14788",
     "state": "open",
     "createdAt": "2026-10-16",
     "mergedAt": null,

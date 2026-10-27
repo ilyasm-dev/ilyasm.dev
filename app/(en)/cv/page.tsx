@@ -122,7 +122,8 @@ export default function Cv() {
                 <strong>LLVM</strong> (libc++, Clang). {upperFirst(countWord(LLVM_OPEN, "en"))} {LLVM_OPEN === 1 ? "PR" : "PRs"} in review: hardening assertions for <code>insert</code>/
                 <code>emplace</code> positions (<Pr repo="llvm/llvm-project" n={230490} />
                 ), <code>resize_and_overwrite</code> bounds (<Pr repo="llvm/llvm-project" n={230605} />
-                ), <code>valarray</code> sizes (<Pr repo="llvm/llvm-project" n={230606} />
+                ), <code>valarray</code> sizes and the elements a subscript selects (<Pr repo="llvm/llvm-project" n={230606} />,{" "}
+                <Pr repo="llvm/llvm-project" n={236120} />
                 ), iterator ranges in <code>string</code> <code>insert</code>, <code>append</code> and <code>assign</code> (<Pr repo="llvm/llvm-project" n={234566} />
                 ), <code>list::splice</code> and <code>erase(end())</code> (<Pr repo="llvm/llvm-project" n={232538} />,{" "}
                 <Pr repo="llvm/llvm-project" n={232661} />
@@ -130,11 +131,11 @@ export default function Cv() {
                 <Pr repo="llvm/llvm-project" n={234068} />
                 ), a missing XMM register save in x86 variadic functions built with stack clash protection (
                 <Pr repo="llvm/llvm-project" n={234871} />
-                ), the callee pop size of x86 tail calls with 16-byte aligned stack arguments (
-                <Pr repo="llvm/llvm-project" n={235417} />
                 ), a Clang warning (<Pr repo="llvm/llvm-project" n={230491} />
                 ), and a Clang Safe Buffers gate and its libc-call subgroups (<Pr repo="llvm/llvm-project" n={232898} />,{" "}
                 <Pr repo="llvm/llvm-project" n={233604} />
+                ). Merged: the callee pop size of x86 tail calls with 16-byte aligned stack arguments (
+                <Pr repo="llvm/llvm-project" n={235417} />
                 ).
               </p>
             </li>

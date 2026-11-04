@@ -1,5 +1,45 @@
 [
   {
+    "repo": "protocolbuffers/protobuf",
+    "number": 31210,
+    "title": "Reject repeated fields with a default value in upb def builder",
+    "url": "https://github.com/protocolbuffers/protobuf/pull/31210",
+    "state": "merged",
+    "createdAt": "2026-11-02",
+    "mergedAt": "2026-11-04",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "libjxl/libjxl",
+    "number": 5083,
+    "title": "Zero the rows a truncated PNG leaves undecoded",
+    "url": "https://github.com/libjxl/libjxl/pull/5083",
+    "state": "merged",
+    "createdAt": "2026-11-02",
+    "mergedAt": "2026-11-03",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "luau-lang/luau",
+    "number": 3097,
+    "title": "Fix native guard exits reading a number register as nil after a libm call",
+    "url": "https://github.com/luau-lang/luau/pull/3097",
+    "state": "open",
+    "createdAt": "2026-10-31",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "gfx-rs/wgpu",
+    "number": 10704,
+    "title": "[naga glsl-out] Cast u32 image levels and sample indices to int in bounds checks",
+    "url": "https://github.com/gfx-rs/wgpu/pull/10704",
+    "state": "merged",
+    "createdAt": "2026-10-22",
+    "mergedAt": "2026-10-30",
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "llvm/llvm-project",
     "number": 236120,
     "title": "[libc++] Assert that the elements selected by a valarray subscript exist",
@@ -124,16 +164,6 @@
     "number": 234566,
     "title": "[libc++] Assert that iterator ranges are valid in string insert, append and assign",
     "url": "https://github.com/llvm/llvm-project/pull/234566",
-    "state": "open",
-    "createdAt": "2026-10-22",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "gfx-rs/wgpu",
-    "number": 10704,
-    "title": "[naga glsl-out] Cast u32 image levels and sample indices to int in bounds checks",
-    "url": "https://github.com/gfx-rs/wgpu/pull/10704",
     "state": "open",
     "createdAt": "2026-10-22",
     "mergedAt": null,
@@ -340,16 +370,6 @@
     "author": "ilyas-mallah"
   },
   {
-    "repo": "ggml-org/llama.cpp",
-    "number": 30694,
-    "title": "llama : merge nearby KV ranges when reading state into host memory",
-    "url": "https://github.com/ggml-org/llama.cpp/pull/30694",
-    "state": "open",
-    "createdAt": "2026-10-16",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
     "repo": "bytecodealliance/wasmtime",
     "number": 14778,
     "title": "x64: Lower fcvt_to_{u,s}int{,_sat} to i8 and i16",
@@ -430,30 +450,30 @@
     "author": "ilyas-mallah"
   },
   {
-    "repo": "facebook/zstd",
+    "repo": "meta/zstd",
     "number": 4834,
     "title": "decompress: return the skippable header size from ZSTD_frameHeaderSize()",
-    "url": "https://github.com/facebook/zstd/pull/4834",
+    "url": "https://github.com/meta/zstd/pull/4834",
     "state": "open",
     "createdAt": "2026-10-09",
     "mergedAt": null,
     "author": "ilyas-mallah"
   },
   {
-    "repo": "facebook/zstd",
+    "repo": "meta/zstd",
     "number": 4833,
     "title": "programs: fix `zstd -l` infinite loop on a large skippable frame",
-    "url": "https://github.com/facebook/zstd/pull/4833",
+    "url": "https://github.com/meta/zstd/pull/4833",
     "state": "open",
     "createdAt": "2026-10-09",
     "mergedAt": null,
     "author": "ilyas-mallah"
   },
   {
-    "repo": "facebook/zstd",
+    "repo": "meta/zstd",
     "number": 4832,
     "title": "decompress: make `ZSTD_decompressBound()` a true upper bound",
-    "url": "https://github.com/facebook/zstd/pull/4832",
+    "url": "https://github.com/meta/zstd/pull/4832",
     "state": "open",
     "createdAt": "2026-10-09",
     "mergedAt": null,

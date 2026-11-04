@@ -1,5 +1,55 @@
 [
   {
+    "repo": "llvm/llvm-project",
+    "number": 232898,
+    "title": "[clang][-Wunsafe-buffer-usage] Keep format-attr-call warnings independent of libc-call",
+    "url": "https://github.com/llvm/llvm-project/pull/232898",
+    "state": "merged",
+    "createdAt": "2026-10-16",
+    "mergedAt": "2026-11-04",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "vllm-project/vllm",
+    "number": 65630,
+    "title": "[Perf][Quantization] Batch the Marlin MoE scale and zero-point conversion over experts",
+    "url": "https://github.com/vllm-project/vllm/pull/65630",
+    "state": "open",
+    "createdAt": "2026-11-04",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "sgl-project/sglang",
+    "number": 48370,
+    "title": "[Perf] gemma3: Fuse q_norm and k_norm into gemma_rmsnorm for rank above 2",
+    "url": "https://github.com/sgl-project/sglang/pull/48370",
+    "state": "open",
+    "createdAt": "2026-11-04",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "ggml-org/llama.cpp",
+    "number": 31641,
+    "title": "CUDA: pick the FA MMA ncols2 with the least head padding for large batches",
+    "url": "https://github.com/ggml-org/llama.cpp/pull/31641",
+    "state": "open",
+    "createdAt": "2026-11-04",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "protocolbuffers/protobuf",
+    "number": 31287,
+    "title": "Fix wrong field paths after a scalar valued map in upb_util_HasUnsetRequired",
+    "url": "https://github.com/protocolbuffers/protobuf/pull/31287",
+    "state": "open",
+    "createdAt": "2026-11-04",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "protocolbuffers/protobuf",
     "number": 31210,
     "title": "Reject repeated fields with a default value in upb def builder",
@@ -347,16 +397,6 @@
     "state": "merged",
     "createdAt": "2026-10-15",
     "mergedAt": "2026-10-17",
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "llvm/llvm-project",
-    "number": 232898,
-    "title": "[clang][-Wunsafe-buffer-usage] Keep format-attr-call warnings independent of libc-call",
-    "url": "https://github.com/llvm/llvm-project/pull/232898",
-    "state": "open",
-    "createdAt": "2026-10-16",
-    "mergedAt": null,
     "author": "ilyas-mallah"
   },
   {

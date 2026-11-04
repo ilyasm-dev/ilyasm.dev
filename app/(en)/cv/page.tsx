@@ -152,8 +152,9 @@ export default function Cv() {
               </p>
               <ul>
                 <li>
-                  My merged PR fixes the callee pop size of x86 tail calls with aligned stack arguments (
-                  <Pr repo="llvm/llvm-project" n={235417} />).
+                  My merged PRs fix the callee pop size of x86 tail calls with aligned stack arguments (
+                  <Pr repo="llvm/llvm-project" n={235417} />). They also make Clang&apos;s format attribute warning work without its
+                  libc call warning (<Pr repo="llvm/llvm-project" n={232898} />).
                 </li>
                 <li>
                   My PRs in review add hardening assertions to <code>insert</code>, <code>emplace</code>, <code>string</code> and{" "}

@@ -1127,6 +1127,27 @@ a.card-title {
   margin: 0;
 }
 
+/* An entry's title and its right-hand side (dates or PR counts): side by side when there is room, stacked on phones. */
+.cv-list .cv-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+@media (min-width: 600px) {
+  .cv-list .cv-entry {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 20px;
+  }
+}
+
+.cv-when {
+  color: var(--faint);
+  font-size: 0.92rem;
+}
+
 .cv-list strong {
   color: var(--fg);
 }

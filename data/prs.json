@@ -1,5 +1,15 @@
 [
   {
+    "repo": "WebAssembly/wabt",
+    "number": 2894,
+    "title": "Fix rounding of hex float literals",
+    "url": "https://github.com/WebAssembly/wabt/pull/2894",
+    "state": "merged",
+    "createdAt": "2026-10-21",
+    "mergedAt": "2026-11-05",
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "llvm/llvm-project",
     "number": 232898,
     "title": "[clang][-Wunsafe-buffer-usage] Keep format-attr-call warnings independent of libc-call",
@@ -294,16 +304,6 @@
     "number": 5174,
     "title": "fix(loader): widen the tag array size in load_tag_section",
     "url": "https://github.com/wasm-micro-runtime/wasm-micro-runtime/pull/5174",
-    "state": "open",
-    "createdAt": "2026-10-21",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "WebAssembly/wabt",
-    "number": 2894,
-    "title": "Fix rounding of hex float literals",
-    "url": "https://github.com/WebAssembly/wabt/pull/2894",
     "state": "open",
     "createdAt": "2026-10-21",
     "mergedAt": null,

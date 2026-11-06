@@ -1,5 +1,15 @@
 [
   {
+    "repo": "vllm-project/vllm",
+    "number": 60438,
+    "title": "[Bugfix] Fall back from DeepGEMM when nvcc is older than 12.9",
+    "url": "https://github.com/vllm-project/vllm/pull/60438",
+    "state": "merged",
+    "createdAt": "2026-10-07",
+    "mergedAt": "2026-11-06",
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "WebAssembly/wabt",
     "number": 2894,
     "title": "Fix rounding of hex float literals",
@@ -534,16 +544,6 @@
     "number": 60464,
     "title": "[Perf] Pick the SM90 block-FP8 CUTLASS kernel by M size, not M % 4",
     "url": "https://github.com/vllm-project/vllm/pull/60464",
-    "state": "open",
-    "createdAt": "2026-10-07",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "vllm-project/vllm",
-    "number": 60438,
-    "title": "[Bugfix] Fall back from DeepGEMM when nvcc is older than 12.9",
-    "url": "https://github.com/vllm-project/vllm/pull/60438",
     "state": "open",
     "createdAt": "2026-10-07",
     "mergedAt": null,

@@ -1,5 +1,15 @@
 [
   {
+    "repo": "sgl-project/sglang",
+    "number": 48370,
+    "title": "[Perf] gemma3: Fuse q_norm and k_norm into gemma_rmsnorm for rank above 2",
+    "url": "https://github.com/sgl-project/sglang/pull/48370",
+    "state": "merged",
+    "createdAt": "2026-11-04",
+    "mergedAt": "2026-11-08",
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "meta/zstd",
     "number": 4833,
     "title": "programs: fix `zstd -l` infinite loop on a large skippable frame",
@@ -44,16 +54,6 @@
     "number": 65630,
     "title": "[Perf][Quantization] Batch the Marlin MoE scale and zero-point conversion over experts",
     "url": "https://github.com/vllm-project/vllm/pull/65630",
-    "state": "open",
-    "createdAt": "2026-11-04",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "sgl-project/sglang",
-    "number": 48370,
-    "title": "[Perf] gemma3: Fuse q_norm and k_norm into gemma_rmsnorm for rank above 2",
-    "url": "https://github.com/sgl-project/sglang/pull/48370",
     "state": "open",
     "createdAt": "2026-11-04",
     "mergedAt": null,

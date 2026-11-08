@@ -1,5 +1,15 @@
 [
   {
+    "repo": "meta/zstd",
+    "number": 4833,
+    "title": "programs: fix `zstd -l` infinite loop on a large skippable frame",
+    "url": "https://github.com/meta/zstd/pull/4833",
+    "state": "merged",
+    "createdAt": "2026-10-09",
+    "mergedAt": "2026-11-08",
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "vllm-project/vllm",
     "number": 60438,
     "title": "[Bugfix] Fall back from DeepGEMM when nvcc is older than 12.9",
@@ -504,16 +514,6 @@
     "number": 4834,
     "title": "decompress: return the skippable header size from ZSTD_frameHeaderSize()",
     "url": "https://github.com/meta/zstd/pull/4834",
-    "state": "open",
-    "createdAt": "2026-10-09",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "meta/zstd",
-    "number": 4833,
-    "title": "programs: fix `zstd -l` infinite loop on a large skippable frame",
-    "url": "https://github.com/meta/zstd/pull/4833",
     "state": "open",
     "createdAt": "2026-10-09",
     "mergedAt": null,

@@ -1,5 +1,15 @@
 [
   {
+    "repo": "llvm/llvm-project",
+    "number": 233604,
+    "title": "[clang][-Wunsafe-buffer-usage] Add per-family subgroups of -Wunsafe-buffer-usage-in-libc-call",
+    "url": "https://github.com/llvm/llvm-project/pull/233604",
+    "state": "merged",
+    "createdAt": "2026-10-19",
+    "mergedAt": "2026-11-09",
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "sgl-project/sglang",
     "number": 48370,
     "title": "[Perf] gemma3: Fuse q_norm and k_norm into gemma_rmsnorm for rank above 2",
@@ -396,16 +406,6 @@
     "url": "https://github.com/wasm-micro-runtime/wasm-micro-runtime/pull/5172",
     "state": "open",
     "createdAt": "2026-10-20",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "llvm/llvm-project",
-    "number": 233604,
-    "title": "[clang][-Wunsafe-buffer-usage] Add per-family subgroups of -Wunsafe-buffer-usage-in-libc-call",
-    "url": "https://github.com/llvm/llvm-project/pull/233604",
-    "state": "open",
-    "createdAt": "2026-10-19",
     "mergedAt": null,
     "author": "ilyas-mallah"
   },

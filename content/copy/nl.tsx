@@ -247,8 +247,8 @@ export const nl: Copy = {
       prs: [
         "De x64-registerallocator zette een waarde verkeerd om bij het terugladen van de stack",
         <>
-          Integervergelijkingen van <span className="val-bad">3,18 ns</span> naar <span className="val-good">0,63 ns</span> bij
-          voorspelbare branches
+          Integervergelijkingen mat <span className="val-bad">3,18 ns</span> tegen <span className="val-good">0,63 ns</span> toen
+          dit in augustus 2026 werd gemerged. Luau heeft het integer type sindsdien verwijderd
         </>,
         "Snel pad op ARM64 voor lussen over arrays, zoals x64 al had",
         "Typecontrole voor aanroepen via een __call-metamethode",

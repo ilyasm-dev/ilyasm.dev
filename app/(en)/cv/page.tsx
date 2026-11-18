@@ -112,8 +112,8 @@ export default function Cv() {
               </p>
               <ul>
                 <li>
-                  I gave integer <code>==</code> in branches its own IR command in the native code generator, which cut a comparison
-                  from 3.18 ns to 0.63 ns (<Pr repo="luau-lang/luau" n={2571} />).
+                  I gave integer <code>==</code> in branches its own IR command in the native code generator (<Pr repo="luau-lang/luau" n={2571} />,
+                  merged in August 2026). It measured 3.18 ns to 0.63 ns per comparison. Luau has since removed its integer type.
                 </li>
                 <li>
                   I fixed an x64 register allocator miscompile when restoring a spilled value (<Pr repo="luau-lang/luau" n={2987} />).

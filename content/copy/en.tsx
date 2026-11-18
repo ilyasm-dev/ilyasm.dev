@@ -239,8 +239,8 @@ export const en: Copy = {
       prs: [
         "x64 register allocator converted a value wrongly on reload from the stack",
         <>
-          Integer comparisons from <span className="val-bad">3.18 ns</span> to <span className="val-good">0.63 ns</span> with
-          predictable branches
+          Integer comparisons measured <span className="val-bad">3.18 ns</span> to <span className="val-good">0.63 ns</span> when
+          merged in August 2026. Luau has since removed its integer type
         </>,
         "ARM64 fast path for looping over arrays, as x64 already had",
         "Type checking for calls through a __call metamethod",

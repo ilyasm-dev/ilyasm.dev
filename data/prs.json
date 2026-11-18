@@ -1,5 +1,55 @@
 [
   {
+    "repo": "sgl-project/sglang",
+    "number": 46132,
+    "title": "[Perf] cuda-graph: Raise the decode graph ceiling default to 128 for 35 to 60 GiB GPUs",
+    "url": "https://github.com/sgl-project/sglang/pull/46132",
+    "state": "merged",
+    "createdAt": "2026-10-23",
+    "mergedAt": "2026-11-13",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "protocolbuffers/protobuf",
+    "number": 31552,
+    "title": "upb: zero the whole upb_MessageValue returned by upb_FieldDef_Default()",
+    "url": "https://github.com/protocolbuffers/protobuf/pull/31552",
+    "state": "open",
+    "createdAt": "2026-11-12",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "KhronosGroup/SPIRV-Tools",
+    "number": 6995,
+    "title": "spirv-opt: Skip function declarations in more passes",
+    "url": "https://github.com/KhronosGroup/SPIRV-Tools/pull/6995",
+    "state": "merged",
+    "createdAt": "2026-10-23",
+    "mergedAt": "2026-11-12",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "KhronosGroup/SPIRV-Tools",
+    "number": 6985,
+    "title": "spirv-opt: Handle empty constraints in the loop dependence Delta test",
+    "url": "https://github.com/KhronosGroup/SPIRV-Tools/pull/6985",
+    "state": "merged",
+    "createdAt": "2026-10-21",
+    "mergedAt": "2026-11-12",
+    "author": "ilyas-mallah"
+  },
+  {
+    "repo": "libjxl/libjxl",
+    "number": 5136,
+    "title": "Fail JxlDecoderFlushImage on an unfinished kSkipProgressive frame",
+    "url": "https://github.com/libjxl/libjxl/pull/5136",
+    "state": "open",
+    "createdAt": "2026-11-12",
+    "mergedAt": null,
+    "author": "ilyas-mallah"
+  },
+  {
     "repo": "llvm/llvm-project",
     "number": 240433,
     "title": "[clang][-Wunsafe-buffer-usage] Cache the analysis gate per diagnostic state",
@@ -210,16 +260,6 @@
     "author": "ilyas-mallah"
   },
   {
-    "repo": "sgl-project/sglang",
-    "number": 46132,
-    "title": "[Perf] cuda-graph: Raise the decode graph ceiling default to 128 for 35 to 60 GiB GPUs",
-    "url": "https://github.com/sgl-project/sglang/pull/46132",
-    "state": "open",
-    "createdAt": "2026-10-23",
-    "mergedAt": null,
-    "author": "ilyas-mallah"
-  },
-  {
     "repo": "bytecodealliance/wasmtime",
     "number": 14897,
     "title": "Error on wasm SIMD for riscv64 without vector support",
@@ -237,16 +277,6 @@
     "state": "merged",
     "createdAt": "2026-10-22",
     "mergedAt": "2026-10-23",
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "KhronosGroup/SPIRV-Tools",
-    "number": 6995,
-    "title": "spirv-opt: Skip function declarations in more passes",
-    "url": "https://github.com/KhronosGroup/SPIRV-Tools/pull/6995",
-    "state": "open",
-    "createdAt": "2026-10-23",
-    "mergedAt": null,
     "author": "ilyas-mallah"
   },
   {
@@ -327,16 +357,6 @@
     "state": "merged",
     "createdAt": "2026-10-21",
     "mergedAt": "2026-10-21",
-    "author": "ilyas-mallah"
-  },
-  {
-    "repo": "KhronosGroup/SPIRV-Tools",
-    "number": 6985,
-    "title": "spirv-opt: Handle empty constraints in the loop dependence Delta test",
-    "url": "https://github.com/KhronosGroup/SPIRV-Tools/pull/6985",
-    "state": "open",
-    "createdAt": "2026-10-21",
-    "mergedAt": null,
     "author": "ilyas-mallah"
   },
   {
@@ -532,7 +552,7 @@
   {
     "repo": "meta/zstd",
     "number": 4832,
-    "title": "decompress: make `ZSTD_decompressBound()` a true upper bound",
+    "title": "fuzz: check ZSTD_decompressBound() against declared sizes",
     "url": "https://github.com/meta/zstd/pull/4832",
     "state": "open",
     "createdAt": "2026-10-09",

@@ -97,7 +97,7 @@ export type Copy = {
     teamFixes: ReactNode;
     workTogether: string;
     priceFine: string;
-    // The hardening sweep: a second offer at the investigation's price, so it has no price card of its own.
+    // The hardening sweep: a second offer with its own list price, shown as one line under the price card.
     sweepTitle: string;
     sweepText: string;
     sweepIncluded: [string, string, string];

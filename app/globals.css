@@ -2236,6 +2236,13 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+.price-was.price-list {
+  margin-top: 6px;
+  color: var(--fg);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
 .price-fine {
   margin: 14px 0 0;
   color: var(--muted);
@@ -2243,7 +2250,7 @@ body {
   line-height: 1.5;
 }
 
-/* The second offer at the same price: a ruled block under the price card, no card of its own. */
+/* The second offer: a ruled block under the price card, no card of its own. */
 .sweep {
   margin-top: 40px;
   max-width: 62rem;

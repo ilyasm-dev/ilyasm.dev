@@ -395,7 +395,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
                 <strong>{c.priceNow}</strong>
                 <span>{c.priceNowUsd}</span>
               </p>
-              <p className="price-was">{c.priceWas}</p>
+              <p className="price-was price-list">{c.priceWas}</p>
               <p className="price-scope">{c.priceScope}</p>
             </div>
             <ol className="phase-steps">

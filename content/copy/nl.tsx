@@ -157,10 +157,10 @@ export const nl: Copy = {
     ),
     investigation: "Onderzoek",
     weeks: "2 weken",
-    introBadge: "Introductieprijs",
+    introBadge: "Introductie, eerste twee klanten",
     priceNow: "€3.000",
     priceNowUsd: "/ $3.500",
-    priceWas: "Normale prijs €4.500 / $5.500",
+    priceWas: "Lijstprijs €5.000 / $6.000",
     priceScope: "Eén workload in één omgeving",
     steps: [
       { title: "Je stuurt wat traag is", text: "Vertel me wat traag is en waar het draait. Daarna bespreken we het in een kort gesprek." },
@@ -191,7 +191,7 @@ export const nl: Copy = {
     sweepText:
       "Eén onderdeel in C, C++ of Rust dat onbetrouwbare invoer verwerkt, zoals een parser, codec, runtime of VM. Je krijgt de fouten die gemanipuleerde invoer kan uitlokken, elk bevestigd voordat hij in het rapport komt.",
     sweepIncluded: ["Alleen bevestigde fouten", "Een reproductie per fout", "Een fix per fout"],
-    sweepPrice: "Zelfde prijs en dezelfde twee weken als het onderzoek.",
+    sweepPrice: "Twee weken. Lijstprijs €6.000 / $7.000, introductieprijs €3.000 / $3.500 voor de eerste twee klanten.",
     safeguardsTitle: "Werken in jouw systemen",
     safeguards: [
       "Ik teken je geheimhoudingsverklaring (NDA).",

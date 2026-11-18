@@ -149,10 +149,10 @@ export const en: Copy = {
     ),
     investigation: "Investigation",
     weeks: "2 weeks",
-    introBadge: "Introductory price",
+    introBadge: "Introductory, first two clients",
     priceNow: "€3,000",
     priceNowUsd: "/ $3,500",
-    priceWas: "Regular price €4,500 / $5,500",
+    priceWas: "List price €5,000 / $6,000",
     priceScope: "One workload in one environment",
     steps: [
       { title: "You send the slow part", text: "Tell me what's slow and where it runs. Then we talk it through in a short call." },
@@ -183,7 +183,7 @@ export const en: Copy = {
     sweepText:
       "One C, C++ or Rust component that reads untrusted input, such as a parser, codec, runtime or VM. You get the bugs crafted input can trigger, each confirmed before it goes in the report.",
     sweepIncluded: ["Confirmed findings only", "A reproducer for each", "A fix for each"],
-    sweepPrice: "Same price and the same two weeks as the investigation.",
+    sweepPrice: "Two weeks. List price €6,000 / $7,000, introductory price €3,000 / $3,500 for the first two clients.",
     safeguardsTitle: "Working in your systems",
     safeguards: [
       "I sign your NDA.",
